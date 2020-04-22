@@ -2,6 +2,8 @@
 #include <unistd.h>
 #include <sys/wait.h>
 #include <signal.h>
+#include <iterator>
+#include <sstream>
 #include "Commands.h"
 #include "signals.h"
 
@@ -14,13 +16,29 @@ int main(int argc, char* argv[]) {
     }
 
     //TODO: setup sig alarm handler
-
+    std::string prompt_name = "smash> "; //default prompt
     SmallShell& smash = SmallShell::getInstance();
     while(true) {
-        std::cout << "smash> "; // TODO: change this (why?)
+        std::cout << prompt_name; // TODO: change this (why?)
         std::string cmd_line;
         std::getline(std::cin, cmd_line);
         smash.executeCommand(cmd_line.c_str());
+
+
+        //chprompt command:
+        std::istringstream iss(cmd_line);
+        std::vector<std::string> words(std::istream_iterator<std::string>{iss},
+                                       std::istream_iterator<std::string>());
+        if(words[0].compare("chprompt")==0){
+            if(words.size() >= 1)
+                prompt_name = words[1]+"> "; //ignores the rest of the params if applied
+            else
+                prompt_name = "smash> ";
+        }
+        //end chprompt
+
+
+
     }
     return 0;
 }

@@ -54,9 +54,8 @@ class RedirectionCommand : public Command {
 };
 
 class ChangeDirCommand : public BuiltInCommand {
-// TODO: Add your data members public:
 private:
-   static char* prev_pwd; //all instances should have same prev
+   static std::string prev_pwd; //all instances should have same prev
    std::vector<std::string> params;
    int num_params;
 public:
@@ -170,7 +169,7 @@ class CopyCommand : public BuiltInCommand {
 };
 
 // TODO: add more classes if needed 
-// maybe chprompt , timeout ?
+// maybe chprompt-done on main , timeout ?
 
 //Following the design pattern of a singleton classs
 class SmallShell {
