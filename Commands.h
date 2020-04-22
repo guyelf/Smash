@@ -3,6 +3,9 @@
 
 #include <vector>
 
+#include <unistd.h>
+#include <string.h>
+#include <iostream>
 #define COMMAND_ARGS_MAX_LENGTH (200)
 #define COMMAND_MAX_ARGS (20)
 #define HISTORY_MAX_RECORDS (50)
@@ -22,6 +25,7 @@ class BuiltInCommand : public Command {
  public:
   BuiltInCommand(const char* cmd_line);
   virtual ~BuiltInCommand() {}
+  // TOdo: Add generic error message function for sub class to derive from (page 2/18)
 };
 
 class ExternalCommand : public Command {
@@ -51,6 +55,11 @@ class RedirectionCommand : public Command {
 
 class ChangeDirCommand : public BuiltInCommand {
 // TODO: Add your data members public:
+private:
+   static char* prev_pwd; //all instances should have same prev
+   std::vector<std::string> params;
+   int num_params;
+public:
   ChangeDirCommand(const char* cmd_line, char** plastPwd);
   virtual ~ChangeDirCommand() {}
   void execute() override;
@@ -163,6 +172,7 @@ class CopyCommand : public BuiltInCommand {
 // TODO: add more classes if needed 
 // maybe chprompt , timeout ?
 
+//Following the design pattern of a singleton classs
 class SmallShell {
  private:
   // TODO: Add your data members

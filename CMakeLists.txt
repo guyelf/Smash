@@ -10,4 +10,6 @@ set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall")
 add_executable(smash
         smash.cpp
         Commands.cpp
-        signals.cpp system_functions.cpp system_functions.h)
+        signals.cpp ShowPidCommand.cpp GetCurrDirCommand.cpp ChangeDirCommand.cpp)
+
+#todo: Might come handy, otherwise remove //system_functions.h cmake-build-debug/BuiltInCommand.cpp
