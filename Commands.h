@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <iostream>
+#include "Wrappers.h"
 #define COMMAND_ARGS_MAX_LENGTH (200)
 #define COMMAND_MAX_ARGS (20)
 #define HISTORY_MAX_RECORDS (50)
@@ -38,24 +39,6 @@ class ExternalCommand : public Command {
   ExternalCommand(const char* cmd_line);
   virtual ~ExternalCommand() {}
   void execute() override;
-};
-
-class PipeCommand : public Command {
-  // TODO: Add your data members
- public:
-  PipeCommand(const char* cmd_line);
-  virtual ~PipeCommand() {}
-  void execute() override;
-};
-
-class RedirectionCommand : public Command {
- // TODO: Add your data members
- public:
-  explicit RedirectionCommand(const char* cmd_line);
-  virtual ~RedirectionCommand() {}
-  void execute() override;
-  //void prepare() override;
-  //void cleanup() override;
 };
 
 class ChangeDirCommand : public BuiltInCommand {
@@ -174,6 +157,7 @@ class SmallShell {
   // TODO: Add your data members
   SmallShell();
  public:
+  ppid_t pid;
   Command *CreateCommand(const char* cmd_line);
   SmallShell(SmallShell const&)      = delete; // disable copy ctor
   void operator=(SmallShell const&)  = delete; // disable = operator
@@ -187,5 +171,6 @@ class SmallShell {
   void executeCommand(const char* cmd_line);
   // TODO: add extra methods as needed
 };
+
 
 #endif //SMASH_COMMAND_H_
