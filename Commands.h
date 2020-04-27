@@ -18,6 +18,8 @@
 
 class Command {
 // TODO: Add your data members
+ static std::list<Jobs> jobs_list;
+
  public:
   Command(const char* cmd_line);
   virtual ~Command();
@@ -66,7 +68,6 @@ class ShowPidCommand : public BuiltInCommand {
   void execute() override;
 };
 
-class JobsList;
 class QuitCommand : public BuiltInCommand {
 // TODO: Add your data members public:
   QuitCommand(const char* cmd_line, JobsList* jobs);
@@ -98,7 +99,12 @@ class HistoryCommand : public BuiltInCommand {
 class JobsList {
  public:
   class JobEntry {
-   // TODO: Add your data members
+  public:
+      std::string command;
+      int jobId;
+      pid_t pid;
+      std:chrono::systemp_clock schedule_time;
+      bool is_stopped;
   };
  // TODO: Add your data members
  public:
