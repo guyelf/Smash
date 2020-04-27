@@ -15,11 +15,11 @@
 //my includes:
 #include "JobsCommand.h"
 #include "RedirectionCommand.h"
-
+#include "MyExceptions.h"
 class Command {
 // TODO: Add your data members
  public:
-  Command(const char* cmd_line);
+  explicit Command(const char* cmd_line);
   virtual ~Command();
   virtual void execute() = 0;
   //virtual void prepare();
@@ -29,14 +29,14 @@ class Command {
 
 class BuiltInCommand : public Command {
  public:
-  BuiltInCommand(const char* cmd_line);
+  explicit BuiltInCommand(const char* cmd_line);
   virtual ~BuiltInCommand() {}
   // TOdo: Add generic error message function for sub class to derive from (page 2/18)
 };
 
 class ExternalCommand : public Command {
  public:
-  ExternalCommand(const char* cmd_line);
+  explicit ExternalCommand(const char* cmd_line);
   virtual ~ExternalCommand() {}
   void execute() override;
 };
@@ -54,14 +54,14 @@ public:
 
 class GetCurrDirCommand : public BuiltInCommand {
  public:
-  GetCurrDirCommand(const char* cmd_line);
+  explicit GetCurrDirCommand(const char* cmd_line);
   virtual ~GetCurrDirCommand() {}
   void execute() override;
 };
 
 class ShowPidCommand : public BuiltInCommand {
  public:
-  ShowPidCommand(const char* cmd_line);
+  explicit ShowPidCommand(const char* cmd_line);
   virtual ~ShowPidCommand() {}
   void execute() override;
 };
@@ -69,8 +69,12 @@ class ShowPidCommand : public BuiltInCommand {
 class JobsList;
 class QuitCommand : public BuiltInCommand {
 // TODO: Add your data members public:
+
+    bool _killFlag;
+    JobsList* _jobsList;
+public:
   QuitCommand(const char* cmd_line, JobsList* jobs);
-  virtual ~QuitCommand() {}
+  virtual ~QuitCommand();
   void execute() override;
 };
 
@@ -98,7 +102,12 @@ class HistoryCommand : public BuiltInCommand {
 class JobsList {
  public:
   class JobEntry {
-   // TODO: Add your data members
+  public:
+      //attributes:
+      std::string command;
+      pipid_t pid;
+      int job_id
+      std::chrono::system_clock schedule_time // for getting the elapsed seconds use - std::chrono::duration<double> elapsed
   };
  // TODO: Add your data members
  public:
@@ -112,30 +121,38 @@ class JobsList {
   void removeJobById(int jobId);
   JobEntry * getLastJob(int* lastJobId);
   JobEntry *getLastStoppedJob(int *jobId);
+  int getTopJobId();
+  void removeStoppedSign(int jobId);
+
   // TODO: Add extra methods or modify exisitng ones as needed
 };
-
 class KillCommand : public BuiltInCommand {
- // TODO: Add your data members
- public:
-  KillCommand(const char* cmd_line, JobsList* jobs);
-  virtual ~KillCommand() {}
-  void execute() override;
+    // TODO: Add your data members
+    pipid_t j_pid; //job's pid
+    int signum;
+public:
+    explicit KillCommand(const char* cmd_line);
+    KillCommand(const char* cmd_line, JobsList* jobs);
+    virtual ~KillCommand() {}
+    void execute() override;
 };
-
 class ForegroundCommand : public BuiltInCommand {
  // TODO: Add your data members
+ int _job_id;
+ JobsList* _jobsList;
  public:
   ForegroundCommand(const char* cmd_line, JobsList* jobs);
-  virtual ~ForegroundCommand() {}
+  virtual ~ForegroundCommand();
   void execute() override;
 };
 
 class BackgroundCommand : public BuiltInCommand {
  // TODO: Add your data members
+ int _job_id;
+ JobsList* _jobsList;
  public:
   BackgroundCommand(const char* cmd_line, JobsList* jobs);
-  virtual ~BackgroundCommand() {}
+  virtual ~BackgroundCommand();
   void execute() override;
 };
 

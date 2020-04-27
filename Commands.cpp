@@ -1,3 +1,8 @@
+
+
+#ifndef SMASH_COMMANDS_CPP
+#define SMASH_COMMANDS_CPP
+
 #include <sstream>
 #include <sys/wait.h>
 #include <iomanip>
@@ -53,6 +58,17 @@ int _parseCommandLine(const char* cmd_line, char** args) {
   return i;
 
   FUNC_EXIT()
+}
+
+std::vector<string> _parseCommandLineStrings(const char* cmd_line) {
+    char** f_args = nullptr;
+    vector<string> args;
+    _parseCommandLine(cmd_line,f_args);
+    while(*f_args){
+        args.push_back(*f_args);
+        f_args++;
+    }
+    return args;
 }
 
 bool _isBackgroundComamnd(const char* cmd_line) {
@@ -146,3 +162,9 @@ void SmallShell::executeCommand(const char *cmd_line) {
   // cmd->execute();
   // Please note that you must fork smash process for some commands (e.g., external commands....)
 }
+
+
+#endif
+
+
+

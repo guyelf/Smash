@@ -7,14 +7,6 @@
 #define SMASH_JOBSCOMMAND_H
 
 #include "Commands.h"
-struct Jobs{
-    std::string command;
-    int jobId;
-    pid_t pid;
-    std:chrono::systemp_clock schedule_time;
-    bool is_stopped;
-
-};
 
 class JobsCommand : public BuiltInCommand {
     // TODO: Add your data members

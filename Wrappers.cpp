@@ -19,9 +19,7 @@ int doFork() {
 }
 
 void doPerror(char *sysCall_name) {
-    // todo: find from where to get the syscall failed name (exception.what??)
-    // todo: append the "failed"
-    perror("smash error");
+
 }
 
 
