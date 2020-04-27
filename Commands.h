@@ -14,7 +14,7 @@
 
 //my includes:
 #include "JobsCommand.h"
-
+#include "RedirectionCommand.h"
 
 class Command {
 // TODO: Add your data members
