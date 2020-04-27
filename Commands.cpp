@@ -55,6 +55,17 @@ int _parseCommandLine(const char* cmd_line, char** args) {
   FUNC_EXIT()
 }
 
+std::vector<string> _parseCommandLineStrings(const char* cmd_line) {
+    char** f_args = nullptr;
+    vector<string> args;
+    _parseCommandLine(cmd_line,f_args);
+    while(*f_args){
+        args.push_back(*f_args);
+        f_args++;
+    }
+    return args;
+}
+
 bool _isBackgroundComamnd(const char* cmd_line) {
   const string str(cmd_line);
   return str[str.find_last_not_of(WHITESPACE)] == '&';
