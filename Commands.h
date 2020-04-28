@@ -2,7 +2,7 @@
 #define SMASH_COMMAND_H_
 
 #include <vector>
-
+#include <list>
 #include <unistd.h>
 #include <string.h>
 #include <iostream>
@@ -17,11 +17,12 @@
 #include "RedirectionCommand.h"
 #include "MyExceptions.h"
 class Command {
-// TODO: Add your data members
+    const char * cmd;
  public:
   explicit Command(const char* cmd_line);
   virtual ~Command();
   virtual void execute() = 0;
+  virtual const char* cmd_string() =0;
   //virtual void prepare();
   //virtual void cleanup();
   // TODO: Add your extra methods if needed
@@ -104,12 +105,19 @@ class JobsList {
   class JobEntry {
   public:
       //attributes:
-      std::string command;
-      pipid_t pid;
+      Command *command;
+      pid_t pid;
       int job_id
-      std::chrono::system_clock schedule_time // for getting the elapsed seconds use - std::chrono::duration<double> elapsed
+      auto time;
+      // for getting the elapsed seconds use - std::chrono::duration<double> elapsed
+      // TODO : How I get pid, which class is pid
+      JobEntry(Command *command,pid_t pid,int job_id,auto time):command(command),pid(pid),job_id(job_id),time(time){};
+      ~JobEntry();
+      std::string print_job();
+
   };
- // TODO: Add your data members
+ list<JobEntry> jobs_list;
+ std::chrono::system_clock schedule_time;
  public:
   JobsList();
   ~JobsList();

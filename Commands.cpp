@@ -1,6 +1,7 @@
 #include <sstream>
 #include <sys/wait.h>
 #include <iomanip>
+#include <chrono>
 #include "Commands.h"
 
 using namespace std;
@@ -22,6 +23,26 @@ const std::string WHITESPACE = " \n\r\t\f\v";
 
 #define EXEC(path, arg) \
   execvp((path), (arg));
+
+JobsList::JobsList() {
+    std::chrono::system_clock time= std::chrono::system_clock();
+    this->jobs_list = list<JobEntry>();
+}
+JobsList::~JobsList() {}
+
+void JobsList::addJob(Command *cmd, bool isStopped) {
+    //TODO: fork ??
+    pid_t pid;
+    auto time=this->schedule_time.now();
+    int job_id = this->jobs_list.size()+1;
+    JobEntry new_job = JobEntry(cmd,pid,job_id,time);
+    this->jobs_list.assign(job_id,new_job);
+}
+std::string JobsList::JobEntry::print_job() {
+    std::string res = "[" + to_string(job_id) + "]" + this->command->cmd_string() + " : " + to_string(this->pid);
+    //TODO: add elapsed time!!
+    return res;
+}
 
 string _ltrim(const std::string& s)
 {
