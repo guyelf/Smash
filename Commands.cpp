@@ -1,7 +1,4 @@
-#include <sstream>
-#include <sys/wait.h>
-#include <iomanip>
-#include <chrono>
+
 #include "Commands.h"
 
 using namespace std;
@@ -25,17 +22,16 @@ const std::string WHITESPACE = " \n\r\t\f\v";
   execvp((path), (arg));
 
 JobsList::JobsList() {
-    std::chrono::system_clock time= std::chrono::system_clock();
     this->jobs_list = list<JobEntry>();
 }
 JobsList::~JobsList() {}
 
 void JobsList::addJob(Command *cmd, bool isStopped) {
     //TODO: fork ??
+    std::chrono::system_clock::time_point now = std::chrono::system_clock::now();
     pid_t pid;
-    auto time=this->schedule_time.now();
-    int job_id = this->jobs_list.size()+1;
-    JobEntry new_job = JobEntry(cmd,pid,job_id,time,isStopped);
+    int job_id = this->jobs_list.size()+1;//save the highest job id in the list
+    JobEntry new_job = JobEntry(cmd,pid,job_id,now,isStopped);
     this->jobs_list.assign(job_id,new_job);
 }
 std::string JobsList::JobEntry::print_job() {
@@ -79,6 +75,7 @@ void JobsList::removeFinishedJobs() {
             JobEntry current_ = *current;
             this->jobs_list.erase(current);
             current_.kill();
+            //TODO ??
         }
     }
 }
@@ -115,6 +112,9 @@ int JobsList::getTopJobId(){
         }
     }
     return max_id;
+}
+void JobsList::stopJobById(int jobID){
+    //TODO
 }
 
 string _ltrim(const std::string& s)

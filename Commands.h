@@ -6,17 +6,22 @@
 #include <unistd.h>
 #include <string.h>
 #include <iostream>
-#include "Wrappers.h"
 #include <sys/types.h>
-#include <csignal.h>
-
+#include <signal.h>
+#include <sstream>
+#include <sys/wait.h>
+#include <iomanip>
+#include <chrono>
+#include <ctime>
 #include <iterator>
+
 #define COMMAND_ARGS_MAX_LENGTH (200)
 #define COMMAND_MAX_ARGS (20)
 #define HISTORY_MAX_RECORDS (50)
 
 
 //my includes:
+#include "Wrappers.h"
 #include "JobsCommand.h"
 #include "RedirectionCommand.h"
 #include "MyExceptions.h"
@@ -112,17 +117,18 @@ class JobsList {
       Command *command;
       pid_t pid;
       int job_id
-      auto time;
+      std::chrono::system_clock::time_point schedule_time;
       bool stopped;
+      std::chrono::system_clock::time_point stop_time;
       // for getting the elapsed seconds use - std::chrono::duration<double> elapsed
       // TODO : How I get pid, which class is pid
-      JobEntry(Command *command,pid_t pid,int job_id,auto time,bool stopped = false):command(command),pid(pid),job_id(job_id),time(time),stopped(stopped){};
+      JobEntry(Command *command,pid_t pid,int job_id,std::chrono::system_clock::time_point time,bool stopped):command(command),
+      pid(pid),job_id(job_id),schedule_time(time),stopped(stopped){};
       ~JobEntry();
       std::string print_job();
       void kill();
   };
  list<JobEntry> jobs_list;
- std::chrono::system_clock schedule_time;
  public:
   JobsList();
   ~JobsList();
@@ -137,6 +143,7 @@ class JobsList {
   JobEntry *getLastStoppedJob(int *jobId);
     int getTopJobId();
     void removeStoppedSign(int jobId);
+    void stopJobById(int jobID);
 };
 class KillCommand : public BuiltInCommand {
     // TODO: Add your data members
