@@ -26,11 +26,9 @@ JobsList::JobsList() {
 }
 JobsList::~JobsList() {}
 
-void JobsList::addJob(Command *cmd, bool isStopped) {
-    //TODO: fork ??
+void JobsList::addJob(Command *cmd,pid_t pid,bool isStopped) {
     std::chrono::system_clock::time_point now = std::chrono::system_clock::now();
-    pid_t pid;
-    int job_id = this->jobs_list.size()+1;//save the highest job id in the list
+    int job_id = getTopJobId() +1;
     JobEntry new_job = JobEntry(cmd,pid,job_id,now,isStopped);
     this->jobs_list.assign(job_id,new_job);
 }
@@ -53,7 +51,7 @@ void JobsList::killAllJobs() {
     for (list<JobEntry>::iterator  current = this->jobs_list.begin(); current!=this->jobs_list.end() ; current++) {
         JobEntry current_job = *current;
         this->jobs_list.erase(current);
-        kill(current_job.pid,SIGKILL);
+        //kill(current_job.pid,SIGKILL); TODO
     }
 }
 JobsList::JobEntry * JobsList::getJobById(int jobId) {
@@ -65,8 +63,24 @@ JobsList::JobEntry * JobsList::getJobById(int jobId) {
     }
 }
 
-JobsList::JobEntry * JobsList::getLastJob(int *lastJobId) {
+void JobsList::setJobAsFinished(int jobId){
+    for(list<JobEntry>::iterator current = this->jobs_list.begin(); current != this->jobs_list.end() ; current++){
+        if (current->job_id == jobId){
+            current->finished = true;
+        }
+    }
+}
 
+JobsList::JobEntry * JobsList::getLastJob(int *lastJobId) {
+    std::chrono::system_clock::time_point time = this->jobs_list.begin()->schedule_time;
+    JobEntry *lastjob = NULL;
+    for(list<JobEntry>::iterator current = this->jobs_list.begin(); current != this->jobs_list.end() ; current++){
+        if (current->schedule_time > time){
+            *lastJobId = current->job_id;
+            *lastjob = *current;
+        }
+    }
+    return lastjob;
 }
 
 void JobsList::removeFinishedJobs() {
@@ -83,24 +97,24 @@ void JobsList::removeFinishedJobs() {
 void JobsList::removeStoppedSign(int jobId) {
     for(list<JobEntry>::iterator current = this->jobs_list.begin(); current != this->jobs_list.end() ; current++){
         if (current->job_id == jobId){
-            JobEntry current_upt = *current;
-            this->jobs_list.erase(current);
-            current_upt.stopped= false;
-            this->jobs_list.insert(current,current_upt);
+            current->stopped = false;
         }
     }
 }
 
 JobsList::JobEntry* JobsList::getLastStoppedJob(int *jobId) {
-    int max_id = this->jobs_list.begin()->job_id;
-    JobEntry *last_stopped;
+    std::chrono::system_clock::time_point current_last_stop_time = std::chrono::system_clock::now();
+    bool found_stopped = false;
+    JobEntry *last_stopped = NULL;
     for(list<JobEntry>::iterator current = this->jobs_list.begin(); current != this->jobs_list.end() ; current++) {
-        if(current->job_id > max_id && current->stopped == true){
-            max_id = current->job_id;
-            *last_stopped = *current;
+        if(current->stopped == true){
+            found_stopped = true;
+            if (current_last_stop_time > current->stop_time) {
+                *jobId = current->job_id;
+                *last_stopped = *current;
+            }
         }
     }
-    *jobId = max_id;
     return last_stopped;
 }
 
@@ -114,7 +128,12 @@ int JobsList::getTopJobId(){
     return max_id;
 }
 void JobsList::stopJobById(int jobID){
-    //TODO
+    for(list<JobEntry>::iterator current = this->jobs_list.begin(); current != this->jobs_list.end() ; current++){
+        if (current->job_id == jobID){
+            current->stop_time = std::chrono::system_clock::now();
+            current->stopped = true;
+        }
+    }
 }
 
 string _ltrim(const std::string& s)

@@ -110,40 +110,39 @@ class HistoryCommand : public BuiltInCommand {
 };
 
 class JobsList {
- public:
-  class JobEntry {
+  class JobEntry { //TODO move to public??
   public:
-      //attributes:
       Command *command;
       pid_t pid;
       int job_id
-      std::chrono::system_clock::time_point schedule_time;
       bool stopped;
+      bool finished;
+      std::chrono::system_clock::time_point schedule_time;
       std::chrono::system_clock::time_point stop_time;
       // for getting the elapsed seconds use - std::chrono::duration<double> elapsed
       // TODO : How I get pid, which class is pid
       JobEntry(Command *command,pid_t pid,int job_id,std::chrono::system_clock::time_point time,bool stopped):command(command),
-      pid(pid),job_id(job_id),schedule_time(time),stopped(stopped){};
+      pid(pid),job_id(job_id),schedule_time(time),stopped(stopped),finished(false){};
       ~JobEntry();
       std::string print_job();
       void kill();
   };
  list<JobEntry> jobs_list;
  public:
-  JobsList();
-  ~JobsList();
-  int size();
-  void addJob(Command* cmd, bool isStopped = false);
-  void printJobsList();
-  void killAllJobs(); //NEEDED TO BE COMPLETED
-  void removeFinishedJobs(); //TODO
-  JobEntry* getJobById(int jobId);
-  void removeJobById(int jobId);
-  JobEntry* getLastJob(int* lastJobId) //TODO
-  JobEntry *getLastStoppedJob(int *jobId);
+    JobsList();
+    ~JobsList();
+    int size();
+    void addJob(Command* cmd,pid_t pid,bool isStopped = false);
+    void printJobsList();
+    void killAllJobs(); //NEEDED TO BE COMPLETED
+    void removeFinishedJobs(); //TODO
+    JobEntry *getJobById(int jobId);void removeJobById(int jobId);
+    JobEntry *getLastJob(int* lastJobId) //TODO
+    JobEntry *getLastStoppedJob(int *jobId);
     int getTopJobId();
     void removeStoppedSign(int jobId);
     void stopJobById(int jobID);
+    void setJobAsFinished(int jobId);
 };
 class KillCommand : public BuiltInCommand {
     // TODO: Add your data members
