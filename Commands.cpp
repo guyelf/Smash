@@ -55,6 +55,17 @@ int _parseCommandLine(const char* cmd_line, char** args) {
   FUNC_EXIT()
 }
 
+std::vector<string> _parseCommandLineStrings(const char* cmd_line) {
+    char** f_args = nullptr;
+    vector<string> args;
+    _parseCommandLine(cmd_line,f_args);
+    while(*f_args){
+        args.push_back(*f_args);
+        f_args++;
+    }
+    return args;
+}
+
 bool _isBackgroundComamnd(const char* cmd_line) {
   const string str(cmd_line);
   return str[str.find_last_not_of(WHITESPACE)] == '&';
@@ -92,23 +103,55 @@ SmallShell::~SmallShell() {
 * Creates and returns a pointer to Command class which matches the given command line (cmd_line)
 */
 Command * SmallShell::CreateCommand(const char* cmd_line) {
-	// For example:
-/*
+
   string cmd_s = string(cmd_line);
   if (cmd_s.find("pwd") == 0) {
     return new GetCurrDirCommand(cmd_line);
   }
-  else if ...
-  .....
+  else if (cmd_s.find("chprompt") == 0){
+    //todo: handle chrompt
+  }
+  else if (cmd_s.find("showpid") == 0){
+    return new ShowPidCommand(cmd_line);
+  }
+  else if (cmd_s.find("cd") == 0){
+    //todo: hanle the path that needs to be send to the c'tor
+    //return new ChangeDirCommand(cmd_line,);
+  }
+  else if (cmd_s.find("jobs") == 0){
+    //return new JobsCommand(cmd_line);
+  }
+  else if (cmd_s.find("kill") == 0){
+     ///return new KillCommand(cmd_line);
+  }
+  else if (cmd_s.find("fg") == 0){
+    //todo: FG command
+  }
+  else if (cmd_s.find("bg") == 0){
+    //todo: BG command
+  }
+  else if (cmd_s.find("quit") == 0){
+    //todo: QUIT command
+  }
+  else if (cmd_s.find(">") >= 0){
+   // return new RedirectionCommand(cmd_line);
+  }
+  else if (cmd_s.find("|&") >= 0){
+      //todo: handle |&
+  }
+  else if (cmd_s.find("|") >= 0){
+      //todo: handle |
+  }
   else {
     return new ExternalCommand(cmd_line);
   }
-  */
+
+
   return nullptr;
 }
 
 void SmallShell::executeCommand(const char *cmd_line) {
-  // TODO: Add your implementation here
+  // Todo: add to Jobs list if Background process
   // for example:
   // Command* cmd = CreateCommand(cmd_line);
   // cmd->execute();

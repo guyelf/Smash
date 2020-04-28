@@ -3,7 +3,8 @@
 //
 
 #include <fcntl.h>
-#include <sys/wait.h>
+#include <wait.h>
+//#include <sys/wait.h>
 #include "RedirectionCommand.h"
 
 RedirectionCommand::RedirectionCommand(const char *cmd_line):Command(cmd_line) {

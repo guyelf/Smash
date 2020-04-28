@@ -1,9 +1,10 @@
 //
 // Created by student on 4/23/20.
 //
-#include "Commands.h"
+
 #ifndef SMASH_REDIRECTIONCOMMAND_H
 #define SMASH_REDIRECTIONCOMMAND_H
+#include "Commands.h"
 
 enum RedirectionType {ONE_REDIRECTION, TWO_REDIRECTIONS};
 

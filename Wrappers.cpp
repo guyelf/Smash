@@ -13,7 +13,7 @@ int doFork() {
         doPerror("fork");
         throw MySpecialCommandException();
     }
-    else if (child == 0 && isFg)
+    else if (child == 0 && isFg) //if in the child and also forking from fg --> change parent_group
         ::setpgrp();
     return child;
 }

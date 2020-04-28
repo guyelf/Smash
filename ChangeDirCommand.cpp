@@ -27,14 +27,14 @@ void ChangeDirCommand::execute() {
 
     if (num_params != 1) {
         if (num_params > 1) {
-            throw MyTooManyArgsException();
+           //todo: throw MyTooManyArgsException(); Perhaps I can pass arguments to MyException that will print it exactly as needed
         }
         //else:
-        throw MyNoArgsException();
+        //todo: throw MyNoArgsException();
     }
     else if(this->params[0].compare("-")==0){
        if(prev_pwd.empty())
-           throw MyOldPWDNotSetException();
+           //todo: throw MyOldPWDNotSetException();
 
        ::chdir(prev_pwd.c_str());
        prev_pwd = pwd_buf;
