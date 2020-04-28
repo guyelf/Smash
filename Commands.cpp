@@ -57,11 +57,28 @@ void JobsList::killAllJobs() {
         current_job.kill();
     }
 }
-JobsList::JobEntry * JobsList::getJobById(int jobId) {}
+JobsList::JobEntry * JobsList::getJobById(int jobId) {
+    for(list<JobEntry>::iterator current = this->jobs_list.begin(); current != this->jobs_list.end() ; current++){
+        if (current->job_id == jobId){
+            JobEntry res = *current;
+            return &res;
+        }
+    }
+}
 
-JobsList::JobEntry * JobsList::getLastJob(int *lastJobId) {}
+JobsList::JobEntry * JobsList::getLastJob(int *lastJobId) {
 
-void JobsList::removeFinishedJobs() {}
+}
+
+void JobsList::removeFinishedJobs() {
+    for(list<JobEntry>::iterator current = this->jobs_list.begin(); current != this->jobs_list.end() ; current++){
+        if(current->stopped == true){
+            JobEntry current_ = *current;
+            this->jobs_list.erase(current);
+            current_.kill();
+        }
+    }
+}
 
 void JobsList::removeStoppedSign(int jobId) {
     for(list<JobEntry>::iterator current = this->jobs_list.begin(); current != this->jobs_list.end() ; current++){
@@ -230,4 +247,5 @@ void SmallShell::executeCommand(const char *cmd_line) {
   // Command* cmd = CreateCommand(cmd_line);
   // cmd->execute();
   // Please note that you must fork smash process for some commands (e.g., external commands....)
+  //
 }

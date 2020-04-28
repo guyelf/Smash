@@ -127,15 +127,12 @@ class JobsList {
   void printJobsList();
   void killAllJobs(); //NEEDED TO BE COMPLETED
   void removeFinishedJobs(); //TODO
-  JobEntry* getJobById(int jobId); //TODO
+  JobEntry* getJobById(int jobId);
   void removeJobById(int jobId);
   JobEntry* getLastJob(int* lastJobId) //TODO
-  int getTopJobId();
-  void removeStoppedSign(int jobId);
   JobEntry *getLastStoppedJob(int *jobId);
-  // TODO: Add extra methods or modify exisitng ones as needed
-
-
+    int getTopJobId();
+    void removeStoppedSign(int jobId);
 };
 class KillCommand : public BuiltInCommand {
     // TODO: Add your data members
