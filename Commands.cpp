@@ -35,13 +35,66 @@ void JobsList::addJob(Command *cmd, bool isStopped) {
     pid_t pid;
     auto time=this->schedule_time.now();
     int job_id = this->jobs_list.size()+1;
-    JobEntry new_job = JobEntry(cmd,pid,job_id,time);
+    JobEntry new_job = JobEntry(cmd,pid,job_id,time,isStopped);
     this->jobs_list.assign(job_id,new_job);
 }
 std::string JobsList::JobEntry::print_job() {
     std::string res = "[" + to_string(job_id) + "]" + this->command->cmd_string() + " : " + to_string(this->pid);
     //TODO: add elapsed time!!
     return res;
+}
+
+void JobsList::printJobsList() {
+    for (list<JobEntry>::iterator current = this->jobs_list.begin();current != this->jobs_list.end();current++){
+        std::string res = current->print_job();
+        cout<< res << "\n";
+    }
+}
+void JobsList::killAllJobs() {
+    for (list<JobEntry>::iterator  current = this->jobs_list.begin(); current!=this->jobs_list.end() ; current++) {
+        JobEntry current_job = *current;
+        this->jobs_list.erase(current);
+        current_job.kill();
+    }
+}
+JobsList::JobEntry * JobsList::getJobById(int jobId) {}
+
+JobsList::JobEntry * JobsList::getLastJob(int *lastJobId) {}
+
+void JobsList::removeFinishedJobs() {}
+
+void JobsList::removeStoppedSign(int jobId) {
+    for(list<JobEntry>::iterator current = this->jobs_list.begin(); current != this->jobs_list.end() ; current++){
+        if (current->job_id == jobId){
+            JobEntry current_upt = *current;
+            this->jobs_list.erase(current);
+            current_upt.stopped= false;
+            this->jobs_list.insert(current,current_upt);
+        }
+    }
+}
+
+JobsList::JobEntry* JobsList::getLastStoppedJob(int *jobId) {
+    int max_id = this->jobs_list.begin()->job_id;
+    JobEntry *last_stopped;
+    for(list<JobEntry>::iterator current = this->jobs_list.begin(); current != this->jobs_list.end() ; current++) {
+        if(current->job_id > max_id && current->stopped == true){
+            max_id = current->job_id;
+            *last_stopped = *current;
+        }
+    }
+    *jobId = max_id;
+    return last_stopped;
+}
+
+int JobsList::getTopJobId(){
+    int max_id=this->jobs_list.begin()->job_id;
+    for(list<JobEntry>::iterator current = this->jobs_list.begin(); current != this->jobs_list.end() ; current++){
+        if (current->job_id > max_id){
+            max_id = current->job_id;
+        }
+    }
+    return max_id;
 }
 
 string _ltrim(const std::string& s)

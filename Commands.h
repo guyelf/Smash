@@ -7,6 +7,7 @@
 #include <string.h>
 #include <iostream>
 #include "Wrappers.h"
+#include <iterator>
 #define COMMAND_ARGS_MAX_LENGTH (200)
 #define COMMAND_MAX_ARGS (20)
 #define HISTORY_MAX_RECORDS (50)
@@ -109,12 +110,13 @@ class JobsList {
       pid_t pid;
       int job_id
       auto time;
+      bool stopped;
       // for getting the elapsed seconds use - std::chrono::duration<double> elapsed
       // TODO : How I get pid, which class is pid
-      JobEntry(Command *command,pid_t pid,int job_id,auto time):command(command),pid(pid),job_id(job_id),time(time){};
+      JobEntry(Command *command,pid_t pid,int job_id,auto time,bool stopped = false):command(command),pid(pid),job_id(job_id),time(time),stopped(stopped){};
       ~JobEntry();
       std::string print_job();
-
+      void kill();
   };
  list<JobEntry> jobs_list;
  std::chrono::system_clock schedule_time;
@@ -123,16 +125,17 @@ class JobsList {
   ~JobsList();
   void addJob(Command* cmd, bool isStopped = false);
   void printJobsList();
-  void killAllJobs();
-  void removeFinishedJobs();
-  JobEntry * getJobById(int jobId);
+  void killAllJobs(); //NEEDED TO BE COMPLETED
+  void removeFinishedJobs(); //TODO
+  JobEntry* getJobById(int jobId); //TODO
   void removeJobById(int jobId);
-  JobEntry * getLastJob(int* lastJobId);
-  JobEntry *getLastStoppedJob(int *jobId);
+  JobEntry* getLastJob(int* lastJobId) //TODO
   int getTopJobId();
   void removeStoppedSign(int jobId);
-
+  JobEntry *getLastStoppedJob(int *jobId);
   // TODO: Add extra methods or modify exisitng ones as needed
+
+
 };
 class KillCommand : public BuiltInCommand {
     // TODO: Add your data members
