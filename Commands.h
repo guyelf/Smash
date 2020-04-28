@@ -7,6 +7,9 @@
 #include <string.h>
 #include <iostream>
 #include "Wrappers.h"
+#include <sys/types.h>
+#include <csignal.h>
+
 #include <iterator>
 #define COMMAND_ARGS_MAX_LENGTH (200)
 #define COMMAND_MAX_ARGS (20)
@@ -123,6 +126,7 @@ class JobsList {
  public:
   JobsList();
   ~JobsList();
+  int size();
   void addJob(Command* cmd, bool isStopped = false);
   void printJobsList();
   void killAllJobs(); //NEEDED TO BE COMPLETED

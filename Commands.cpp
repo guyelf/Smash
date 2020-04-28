@@ -44,6 +44,9 @@ std::string JobsList::JobEntry::print_job() {
     return res;
 }
 
+int JobsList::size() {
+    return this->jobs_list.size();
+}
 void JobsList::printJobsList() {
     for (list<JobEntry>::iterator current = this->jobs_list.begin();current != this->jobs_list.end();current++){
         std::string res = current->print_job();
@@ -54,7 +57,7 @@ void JobsList::killAllJobs() {
     for (list<JobEntry>::iterator  current = this->jobs_list.begin(); current!=this->jobs_list.end() ; current++) {
         JobEntry current_job = *current;
         this->jobs_list.erase(current);
-        current_job.kill();
+        kill(current_job.pid,SIGKILL);
     }
 }
 JobsList::JobEntry * JobsList::getJobById(int jobId) {
