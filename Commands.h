@@ -115,7 +115,7 @@ class JobsList {
       Command *command;
       pid_t pid;
       int job_id
-      bool stopped;
+      bool stopped ;
       bool finished;
       std::chrono::system_clock::time_point schedule_time;
       std::chrono::system_clock::time_point stop_time;

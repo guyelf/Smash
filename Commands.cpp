@@ -97,7 +97,7 @@ void JobsList::removeFinishedJobs() {
 void JobsList::removeStoppedSign(int jobId) {
     for(list<JobEntry>::iterator current = this->jobs_list.begin(); current != this->jobs_list.end() ; current++){
         if (current->job_id == jobId){
-            current->stopped = false;
+            current->stopped= false;
         }
     }
 }
