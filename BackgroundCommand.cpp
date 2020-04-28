@@ -21,9 +21,14 @@ BackgroundCommand::BackgroundCommand(const char *cmd_line, JobsList *jobs):Built
     if(args.size() == 2)//Todo: add correct checks after merging with Carmel's code
         //todo: use case the job exist (based on the job id) but is already running in the BG
         throw MyBgException(stoi(args[1]),"is already running in the background");
-    /*if() Todo: same exception as above only for an empty bg command - i.e if all the jobs in the queue are full
-    */
-    //todo handle exceptions
+
+    int* tmpStopedId;
+    jobs->getLastStoppedJob(tmpStopedId);
+    if(tmpStopedId == nullptr){//e.g no stopped jobs
+        throw MyBgException("there is no stopped jobs to resume");
+    }
+    free(tmpStopedId);
+    //Finished handling exceptions
 
     if(args.size() == 2)
         this->_job_id = stoi(args[1]);
@@ -32,16 +37,21 @@ BackgroundCommand::BackgroundCommand(const char *cmd_line, JobsList *jobs):Built
 }
 
 void BackgroundCommand::execute() {
-    int j_id = this->_job_id;
+   try{
+       int j_id = this->_job_id;
 
-    if(this->_job_id == -1) //if no job id was provided
-        j_id = this->_jobsList->getTopJobId();
+       if(this->_job_id == -1) //if no job id was provided
+           j_id = this->_jobsList->getTopJobId();
 
-    auto jobToBg = this->_jobsList->getJobById(j_id);
-    cout<< jobToBg->command + " : " + jobToBg->pid;
-    kill(jobToBg->pid,SIGCONT);
-    this->_jobsList->removeStoppedSign(j_id);
+       auto jobToBg = this->_jobsList->getJobById(j_id);
+       cout<< jobToBg->command + " : " + jobToBg->pid;
+       kill(jobToBg->pid,SIGCONT);
+       this->_jobsList->removeStoppedSign(j_id);
 
+   }
+   catch (std::exception e) {
+        throw MyException("bg");
+   }
 }
 
 BackgroundCommand::~BackgroundCommand()  {
