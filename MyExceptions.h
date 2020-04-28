@@ -16,7 +16,7 @@ public:
      MyException(const char* syscall): _msg("smash error: "){
          //as instructed in the error handling part,
          // this is for a generic system call that fails
-        this->_msg.append(syscall).append("failed");
+        this->_msg.append(syscall).append(" failed");
     }
     virtual const char* what()  noexcept  {
          return this->_msg.c_str();}

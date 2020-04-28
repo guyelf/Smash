@@ -19,26 +19,30 @@ int main(int argc, char* argv[]) {
     std::string prompt_name = "smash> "; //default prompt
     SmallShell& smash = SmallShell::getInstance();
     while(true) {
-        std::cout << prompt_name; // TODO: change this (why?)
-        std::string cmd_line;
-        std::getline(std::cin, cmd_line);
-        smash.executeCommand(cmd_line.c_str());
+
+        try {
+            std::cout << prompt_name; // TODO: change this (why?)
+            std::string cmd_line;
+            std::getline(std::cin, cmd_line);
+            smash.executeCommand(cmd_line.c_str());
 
 
-        //chprompt command:
-        std::istringstream iss(cmd_line);
-        std::vector<std::string> words(std::istream_iterator<std::string>{iss},
-                                       std::istream_iterator<std::string>());
-        if(words[0].compare("chprompt")==0){
-            if(words.size() >= 1)
-                prompt_name = words[1]+"> "; //ignores the rest of the params if applied
-            else
-                prompt_name = "smash> ";
+            //chprompt command:
+            std::istringstream iss(cmd_line);
+            std::vector<std::string> words(std::istream_iterator<std::string>{iss},
+                                           std::istream_iterator<std::string>());
+            if(words[0].compare("chprompt")==0){
+                if(words.size() >= 1)
+                    prompt_name = words[1]+"> "; //ignores the rest of the params if applied
+                else
+                    prompt_name = "smash> ";
+            }
+            //end chprompt
         }
-        //end chprompt
-
-
-
+        catch (MyException my) { //using the virtual method what to print to stdErr
+            perror(my.what());
+            //todo: add more code in case it's a more complicated error
+        }
     }
     return 0;
 }
