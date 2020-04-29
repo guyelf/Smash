@@ -136,6 +136,10 @@ void JobsList::stopJobById(int jobID){
     }
 }
 
+void JobsList::removeJobById(int jobId) {
+
+}
+
 string _ltrim(const std::string& s)
 {
   size_t start = s.find_first_not_of(WHITESPACE);
