@@ -123,6 +123,33 @@ smash/fast:
 	$(MAKE) -f CMakeFiles/smash.dir/build.make CMakeFiles/smash.dir/build
 .PHONY : smash/fast
 
+BackgroundCommand.o: BackgroundCommand.cpp.o
+
+.PHONY : BackgroundCommand.o
+
+# target to build an object file
+BackgroundCommand.cpp.o:
+	$(MAKE) -f CMakeFiles/smash.dir/build.make CMakeFiles/smash.dir/BackgroundCommand.cpp.o
+.PHONY : BackgroundCommand.cpp.o
+
+BackgroundCommand.i: BackgroundCommand.cpp.i
+
+.PHONY : BackgroundCommand.i
+
+# target to preprocess a source file
+BackgroundCommand.cpp.i:
+	$(MAKE) -f CMakeFiles/smash.dir/build.make CMakeFiles/smash.dir/BackgroundCommand.cpp.i
+.PHONY : BackgroundCommand.cpp.i
+
+BackgroundCommand.s: BackgroundCommand.cpp.s
+
+.PHONY : BackgroundCommand.s
+
+# target to generate assembly for a file
+BackgroundCommand.cpp.s:
+	$(MAKE) -f CMakeFiles/smash.dir/build.make CMakeFiles/smash.dir/BackgroundCommand.cpp.s
+.PHONY : BackgroundCommand.cpp.s
+
 ChangeDirCommand.o: ChangeDirCommand.cpp.o
 
 .PHONY : ChangeDirCommand.o
@@ -176,6 +203,33 @@ Commands.s: Commands.cpp.s
 Commands.cpp.s:
 	$(MAKE) -f CMakeFiles/smash.dir/build.make CMakeFiles/smash.dir/Commands.cpp.s
 .PHONY : Commands.cpp.s
+
+ForegroundCommand.o: ForegroundCommand.cpp.o
+
+.PHONY : ForegroundCommand.o
+
+# target to build an object file
+ForegroundCommand.cpp.o:
+	$(MAKE) -f CMakeFiles/smash.dir/build.make CMakeFiles/smash.dir/ForegroundCommand.cpp.o
+.PHONY : ForegroundCommand.cpp.o
+
+ForegroundCommand.i: ForegroundCommand.cpp.i
+
+.PHONY : ForegroundCommand.i
+
+# target to preprocess a source file
+ForegroundCommand.cpp.i:
+	$(MAKE) -f CMakeFiles/smash.dir/build.make CMakeFiles/smash.dir/ForegroundCommand.cpp.i
+.PHONY : ForegroundCommand.cpp.i
+
+ForegroundCommand.s: ForegroundCommand.cpp.s
+
+.PHONY : ForegroundCommand.s
+
+# target to generate assembly for a file
+ForegroundCommand.cpp.s:
+	$(MAKE) -f CMakeFiles/smash.dir/build.make CMakeFiles/smash.dir/ForegroundCommand.cpp.s
+.PHONY : ForegroundCommand.cpp.s
 
 GetCurrDirCommand.o: GetCurrDirCommand.cpp.o
 
@@ -231,6 +285,33 @@ JobsCommand.cpp.s:
 	$(MAKE) -f CMakeFiles/smash.dir/build.make CMakeFiles/smash.dir/JobsCommand.cpp.s
 .PHONY : JobsCommand.cpp.s
 
+MyException.o: MyException.cpp.o
+
+.PHONY : MyException.o
+
+# target to build an object file
+MyException.cpp.o:
+	$(MAKE) -f CMakeFiles/smash.dir/build.make CMakeFiles/smash.dir/MyException.cpp.o
+.PHONY : MyException.cpp.o
+
+MyException.i: MyException.cpp.i
+
+.PHONY : MyException.i
+
+# target to preprocess a source file
+MyException.cpp.i:
+	$(MAKE) -f CMakeFiles/smash.dir/build.make CMakeFiles/smash.dir/MyException.cpp.i
+.PHONY : MyException.cpp.i
+
+MyException.s: MyException.cpp.s
+
+.PHONY : MyException.s
+
+# target to generate assembly for a file
+MyException.cpp.s:
+	$(MAKE) -f CMakeFiles/smash.dir/build.make CMakeFiles/smash.dir/MyException.cpp.s
+.PHONY : MyException.cpp.s
+
 PipeCommand.o: PipeCommand.cpp.o
 
 .PHONY : PipeCommand.o
@@ -257,6 +338,33 @@ PipeCommand.s: PipeCommand.cpp.s
 PipeCommand.cpp.s:
 	$(MAKE) -f CMakeFiles/smash.dir/build.make CMakeFiles/smash.dir/PipeCommand.cpp.s
 .PHONY : PipeCommand.cpp.s
+
+QuitCommand.o: QuitCommand.cpp.o
+
+.PHONY : QuitCommand.o
+
+# target to build an object file
+QuitCommand.cpp.o:
+	$(MAKE) -f CMakeFiles/smash.dir/build.make CMakeFiles/smash.dir/QuitCommand.cpp.o
+.PHONY : QuitCommand.cpp.o
+
+QuitCommand.i: QuitCommand.cpp.i
+
+.PHONY : QuitCommand.i
+
+# target to preprocess a source file
+QuitCommand.cpp.i:
+	$(MAKE) -f CMakeFiles/smash.dir/build.make CMakeFiles/smash.dir/QuitCommand.cpp.i
+.PHONY : QuitCommand.cpp.i
+
+QuitCommand.s: QuitCommand.cpp.s
+
+.PHONY : QuitCommand.s
+
+# target to generate assembly for a file
+QuitCommand.cpp.s:
+	$(MAKE) -f CMakeFiles/smash.dir/build.make CMakeFiles/smash.dir/QuitCommand.cpp.s
+.PHONY : QuitCommand.cpp.s
 
 RedirectionCommand.o: RedirectionCommand.cpp.o
 
@@ -339,6 +447,33 @@ Wrappers.cpp.s:
 	$(MAKE) -f CMakeFiles/smash.dir/build.make CMakeFiles/smash.dir/Wrappers.cpp.s
 .PHONY : Wrappers.cpp.s
 
+killCommand.o: killCommand.cpp.o
+
+.PHONY : killCommand.o
+
+# target to build an object file
+killCommand.cpp.o:
+	$(MAKE) -f CMakeFiles/smash.dir/build.make CMakeFiles/smash.dir/killCommand.cpp.o
+.PHONY : killCommand.cpp.o
+
+killCommand.i: killCommand.cpp.i
+
+.PHONY : killCommand.i
+
+# target to preprocess a source file
+killCommand.cpp.i:
+	$(MAKE) -f CMakeFiles/smash.dir/build.make CMakeFiles/smash.dir/killCommand.cpp.i
+.PHONY : killCommand.cpp.i
+
+killCommand.s: killCommand.cpp.s
+
+.PHONY : killCommand.s
+
+# target to generate assembly for a file
+killCommand.cpp.s:
+	$(MAKE) -f CMakeFiles/smash.dir/build.make CMakeFiles/smash.dir/killCommand.cpp.s
+.PHONY : killCommand.cpp.s
+
 signals.o: signals.cpp.o
 
 .PHONY : signals.o
@@ -402,21 +537,33 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... smash"
+	@echo "... BackgroundCommand.o"
+	@echo "... BackgroundCommand.i"
+	@echo "... BackgroundCommand.s"
 	@echo "... ChangeDirCommand.o"
 	@echo "... ChangeDirCommand.i"
 	@echo "... ChangeDirCommand.s"
 	@echo "... Commands.o"
 	@echo "... Commands.i"
 	@echo "... Commands.s"
+	@echo "... ForegroundCommand.o"
+	@echo "... ForegroundCommand.i"
+	@echo "... ForegroundCommand.s"
 	@echo "... GetCurrDirCommand.o"
 	@echo "... GetCurrDirCommand.i"
 	@echo "... GetCurrDirCommand.s"
 	@echo "... JobsCommand.o"
 	@echo "... JobsCommand.i"
 	@echo "... JobsCommand.s"
+	@echo "... MyException.o"
+	@echo "... MyException.i"
+	@echo "... MyException.s"
 	@echo "... PipeCommand.o"
 	@echo "... PipeCommand.i"
 	@echo "... PipeCommand.s"
+	@echo "... QuitCommand.o"
+	@echo "... QuitCommand.i"
+	@echo "... QuitCommand.s"
 	@echo "... RedirectionCommand.o"
 	@echo "... RedirectionCommand.i"
 	@echo "... RedirectionCommand.s"
@@ -426,6 +573,9 @@ help:
 	@echo "... Wrappers.o"
 	@echo "... Wrappers.i"
 	@echo "... Wrappers.s"
+	@echo "... killCommand.o"
+	@echo "... killCommand.i"
+	@echo "... killCommand.s"
 	@echo "... signals.o"
 	@echo "... signals.i"
 	@echo "... signals.s"

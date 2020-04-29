@@ -1,1 +1,4 @@
-CMakeLists.txt not found in /home/student/CLionProjects/Smash Select CMakeLists.txt file...
+/opt/clion-2020.1/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/student/CLionProjects/Smash
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/student/CLionProjects/Smash/cmake-build-debug

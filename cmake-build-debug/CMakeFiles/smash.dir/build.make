@@ -187,6 +187,71 @@ CMakeFiles/smash.dir/RedirectionCommand.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/smash.dir/RedirectionCommand.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/student/CLionProjects/Smash/RedirectionCommand.cpp -o CMakeFiles/smash.dir/RedirectionCommand.cpp.s
 
+CMakeFiles/smash.dir/MyException.cpp.o: CMakeFiles/smash.dir/flags.make
+CMakeFiles/smash.dir/MyException.cpp.o: ../MyException.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/student/CLionProjects/Smash/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/smash.dir/MyException.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/smash.dir/MyException.cpp.o -c /home/student/CLionProjects/Smash/MyException.cpp
+
+CMakeFiles/smash.dir/MyException.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/smash.dir/MyException.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/student/CLionProjects/Smash/MyException.cpp > CMakeFiles/smash.dir/MyException.cpp.i
+
+CMakeFiles/smash.dir/MyException.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/smash.dir/MyException.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/student/CLionProjects/Smash/MyException.cpp -o CMakeFiles/smash.dir/MyException.cpp.s
+
+CMakeFiles/smash.dir/killCommand.cpp.o: CMakeFiles/smash.dir/flags.make
+CMakeFiles/smash.dir/killCommand.cpp.o: ../killCommand.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/student/CLionProjects/Smash/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/smash.dir/killCommand.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/smash.dir/killCommand.cpp.o -c /home/student/CLionProjects/Smash/killCommand.cpp
+
+CMakeFiles/smash.dir/killCommand.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/smash.dir/killCommand.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/student/CLionProjects/Smash/killCommand.cpp > CMakeFiles/smash.dir/killCommand.cpp.i
+
+CMakeFiles/smash.dir/killCommand.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/smash.dir/killCommand.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/student/CLionProjects/Smash/killCommand.cpp -o CMakeFiles/smash.dir/killCommand.cpp.s
+
+CMakeFiles/smash.dir/BackgroundCommand.cpp.o: CMakeFiles/smash.dir/flags.make
+CMakeFiles/smash.dir/BackgroundCommand.cpp.o: ../BackgroundCommand.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/student/CLionProjects/Smash/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/smash.dir/BackgroundCommand.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/smash.dir/BackgroundCommand.cpp.o -c /home/student/CLionProjects/Smash/BackgroundCommand.cpp
+
+CMakeFiles/smash.dir/BackgroundCommand.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/smash.dir/BackgroundCommand.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/student/CLionProjects/Smash/BackgroundCommand.cpp > CMakeFiles/smash.dir/BackgroundCommand.cpp.i
+
+CMakeFiles/smash.dir/BackgroundCommand.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/smash.dir/BackgroundCommand.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/student/CLionProjects/Smash/BackgroundCommand.cpp -o CMakeFiles/smash.dir/BackgroundCommand.cpp.s
+
+CMakeFiles/smash.dir/ForegroundCommand.cpp.o: CMakeFiles/smash.dir/flags.make
+CMakeFiles/smash.dir/ForegroundCommand.cpp.o: ../ForegroundCommand.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/student/CLionProjects/Smash/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/smash.dir/ForegroundCommand.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/smash.dir/ForegroundCommand.cpp.o -c /home/student/CLionProjects/Smash/ForegroundCommand.cpp
+
+CMakeFiles/smash.dir/ForegroundCommand.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/smash.dir/ForegroundCommand.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/student/CLionProjects/Smash/ForegroundCommand.cpp > CMakeFiles/smash.dir/ForegroundCommand.cpp.i
+
+CMakeFiles/smash.dir/ForegroundCommand.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/smash.dir/ForegroundCommand.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/student/CLionProjects/Smash/ForegroundCommand.cpp -o CMakeFiles/smash.dir/ForegroundCommand.cpp.s
+
+CMakeFiles/smash.dir/QuitCommand.cpp.o: CMakeFiles/smash.dir/flags.make
+CMakeFiles/smash.dir/QuitCommand.cpp.o: ../QuitCommand.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/student/CLionProjects/Smash/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/smash.dir/QuitCommand.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/smash.dir/QuitCommand.cpp.o -c /home/student/CLionProjects/Smash/QuitCommand.cpp
+
+CMakeFiles/smash.dir/QuitCommand.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/smash.dir/QuitCommand.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/student/CLionProjects/Smash/QuitCommand.cpp > CMakeFiles/smash.dir/QuitCommand.cpp.i
+
+CMakeFiles/smash.dir/QuitCommand.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/smash.dir/QuitCommand.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/student/CLionProjects/Smash/QuitCommand.cpp -o CMakeFiles/smash.dir/QuitCommand.cpp.s
+
 # Object files for target smash
 smash_OBJECTS = \
 "CMakeFiles/smash.dir/smash.cpp.o" \
@@ -198,7 +263,12 @@ smash_OBJECTS = \
 "CMakeFiles/smash.dir/JobsCommand.cpp.o" \
 "CMakeFiles/smash.dir/Wrappers.cpp.o" \
 "CMakeFiles/smash.dir/PipeCommand.cpp.o" \
-"CMakeFiles/smash.dir/RedirectionCommand.cpp.o"
+"CMakeFiles/smash.dir/RedirectionCommand.cpp.o" \
+"CMakeFiles/smash.dir/MyException.cpp.o" \
+"CMakeFiles/smash.dir/killCommand.cpp.o" \
+"CMakeFiles/smash.dir/BackgroundCommand.cpp.o" \
+"CMakeFiles/smash.dir/ForegroundCommand.cpp.o" \
+"CMakeFiles/smash.dir/QuitCommand.cpp.o"
 
 # External object files for target smash
 smash_EXTERNAL_OBJECTS =
@@ -213,9 +283,14 @@ smash: CMakeFiles/smash.dir/JobsCommand.cpp.o
 smash: CMakeFiles/smash.dir/Wrappers.cpp.o
 smash: CMakeFiles/smash.dir/PipeCommand.cpp.o
 smash: CMakeFiles/smash.dir/RedirectionCommand.cpp.o
+smash: CMakeFiles/smash.dir/MyException.cpp.o
+smash: CMakeFiles/smash.dir/killCommand.cpp.o
+smash: CMakeFiles/smash.dir/BackgroundCommand.cpp.o
+smash: CMakeFiles/smash.dir/ForegroundCommand.cpp.o
+smash: CMakeFiles/smash.dir/QuitCommand.cpp.o
 smash: CMakeFiles/smash.dir/build.make
 smash: CMakeFiles/smash.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/student/CLionProjects/Smash/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Linking CXX executable smash"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/student/CLionProjects/Smash/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Linking CXX executable smash"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/smash.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

@@ -84,6 +84,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/student/CLionProjects/Smash/BackgroundCommand.cpp">
+			<Option target="smash"/>
+		</Unit>
 		<Unit filename="/home/student/CLionProjects/Smash/BackgroundCommand.h">
 			<Option target="smash"/>
 		</Unit>
@@ -94,6 +97,9 @@
 			<Option target="smash"/>
 		</Unit>
 		<Unit filename="/home/student/CLionProjects/Smash/Commands.h">
+			<Option target="smash"/>
+		</Unit>
+		<Unit filename="/home/student/CLionProjects/Smash/ForegroundCommand.cpp">
 			<Option target="smash"/>
 		</Unit>
 		<Unit filename="/home/student/CLionProjects/Smash/ForegroundCommand.h">
@@ -108,7 +114,7 @@
 		<Unit filename="/home/student/CLionProjects/Smash/JobsCommand.h">
 			<Option target="smash"/>
 		</Unit>
-		<Unit filename="/home/student/CLionProjects/Smash/KillCommand.h">
+		<Unit filename="/home/student/CLionProjects/Smash/MyException.cpp">
 			<Option target="smash"/>
 		</Unit>
 		<Unit filename="/home/student/CLionProjects/Smash/MyExceptions.h">
@@ -118,6 +124,9 @@
 			<Option target="smash"/>
 		</Unit>
 		<Unit filename="/home/student/CLionProjects/Smash/PipeCommand.h">
+			<Option target="smash"/>
+		</Unit>
+		<Unit filename="/home/student/CLionProjects/Smash/QuitCommand.cpp">
 			<Option target="smash"/>
 		</Unit>
 		<Unit filename="/home/student/CLionProjects/Smash/QuitCommand.h">
@@ -136,6 +145,9 @@
 			<Option target="smash"/>
 		</Unit>
 		<Unit filename="/home/student/CLionProjects/Smash/Wrappers.h">
+			<Option target="smash"/>
+		</Unit>
+		<Unit filename="/home/student/CLionProjects/Smash/killCommand.cpp">
 			<Option target="smash"/>
 		</Unit>
 		<Unit filename="/home/student/CLionProjects/Smash/signals.cpp">
