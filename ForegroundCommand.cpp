@@ -39,7 +39,7 @@ void ForegroundCommand::execute() {
         this->_jobsList->removeJobById(j_id); //removing the job after bringing it back to FG //todo: handle what if someone stops it again -> ctrl+c
         waitpid(jobToFg->pid,nullptr); //wait for that job to finish bc it's FG now.
     }
-    catch (std::exception e) {
+    catch (std::exception& e) {
         throw MyException("fg"); // for generic fg failure as instructed in the Error handling part
     }
 }

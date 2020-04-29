@@ -158,7 +158,15 @@ Command * SmallShell::CreateCommand(const char* cmd_line) {
 void SmallShell::executeCommand(const char *cmd_line) {
   // Todo: add to Jobs list if Background process
   // for example:
+    std:string command (cmd_line);
+    int isBg = command.find("&");
+    int isNotBg = command.find("|&");
+    if(isBg && !isNotBg){
+        //todo: check if jobs need to be deleted and delete if so
+        //todo: add new job: JobsList.addJob(cmd_line, false);
+    }
   // Command* cmd = CreateCommand(cmd_line);
+
   // cmd->execute();
   // Please note that you must fork smash process for some commands (e.g., external commands....)
 }

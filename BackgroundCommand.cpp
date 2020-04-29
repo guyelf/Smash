@@ -49,7 +49,7 @@ void BackgroundCommand::execute() {
        this->_jobsList->removeStoppedSign(j_id);
 
    }
-   catch (std::exception e) {
+   catch (std::exception& e) {
         throw MyException("bg");
    }
 }

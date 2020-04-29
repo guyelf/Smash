@@ -1,9 +1,6 @@
 //
-// Created by student on 4/27/20.
+// Created by student on 4/29/20.
 //
-
-#ifndef SMASH_QUITCOMMAND_H
-#define SMASH_QUITCOMMAND_H
 
 #include "Commands.h"
 #include "Commands.cpp"
@@ -33,4 +30,3 @@ void QuitCommand::execute() {
 QuitCommand::~QuitCommand() {
     free(this->_jobsList);
 }
-#endif //SMASH_QUITCOMMAND_H

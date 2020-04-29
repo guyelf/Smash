@@ -39,9 +39,10 @@ int main(int argc, char* argv[]) {
             }
             //end chprompt
         }
-        catch (MyException my) { //using the virtual method what to print to stdErr
+        catch (MyException& my) { //using the virtual method what to print to stdErr
             perror(my.what());
-            //todo: add more code in case it's a more complicated error
+            //todo: print the error message maybe using just cerr<< my.what() <<endl;
+            //todo: kill smash depends if it's a fatal error or not
         }
     }
     return 0;

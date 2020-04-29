@@ -151,7 +151,7 @@ class BackgroundCommand : public BuiltInCommand {
  int _job_id;
  JobsList* _jobsList;
  public:
-  BackgroundCommand(const char* cmd_line, JobsList* jobs);
+  BackgroundComlmand(const char* cmd_line, JobsList* jobs);
   virtual ~BackgroundCommand();
   void execute() override;
 };

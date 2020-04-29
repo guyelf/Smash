@@ -34,7 +34,7 @@ void ChangeDirCommand::execute() {
        try{
            ::chdir(prev_pwd.c_str());
        }
-       catch (std::exception e) {
+       catch (std::exception& e) {
            throw MyException("cd");
        }
        prev_pwd = pwd_buf;
@@ -77,7 +77,7 @@ void ChangeDirCommand::execute() {
         }
         free(pwd_buf);
     }
-    catch (std::exception e) {
+    catch (std::exception& e) {
         throw MyException("cd");
     }
 }
