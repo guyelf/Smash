@@ -2,9 +2,11 @@ file(REMOVE_RECURSE
   "CMakeFiles/smash.dir/BackgroundCommand.cpp.o"
   "CMakeFiles/smash.dir/ChangeDirCommand.cpp.o"
   "CMakeFiles/smash.dir/Commands.cpp.o"
+  "CMakeFiles/smash.dir/ExternalCommand.cpp.o"
   "CMakeFiles/smash.dir/ForegroundCommand.cpp.o"
   "CMakeFiles/smash.dir/GetCurrDirCommand.cpp.o"
   "CMakeFiles/smash.dir/JobsCommand.cpp.o"
+  "CMakeFiles/smash.dir/JobsList.cpp.o"
   "CMakeFiles/smash.dir/MyException.cpp.o"
   "CMakeFiles/smash.dir/PipeCommand.cpp.o"
   "CMakeFiles/smash.dir/QuitCommand.cpp.o"
@@ -14,7 +16,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/smash.dir/killCommand.cpp.o"
   "CMakeFiles/smash.dir/signals.cpp.o"
   "CMakeFiles/smash.dir/smash.cpp.o"
-  "smash"
+  "libsmash.dll.a"
+  "smash.exe"
   "smash.pdb"
 )
 

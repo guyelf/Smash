@@ -8,7 +8,7 @@ JobsCommand::JobsCommand(const char *cmd_line, JobsList *jobs) :BuiltInCommand(c
     //todo ?? assign them all to a list with while loop (list is better bc it sortable)
 }
 
-bool compareJobIds(Job j1, Job j2)
+bool compareJobIds(JobEntry j1, JobEntry j2)
 {
     return (j1.job_id < j2.job_id);
 }

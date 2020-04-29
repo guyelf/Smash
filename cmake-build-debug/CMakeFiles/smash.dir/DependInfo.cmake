@@ -4,21 +4,23 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/student/CLionProjects/Smash/BackgroundCommand.cpp" "/home/student/CLionProjects/Smash/cmake-build-debug/CMakeFiles/smash.dir/BackgroundCommand.cpp.o"
-  "/home/student/CLionProjects/Smash/ChangeDirCommand.cpp" "/home/student/CLionProjects/Smash/cmake-build-debug/CMakeFiles/smash.dir/ChangeDirCommand.cpp.o"
-  "/home/student/CLionProjects/Smash/Commands.cpp" "/home/student/CLionProjects/Smash/cmake-build-debug/CMakeFiles/smash.dir/Commands.cpp.o"
-  "/home/student/CLionProjects/Smash/ForegroundCommand.cpp" "/home/student/CLionProjects/Smash/cmake-build-debug/CMakeFiles/smash.dir/ForegroundCommand.cpp.o"
-  "/home/student/CLionProjects/Smash/GetCurrDirCommand.cpp" "/home/student/CLionProjects/Smash/cmake-build-debug/CMakeFiles/smash.dir/GetCurrDirCommand.cpp.o"
-  "/home/student/CLionProjects/Smash/JobsCommand.cpp" "/home/student/CLionProjects/Smash/cmake-build-debug/CMakeFiles/smash.dir/JobsCommand.cpp.o"
-  "/home/student/CLionProjects/Smash/MyException.cpp" "/home/student/CLionProjects/Smash/cmake-build-debug/CMakeFiles/smash.dir/MyException.cpp.o"
-  "/home/student/CLionProjects/Smash/PipeCommand.cpp" "/home/student/CLionProjects/Smash/cmake-build-debug/CMakeFiles/smash.dir/PipeCommand.cpp.o"
-  "/home/student/CLionProjects/Smash/QuitCommand.cpp" "/home/student/CLionProjects/Smash/cmake-build-debug/CMakeFiles/smash.dir/QuitCommand.cpp.o"
-  "/home/student/CLionProjects/Smash/RedirectionCommand.cpp" "/home/student/CLionProjects/Smash/cmake-build-debug/CMakeFiles/smash.dir/RedirectionCommand.cpp.o"
-  "/home/student/CLionProjects/Smash/ShowPidCommand.cpp" "/home/student/CLionProjects/Smash/cmake-build-debug/CMakeFiles/smash.dir/ShowPidCommand.cpp.o"
-  "/home/student/CLionProjects/Smash/Wrappers.cpp" "/home/student/CLionProjects/Smash/cmake-build-debug/CMakeFiles/smash.dir/Wrappers.cpp.o"
-  "/home/student/CLionProjects/Smash/killCommand.cpp" "/home/student/CLionProjects/Smash/cmake-build-debug/CMakeFiles/smash.dir/killCommand.cpp.o"
-  "/home/student/CLionProjects/Smash/signals.cpp" "/home/student/CLionProjects/Smash/cmake-build-debug/CMakeFiles/smash.dir/signals.cpp.o"
-  "/home/student/CLionProjects/Smash/smash.cpp" "/home/student/CLionProjects/Smash/cmake-build-debug/CMakeFiles/smash.dir/smash.cpp.o"
+  "/cygdrive/c/Users/Dell/CLionProjects/Smash/BackgroundCommand.cpp" "/cygdrive/c/Users/Dell/CLionProjects/Smash/cmake-build-debug/CMakeFiles/smash.dir/BackgroundCommand.cpp.o"
+  "/cygdrive/c/Users/Dell/CLionProjects/Smash/ChangeDirCommand.cpp" "/cygdrive/c/Users/Dell/CLionProjects/Smash/cmake-build-debug/CMakeFiles/smash.dir/ChangeDirCommand.cpp.o"
+  "/cygdrive/c/Users/Dell/CLionProjects/Smash/Commands.cpp" "/cygdrive/c/Users/Dell/CLionProjects/Smash/cmake-build-debug/CMakeFiles/smash.dir/Commands.cpp.o"
+  "/cygdrive/c/Users/Dell/CLionProjects/Smash/ExternalCommand.cpp" "/cygdrive/c/Users/Dell/CLionProjects/Smash/cmake-build-debug/CMakeFiles/smash.dir/ExternalCommand.cpp.o"
+  "/cygdrive/c/Users/Dell/CLionProjects/Smash/ForegroundCommand.cpp" "/cygdrive/c/Users/Dell/CLionProjects/Smash/cmake-build-debug/CMakeFiles/smash.dir/ForegroundCommand.cpp.o"
+  "/cygdrive/c/Users/Dell/CLionProjects/Smash/GetCurrDirCommand.cpp" "/cygdrive/c/Users/Dell/CLionProjects/Smash/cmake-build-debug/CMakeFiles/smash.dir/GetCurrDirCommand.cpp.o"
+  "/cygdrive/c/Users/Dell/CLionProjects/Smash/JobsCommand.cpp" "/cygdrive/c/Users/Dell/CLionProjects/Smash/cmake-build-debug/CMakeFiles/smash.dir/JobsCommand.cpp.o"
+  "/cygdrive/c/Users/Dell/CLionProjects/Smash/JobsList.cpp" "/cygdrive/c/Users/Dell/CLionProjects/Smash/cmake-build-debug/CMakeFiles/smash.dir/JobsList.cpp.o"
+  "/cygdrive/c/Users/Dell/CLionProjects/Smash/MyException.cpp" "/cygdrive/c/Users/Dell/CLionProjects/Smash/cmake-build-debug/CMakeFiles/smash.dir/MyException.cpp.o"
+  "/cygdrive/c/Users/Dell/CLionProjects/Smash/PipeCommand.cpp" "/cygdrive/c/Users/Dell/CLionProjects/Smash/cmake-build-debug/CMakeFiles/smash.dir/PipeCommand.cpp.o"
+  "/cygdrive/c/Users/Dell/CLionProjects/Smash/QuitCommand.cpp" "/cygdrive/c/Users/Dell/CLionProjects/Smash/cmake-build-debug/CMakeFiles/smash.dir/QuitCommand.cpp.o"
+  "/cygdrive/c/Users/Dell/CLionProjects/Smash/RedirectionCommand.cpp" "/cygdrive/c/Users/Dell/CLionProjects/Smash/cmake-build-debug/CMakeFiles/smash.dir/RedirectionCommand.cpp.o"
+  "/cygdrive/c/Users/Dell/CLionProjects/Smash/ShowPidCommand.cpp" "/cygdrive/c/Users/Dell/CLionProjects/Smash/cmake-build-debug/CMakeFiles/smash.dir/ShowPidCommand.cpp.o"
+  "/cygdrive/c/Users/Dell/CLionProjects/Smash/Wrappers.cpp" "/cygdrive/c/Users/Dell/CLionProjects/Smash/cmake-build-debug/CMakeFiles/smash.dir/Wrappers.cpp.o"
+  "/cygdrive/c/Users/Dell/CLionProjects/Smash/killCommand.cpp" "/cygdrive/c/Users/Dell/CLionProjects/Smash/cmake-build-debug/CMakeFiles/smash.dir/killCommand.cpp.o"
+  "/cygdrive/c/Users/Dell/CLionProjects/Smash/signals.cpp" "/cygdrive/c/Users/Dell/CLionProjects/Smash/cmake-build-debug/CMakeFiles/smash.dir/signals.cpp.o"
+  "/cygdrive/c/Users/Dell/CLionProjects/Smash/smash.cpp" "/cygdrive/c/Users/Dell/CLionProjects/Smash/cmake-build-debug/CMakeFiles/smash.dir/smash.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

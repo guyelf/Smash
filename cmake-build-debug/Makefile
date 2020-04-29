@@ -39,19 +39,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /opt/clion-2020.1/bin/cmake/linux/bin/cmake
+CMAKE_COMMAND = /cygdrive/c/Users/Dell/AppData/Local/JetBrains/CLion2020.1/cygwin_cmake/bin/cmake.exe
 
 # The command to remove a file.
-RM = /opt/clion-2020.1/bin/cmake/linux/bin/cmake -E remove -f
+RM = /cygdrive/c/Users/Dell/AppData/Local/JetBrains/CLion2020.1/cygwin_cmake/bin/cmake.exe -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/student/CLionProjects/Smash
+CMAKE_SOURCE_DIR = /cygdrive/c/Users/Dell/CLionProjects/Smash
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/student/CLionProjects/Smash/cmake-build-debug
+CMAKE_BINARY_DIR = /cygdrive/c/Users/Dell/CLionProjects/Smash/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /home/student/CLionProjects/Smash/cmake-build-debug
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/opt/clion-2020.1/bin/cmake/linux/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/cygdrive/c/Users/Dell/AppData/Local/JetBrains/CLion2020.1/cygwin_cmake/bin/cmake.exe -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -70,7 +70,7 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/opt/clion-2020.1/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	/cygdrive/c/Users/Dell/AppData/Local/JetBrains/CLion2020.1/cygwin_cmake/bin/cmake.exe -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/student/CLionProjects/Smash/cmake-build-debug/CMakeFiles /home/student/CLionProjects/Smash/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /cygdrive/c/Users/Dell/CLionProjects/Smash/cmake-build-debug/CMakeFiles /cygdrive/c/Users/Dell/CLionProjects/Smash/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/student/CLionProjects/Smash/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /cygdrive/c/Users/Dell/CLionProjects/Smash/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -204,6 +204,33 @@ Commands.cpp.s:
 	$(MAKE) -f CMakeFiles/smash.dir/build.make CMakeFiles/smash.dir/Commands.cpp.s
 .PHONY : Commands.cpp.s
 
+ExternalCommand.o: ExternalCommand.cpp.o
+
+.PHONY : ExternalCommand.o
+
+# target to build an object file
+ExternalCommand.cpp.o:
+	$(MAKE) -f CMakeFiles/smash.dir/build.make CMakeFiles/smash.dir/ExternalCommand.cpp.o
+.PHONY : ExternalCommand.cpp.o
+
+ExternalCommand.i: ExternalCommand.cpp.i
+
+.PHONY : ExternalCommand.i
+
+# target to preprocess a source file
+ExternalCommand.cpp.i:
+	$(MAKE) -f CMakeFiles/smash.dir/build.make CMakeFiles/smash.dir/ExternalCommand.cpp.i
+.PHONY : ExternalCommand.cpp.i
+
+ExternalCommand.s: ExternalCommand.cpp.s
+
+.PHONY : ExternalCommand.s
+
+# target to generate assembly for a file
+ExternalCommand.cpp.s:
+	$(MAKE) -f CMakeFiles/smash.dir/build.make CMakeFiles/smash.dir/ExternalCommand.cpp.s
+.PHONY : ExternalCommand.cpp.s
+
 ForegroundCommand.o: ForegroundCommand.cpp.o
 
 .PHONY : ForegroundCommand.o
@@ -284,6 +311,33 @@ JobsCommand.s: JobsCommand.cpp.s
 JobsCommand.cpp.s:
 	$(MAKE) -f CMakeFiles/smash.dir/build.make CMakeFiles/smash.dir/JobsCommand.cpp.s
 .PHONY : JobsCommand.cpp.s
+
+JobsList.o: JobsList.cpp.o
+
+.PHONY : JobsList.o
+
+# target to build an object file
+JobsList.cpp.o:
+	$(MAKE) -f CMakeFiles/smash.dir/build.make CMakeFiles/smash.dir/JobsList.cpp.o
+.PHONY : JobsList.cpp.o
+
+JobsList.i: JobsList.cpp.i
+
+.PHONY : JobsList.i
+
+# target to preprocess a source file
+JobsList.cpp.i:
+	$(MAKE) -f CMakeFiles/smash.dir/build.make CMakeFiles/smash.dir/JobsList.cpp.i
+.PHONY : JobsList.cpp.i
+
+JobsList.s: JobsList.cpp.s
+
+.PHONY : JobsList.s
+
+# target to generate assembly for a file
+JobsList.cpp.s:
+	$(MAKE) -f CMakeFiles/smash.dir/build.make CMakeFiles/smash.dir/JobsList.cpp.s
+.PHONY : JobsList.cpp.s
 
 MyException.o: MyException.cpp.o
 
@@ -535,8 +589,8 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
-	@echo "... edit_cache"
 	@echo "... smash"
+	@echo "... edit_cache"
 	@echo "... BackgroundCommand.o"
 	@echo "... BackgroundCommand.i"
 	@echo "... BackgroundCommand.s"
@@ -546,6 +600,9 @@ help:
 	@echo "... Commands.o"
 	@echo "... Commands.i"
 	@echo "... Commands.s"
+	@echo "... ExternalCommand.o"
+	@echo "... ExternalCommand.i"
+	@echo "... ExternalCommand.s"
 	@echo "... ForegroundCommand.o"
 	@echo "... ForegroundCommand.i"
 	@echo "... ForegroundCommand.s"
@@ -555,6 +612,9 @@ help:
 	@echo "... JobsCommand.o"
 	@echo "... JobsCommand.i"
 	@echo "... JobsCommand.s"
+	@echo "... JobsList.o"
+	@echo "... JobsList.i"
+	@echo "... JobsList.s"
 	@echo "... MyException.o"
 	@echo "... MyException.i"
 	@echo "... MyException.s"
