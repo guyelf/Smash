@@ -31,7 +31,7 @@ class Command {
   explicit Command(const char* cmd_line);
   virtual ~Command();
   virtual void execute() = 0;
-  virtual const char* cmd_string() =0;
+  virtual const char* getCommand() =0;
   //virtual void prepare();
   //virtual void cleanup();
   // TODO: Add your extra methods if needed
@@ -154,6 +154,7 @@ public:
     virtual ~KillCommand() {}
     void execute() override;
 };
+
 class ForegroundCommand : public BuiltInCommand {
  // TODO: Add your data members
  int _job_id;
@@ -169,7 +170,7 @@ class BackgroundCommand : public BuiltInCommand {
  int _job_id;
  JobsList* _jobsList;
  public:
-  BackgroundCommand(const char* cmd_line, JobsList* jobs);
+  BackgroundComlmand(const char* cmd_line, JobsList* jobs);
   virtual ~BackgroundCommand();
   void execute() override;
 };

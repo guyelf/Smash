@@ -25,46 +25,48 @@ void ChangeDirCommand::execute() {
     char* pwd_buf = nullptr;
     ::getcwd(pwd_buf,0);//puts in pwd_buf the current working directory
 
-    if (num_params != 1) {
-        if (num_params > 1) {
-           //todo: throw MyTooManyArgsException(); Perhaps I can pass arguments to MyException that will print it exactly as needed
-        }
-        //else:
-        //todo: throw MyNoArgsException();
-    }
+    if (num_params > 1)
+        throw MyCdException("too many arguments");
+
     else if(this->params[0].compare("-")==0){
        if(prev_pwd.empty())
-           //todo: throw MyOldPWDNotSetException();
-
-       ::chdir(prev_pwd.c_str());
+           MyCdException("OLDPWD not set");
+       try{
+           ::chdir(prev_pwd.c_str());
+       }
+       catch (std::exception& e) {
+           throw MyException("cd");
+       }
        prev_pwd = pwd_buf;
-
     }
-    else if(this->params[0].compare("..")==0){
-        std::string tmp (pwd_buf);
-        int count_dash = 0;
-        int i = 0;
-        int last_dash = 0;
-        while(*pwd_buf){
-            if(*pwd_buf == '/'){
-                count_dash++;
-                last_dash = i;
+
+
+    try{
+        if(this->params[0].compare("..")==0){
+            std::string tmp (pwd_buf);
+            int count_dash = 0;
+            int i = 0;
+            int last_dash = 0;
+            while(*pwd_buf){
+                if(*pwd_buf == '/'){
+                    count_dash++;
+                    last_dash = i;
+                }
+                pwd_buf++;
+                i++;
             }
-            pwd_buf++;
-            i++;
-        }
-        if(last_dash-1 != 0){ //if it's not already in the top
-            tmp = tmp.substr(0,last_dash-1);
-            ::chdir(tmp.c_str());
+            if(last_dash-1 != 0){ //if it's not already in the top
+                tmp = tmp.substr(0,last_dash-1);
+                ::chdir(tmp.c_str());
+            }
+
         }
 
-    }
-
-    else if(this->params[0].compare(0,1,"/",0,1)==0){//check if it's a full path
+        else if(this->params[0].compare(0,1,"/",0,1)==0){//check if it's a full path
             ::chdir(this->params[0].c_str()); //parsing the string to char*
             prev_pwd = pwd_buf;
         }
-   else{
+        else{
             //relative
             char* path;
             strcpy(pwd_buf,path);
@@ -73,7 +75,11 @@ void ChangeDirCommand::execute() {
             prev_pwd = pwd_buf;
             free(path); //hopefully won't throw an error
         }
-   free(pwd_buf);
+        free(pwd_buf);
+    }
+    catch (std::exception& e) {
+        throw MyException("cd");
+    }
 }
 
 
