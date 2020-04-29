@@ -204,6 +204,33 @@ Commands.cpp.s:
 	$(MAKE) -f CMakeFiles/smash.dir/build.make CMakeFiles/smash.dir/Commands.cpp.s
 .PHONY : Commands.cpp.s
 
+ExternalCommand.o: ExternalCommand.cpp.o
+
+.PHONY : ExternalCommand.o
+
+# target to build an object file
+ExternalCommand.cpp.o:
+	$(MAKE) -f CMakeFiles/smash.dir/build.make CMakeFiles/smash.dir/ExternalCommand.cpp.o
+.PHONY : ExternalCommand.cpp.o
+
+ExternalCommand.i: ExternalCommand.cpp.i
+
+.PHONY : ExternalCommand.i
+
+# target to preprocess a source file
+ExternalCommand.cpp.i:
+	$(MAKE) -f CMakeFiles/smash.dir/build.make CMakeFiles/smash.dir/ExternalCommand.cpp.i
+.PHONY : ExternalCommand.cpp.i
+
+ExternalCommand.s: ExternalCommand.cpp.s
+
+.PHONY : ExternalCommand.s
+
+# target to generate assembly for a file
+ExternalCommand.cpp.s:
+	$(MAKE) -f CMakeFiles/smash.dir/build.make CMakeFiles/smash.dir/ExternalCommand.cpp.s
+.PHONY : ExternalCommand.cpp.s
+
 ForegroundCommand.o: ForegroundCommand.cpp.o
 
 .PHONY : ForegroundCommand.o
@@ -546,6 +573,9 @@ help:
 	@echo "... Commands.o"
 	@echo "... Commands.i"
 	@echo "... Commands.s"
+	@echo "... ExternalCommand.o"
+	@echo "... ExternalCommand.i"
+	@echo "... ExternalCommand.s"
 	@echo "... ForegroundCommand.o"
 	@echo "... ForegroundCommand.i"
 	@echo "... ForegroundCommand.s"

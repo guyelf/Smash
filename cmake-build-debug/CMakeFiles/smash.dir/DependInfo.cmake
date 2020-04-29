@@ -7,6 +7,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/student/CLionProjects/Smash/BackgroundCommand.cpp" "/home/student/CLionProjects/Smash/cmake-build-debug/CMakeFiles/smash.dir/BackgroundCommand.cpp.o"
   "/home/student/CLionProjects/Smash/ChangeDirCommand.cpp" "/home/student/CLionProjects/Smash/cmake-build-debug/CMakeFiles/smash.dir/ChangeDirCommand.cpp.o"
   "/home/student/CLionProjects/Smash/Commands.cpp" "/home/student/CLionProjects/Smash/cmake-build-debug/CMakeFiles/smash.dir/Commands.cpp.o"
+  "/home/student/CLionProjects/Smash/ExternalCommand.cpp" "/home/student/CLionProjects/Smash/cmake-build-debug/CMakeFiles/smash.dir/ExternalCommand.cpp.o"
   "/home/student/CLionProjects/Smash/ForegroundCommand.cpp" "/home/student/CLionProjects/Smash/cmake-build-debug/CMakeFiles/smash.dir/ForegroundCommand.cpp.o"
   "/home/student/CLionProjects/Smash/GetCurrDirCommand.cpp" "/home/student/CLionProjects/Smash/cmake-build-debug/CMakeFiles/smash.dir/GetCurrDirCommand.cpp.o"
   "/home/student/CLionProjects/Smash/JobsCommand.cpp" "/home/student/CLionProjects/Smash/cmake-build-debug/CMakeFiles/smash.dir/JobsCommand.cpp.o"

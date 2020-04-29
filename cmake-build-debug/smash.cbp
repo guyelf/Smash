@@ -99,6 +99,9 @@
 		<Unit filename="/home/student/CLionProjects/Smash/Commands.h">
 			<Option target="smash"/>
 		</Unit>
+		<Unit filename="/home/student/CLionProjects/Smash/ExternalCommand.cpp">
+			<Option target="smash"/>
+		</Unit>
 		<Unit filename="/home/student/CLionProjects/Smash/ForegroundCommand.cpp">
 			<Option target="smash"/>
 		</Unit>

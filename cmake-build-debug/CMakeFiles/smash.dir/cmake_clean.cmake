@@ -2,6 +2,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/smash.dir/BackgroundCommand.cpp.o"
   "CMakeFiles/smash.dir/ChangeDirCommand.cpp.o"
   "CMakeFiles/smash.dir/Commands.cpp.o"
+  "CMakeFiles/smash.dir/ExternalCommand.cpp.o"
   "CMakeFiles/smash.dir/ForegroundCommand.cpp.o"
   "CMakeFiles/smash.dir/GetCurrDirCommand.cpp.o"
   "CMakeFiles/smash.dir/JobsCommand.cpp.o"

@@ -31,7 +31,7 @@ class Command {
   explicit Command(const char* cmd_line);
   virtual ~Command();
   virtual void execute() = 0;
-  virtual const char* getCommand() =0;
+  virtual const char* cmd_string();
   //virtual void prepare();
   //virtual void cleanup();
   // TODO: Add your extra methods if needed
@@ -45,10 +45,12 @@ class BuiltInCommand : public Command {
 };
 
 class ExternalCommand : public Command {
+    std::string cmd;
  public:
   explicit ExternalCommand(const char* cmd_line);
   virtual ~ExternalCommand() {}
   void execute() override;
+  const char* cmd_string() override { return this->cmd.c_str();}
 };
 
 class ChangeDirCommand : public BuiltInCommand {
