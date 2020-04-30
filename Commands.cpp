@@ -98,11 +98,11 @@ void _removeBackgroundSign(char* cmd_line) {
 // TODO: Add your implementation for classes in Commands.h 
 
 SmallShell::SmallShell() {
-// TODO: add your implementation
+    this->jobs_list = new JobsList();
 }
 
 SmallShell::~SmallShell() {
-// TODO: add your implementation
+    delete jobs_list;
 }
 
 /**
@@ -160,15 +160,22 @@ void SmallShell::executeCommand(const char *cmd_line) {
   // Todo: add to Jobs list if Background process
   // for example:
     std:string command (cmd_line);
-    int isBg = command.find("&");
-    int isNotBg = command.find("|&");
-    if(isBg && !isNotBg){
-        //todo: check if jobs need to be deleted and delete if so
-        //todo: add new job: JobsList.addJob(cmd_line, false);
-    }
-  // Command* cmd = CreateCommand(cmd_line);
+    bool isBg = (command.find("&") != std::string::npos);
+    bool isNotBg = (command.find("|&") != std::string::npos);
+    Command* cmd = CreateCommand(cmd_line);
 
-  // cmd->execute();
+    if(isBg && !isNotBg){
+        pid_t pid = doFork();
+        if(pid == 0){//son
+            cmd->execute();
+        }
+        else {
+            this->jobs_list->addJob(cmd,pid,false);
+        }
+    }
+    else{
+        cmd->execute();
+    }
   // Please note that you must fork smash process for some commands (e.g., external commands....)
 }
 

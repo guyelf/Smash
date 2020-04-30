@@ -165,7 +165,7 @@ class CopyCommand : public BuiltInCommand {
 //Following the design pattern of a singleton classs
 class SmallShell {
  private:
-  // TODO: Add your data members
+    JobsList *jobs_list;
   SmallShell();
  public:
   ppid_t pid;
