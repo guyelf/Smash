@@ -30,6 +30,7 @@ class JobsList {
         std::string print_job();
         void kill();
     };
+public:
     list<JobEntry> jobs_list;
     JobsList();
     ~JobsList();

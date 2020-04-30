@@ -23,8 +23,11 @@
 //my includes:
 #include "Wrappers.h"
 #include "JobsCommand.h"
+#include "JobsList.h"
 #include "RedirectionCommand.h"
 #include "MyExceptions.h"
+
+
 class Command {
     const char * cmd;
  public:
@@ -79,7 +82,7 @@ class ShowPidCommand : public BuiltInCommand {
   void execute() override;
 };
 
-class JobsList;
+//class JobsList;
 class QuitCommand : public BuiltInCommand {
 // TODO: Add your data members public:
 
