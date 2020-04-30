@@ -37,7 +37,7 @@ void JobsList::killAllJobs() {
     for (list<JobEntry>::iterator  current = this->jobs_list.begin(); current!=this->jobs_list.end() ; current++) {
         JobEntry current_job = *current;
         this->jobs_list.erase(current);
-        kill(current_job.pid,SIGKILL); //TODO
+        kill(current_job.pid,SIGKILL); //Todo
     }
 }
 JobsList::JobEntry * JobsList::getJobById(int jobId) {
