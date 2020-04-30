@@ -17,7 +17,11 @@ void JobsList::addJob(Command *cmd,pid_t pid,bool isStopped) {
 }
 std::string JobsList::JobEntry::print_job() {
     std::string res = "[" + to_string(job_id) + "]" + this->command->cmd_string() + " : " + to_string(this->pid);
-    //TODO: add elapsed time!!
+    std::chrono::duration<double> elapsed_time = std::chrono::system_clock::now() - this->schedule_time;
+    res = res + " " + to_string(elapsed_time.count()) + " secs";
+    if (this->stopped == true){
+        res = res + " (stopped)";
+    }
     return res;
 }
 
@@ -34,10 +38,10 @@ void JobsList::printJobsList() {
     }
 }
 void JobsList::killAllJobs() {
-    for (list<JobEntry>::iterator  current = this->jobs_list.begin(); current!=this->jobs_list.end() ; current++) {
+    for (list<JobEntry>::iterator current = this->jobs_list.begin(); current!=this->jobs_list.end() ; current++) {
         JobEntry current_job = *current;
         this->jobs_list.erase(current);
-        kill(current_job.pid,SIGKILL); //TODO
+        kill(current_job.pid,SIGKILL); // TODO: BUG FIX ??
     }
 }
 JobsList::JobEntry * JobsList::getJobById(int jobId) {

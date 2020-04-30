@@ -8,6 +8,8 @@ ExternalCommand::ExternalCommand(const char *cmd_line):Command(cmd_line) {
 
 }
 
-ExternalCommand void ::execute() {
+void ExternalCommand::execute() {
+
 
 }
+
