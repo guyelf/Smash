@@ -5,18 +5,25 @@
 #ifndef SMASH_JOBSLIST_H
 #define SMASH_JOBSLIST_H
 
-#include "Commands.h"
+
 using namespace std;
 #include <sys/wait.h>
-#include <sys/types.h>
 #include <signal.h>
-
+#include <unistd.h>
+#include <iostream>
+#include <sstream>
+#include <iomanip>
+#include <chrono>
+#include <ctime>
+#include <iterator>
+#include "Commands.h"
+#include  <sys/types.h>
 
 class JobsList {
     class JobEntry { //TODO move to public??
     public:
         Command *command;
-        pid_t pid;
+        pipid_t pid;
         int job_id;
         bool stopped;
         bool out;

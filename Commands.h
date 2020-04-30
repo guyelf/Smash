@@ -6,7 +6,6 @@
 #include <unistd.h>
 #include <string.h>
 #include <iostream>
-#include <sys/types.h>
 #include <signal.h>
 #include <sstream>
 #include <sys/wait.h>
@@ -34,7 +33,7 @@ class Command {
   explicit Command(const char* cmd_line);
   virtual ~Command();
   virtual void execute() = 0;
-  virtual const char* cmd_string();
+  virtual const char* cmd_string()=0;
   //virtual void prepare();
   //virtual void cleanup();
   // TODO: Add your extra methods if needed
@@ -62,17 +61,21 @@ private:
    static std::string prev_pwd; //all instances should have same prev
    std::vector<std::string> params;
    int num_params;
+   std:string cmd;
 public:
   ChangeDirCommand(const char* cmd_line, char** plastPwd);
   virtual ~ChangeDirCommand() {}
   void execute() override;
+    const char* cmd_string() override { return this->cmd.c_str();}
 };
 
 class GetCurrDirCommand : public BuiltInCommand {
- public:
+std::string cmd;
+public:
   explicit GetCurrDirCommand(const char* cmd_line);
   virtual ~GetCurrDirCommand() {}
   void execute() override;
+  const char* cmd_string() override { return this->cmd.c_str();}
 };
 
 class ShowPidCommand : public BuiltInCommand {
