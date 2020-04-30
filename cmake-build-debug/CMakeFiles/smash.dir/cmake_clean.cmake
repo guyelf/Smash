@@ -16,8 +16,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/smash.dir/killCommand.cpp.o"
   "CMakeFiles/smash.dir/signals.cpp.o"
   "CMakeFiles/smash.dir/smash.cpp.o"
-  "libsmash.dll.a"
-  "smash.exe"
+  "smash"
   "smash.pdb"
 )
 

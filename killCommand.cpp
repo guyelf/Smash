@@ -22,7 +22,7 @@ KillCommand::KillCommand(const char* cmd_line, JobsList* jobs):BuiltInCommand(cm
 
     int j_id =  stoi(args[2]); //string to int helper
 
-    if(!jobs->getJobById(j_id)) // TODO: assumption - this return 0 if not found
+    if(jobs->getJobById(j_id) == nullptr)
         throw MyKillCommandException(j_id);
 
     this->j_pid = jobs->getJobById(j_id)->pid;
