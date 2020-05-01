@@ -95,7 +95,6 @@ void _removeBackgroundSign(char* cmd_line) {
   cmd_line[str.find_last_not_of(WHITESPACE, idx) + 1] = 0;
 }
 
-// TODO: Add your implementation for classes in Commands.h 
 
 SmallShell::SmallShell() {
     this->jobs_list = new JobsList();
@@ -105,9 +104,7 @@ SmallShell::~SmallShell() {
     delete jobs_list;
 }
 
-/**
-* Creates and returns a pointer to Command class which matches the given command line (cmd_line)
-*/
+
 Command * SmallShell::CreateCommand(const char* cmd_line) {
 
   string cmd_s = string(cmd_line);
@@ -115,32 +112,36 @@ Command * SmallShell::CreateCommand(const char* cmd_line) {
     return new GetCurrDirCommand(cmd_line);
   }
   else if (cmd_s.find("chprompt") == 0){
-    //todo: handle chrompt
+    return new ChangePrompt(cmd_line);
   }
   else if (cmd_s.find("showpid") == 0){
-    return new ShowPidCommand(cmd_line);
+    return new ShowPidCommand(cmd_line,this->pid);
   }
   else if (cmd_s.find("cd") == 0){
     //todo: hanle the path that needs to be send to the c'tor
-    //return new ChangeDirCommand(cmd_line,);
+    ChangeDirCommand *cmd =  new ChangeDirCommand(cmd_line,this->current_path);
+    return cmd;
   }
   else if (cmd_s.find("jobs") == 0){
-    //return new JobsCommand(cmd_line);
+    return new JobsCommand(cmd_line,this->jobs_list);
   }
   else if (cmd_s.find("kill") == 0){
-     ///return new KillCommand(cmd_line);
+     KillCommand *cmd = new KillCommand(cmd_line,this->jobs_list);
+     return cmd;
   }
   else if (cmd_s.find("fg") == 0){
-    //todo: FG command
+    return new ForegroundCommand(cmd_line,this->jobs_list);
   }
   else if (cmd_s.find("bg") == 0){
-    //todo: BG command
+    return new BackgroundCommand(cmd_line,this->jobs_list);
   }
   else if (cmd_s.find("quit") == 0){
-    //todo: QUIT command
+      QuitCommand *cmd = new QuitCommand(cmd_line,this->jobs_list);
+      return cmd;
   }
   else if (cmd_s.find(">") >= 0){
-   // return new RedirectionCommand(cmd_line);
+      RedirectionCommand *cmd = new RedirectionCommand(cmd_line);
+      return cmd;
   }
   else if (cmd_s.find("|&") >= 0){
       //todo: handle |&
@@ -151,12 +152,10 @@ Command * SmallShell::CreateCommand(const char* cmd_line) {
   else {
     return new ExternalCommand(cmd_line);
   }
-
-
   return nullptr;
 }
 
-void SmallShell::executeCommand(const char *cmd_line) {
+void SmallShell::executeCommand(const char *cmd_line){
   // Todo: add to Jobs list if Background process
   // for example:
     std:string command (cmd_line);
@@ -176,7 +175,7 @@ void SmallShell::executeCommand(const char *cmd_line) {
     else{
         cmd->execute();
     }
-  // Please note that you must fork smash process for some commands (e.g., external commands....)
+
 }
 
 

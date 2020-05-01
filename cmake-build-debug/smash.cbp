@@ -93,6 +93,9 @@
 		<Unit filename="/home/student/CLionProjects/Smash/ChangeDirCommand.cpp">
 			<Option target="smash"/>
 		</Unit>
+		<Unit filename="/home/student/CLionProjects/Smash/ChangePrompt.cpp">
+			<Option target="smash"/>
+		</Unit>
 		<Unit filename="/home/student/CLionProjects/Smash/Commands.cpp">
 			<Option target="smash"/>
 		</Unit>

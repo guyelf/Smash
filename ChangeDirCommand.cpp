@@ -5,7 +5,7 @@
 #include "MyExceptions.h"
 
 //plastPwd = a vec<string> consists of all the parameters passed to the "cd" command
-ChangeDirCommand::ChangeDirCommand(const char *cmd_line, char** plastPwd):BuiltInCommand(cmd_line){
+ChangeDirCommand::ChangeDirCommand(const char *cmd_line,const char* plastPwd):BuiltInCommand(cmd_line){
 
     int count_params = -1; //ignore the first which is not a param
 

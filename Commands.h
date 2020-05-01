@@ -63,7 +63,7 @@ private:
    int num_params;
    std:string cmd;
 public:
-  ChangeDirCommand(const char* cmd_line, char** plastPwd);
+  ChangeDirCommand(const char* cmd_line,const char* plastPwd);
   virtual ~ChangeDirCommand() {}
   void execute() override;
     const char* cmd_string() override { return this->cmd.c_str();}
@@ -95,6 +95,13 @@ public:
   QuitCommand(const char* cmd_line, JobsList* jobs);
   virtual ~QuitCommand();
   void execute() override;
+};
+
+class ChangePrompt : public BuiltInCommand {
+public:
+    ChangePrompt(const char* cmd_line);
+    virtual ~ChangePrompt();
+    void execute() override;
 };
 
 class CommandsHistory {
@@ -169,6 +176,7 @@ class SmallShell {
   SmallShell();
  public:
   ppid_t pid;
+  const char* current_path;
   Command *CreateCommand(const char* cmd_line);
   SmallShell(SmallShell const&)      = delete; // disable copy ctor
   void operator=(SmallShell const&)  = delete; // disable = operator
