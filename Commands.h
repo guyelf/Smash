@@ -21,7 +21,6 @@
 
 //my includes:
 #include "Wrappers.h"
-#include "JobsCommand.h"
 #include "JobsList.h"
 #include "RedirectionCommand.h"
 #include "MyExceptions.h"
@@ -40,10 +39,12 @@ class Command {
 };
 
 class BuiltInCommand : public Command {
- public:
+    std::string cmd;
+public:
   explicit BuiltInCommand(const char* cmd_line);
   virtual ~BuiltInCommand() {}
-  // TOdo: Add generic error message function for sub class to derive from (page 2/18)
+  const char* cmd_string() override { return this->cmd.c_str();}
+  // Todo: Add generic error message function for sub class to derive from (page 2/18)
 };
 
 class ExternalCommand : public Command {
@@ -66,7 +67,7 @@ public:
   ChangeDirCommand(const char* cmd_line,const char* plastPwd);
   virtual ~ChangeDirCommand() {}
   void execute() override;
-    const char* cmd_string() override { return this->cmd.c_str();}
+
 };
 
 class GetCurrDirCommand : public BuiltInCommand {
@@ -75,7 +76,7 @@ public:
   explicit GetCurrDirCommand(const char* cmd_line);
   virtual ~GetCurrDirCommand() {}
   void execute() override;
-  const char* cmd_string() override { return this->cmd.c_str();}
+
 };
 
 class ShowPidCommand : public BuiltInCommand {
@@ -83,6 +84,7 @@ class ShowPidCommand : public BuiltInCommand {
   explicit ShowPidCommand(const char* cmd_line);
   virtual ~ShowPidCommand() {}
   void execute() override;
+
 };
 
 //class JobsList;
@@ -95,13 +97,24 @@ public:
   QuitCommand(const char* cmd_line, JobsList* jobs);
   virtual ~QuitCommand();
   void execute() override;
+
 };
+class JobsCommand : public BuiltInCommand{
+    // TODO: Add your data members
+    JobsList* myJobs;
+public:
+    JobsCommand(const char *cmd_line, JobsList *jobs): BuiltInCommand(cmd_line),myJobs(jobs){}
+    virtual ~JobsCommand() {}
+    void execute() {this->myJobs->printJobsList();}
+};
+
 
 class ChangePrompt : public BuiltInCommand {
 public:
     ChangePrompt(const char* cmd_line);
     virtual ~ChangePrompt();
     void execute() override;
+
 };
 
 class CommandsHistory {
@@ -123,8 +136,8 @@ class HistoryCommand : public BuiltInCommand {
   HistoryCommand(const char* cmd_line, CommandsHistory* history);
   virtual ~HistoryCommand() {}
   void execute() override;
-};
 
+};
 
 class KillCommand : public BuiltInCommand {
     // TODO: Add your data members
@@ -156,7 +169,6 @@ class BackgroundCommand : public BuiltInCommand {
   virtual ~BackgroundCommand();
   void execute() override;
 };
-
 
 // TODO: should it really inhirit from BuiltInCommand ?
 class CopyCommand : public BuiltInCommand {

@@ -48,3 +48,7 @@ ForegroundCommand::~ForegroundCommand() {
     free(this->_jobsList);
 }
 
+
+const char * ForegroundCommand::cmd_string() {
+
+}

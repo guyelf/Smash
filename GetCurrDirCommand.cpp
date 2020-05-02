@@ -8,5 +8,5 @@ void GetCurrDirCommand::execute() {
     char* pwd  = nullptr;
     ::getcwd(pwd,0); // should allocate the correct size itself, based on documentation
     std::cout<< pwd << std::endl; //print the pwd to the screen
-    delete pwd;
+    free(pwd);
 }

@@ -115,19 +115,17 @@ Command * SmallShell::CreateCommand(const char* cmd_line) {
     return new ChangePrompt(cmd_line);
   }
   else if (cmd_s.find("showpid") == 0){
-    return new ShowPidCommand(cmd_line,this->pid);
+    return new ShowPidCommand(cmd_line);
   }
   else if (cmd_s.find("cd") == 0){
     //todo: hanle the path that needs to be send to the c'tor
-    ChangeDirCommand *cmd =  new ChangeDirCommand(cmd_line,this->current_path);
-    return cmd;
+    //return new ChangeDirCommand(cmd_line;
   }
   else if (cmd_s.find("jobs") == 0){
     return new JobsCommand(cmd_line,this->jobs_list);
   }
   else if (cmd_s.find("kill") == 0){
-     KillCommand *cmd = new KillCommand(cmd_line,this->jobs_list);
-     return cmd;
+     return new KillCommand(cmd_line,this->jobs_list);
   }
   else if (cmd_s.find("fg") == 0){
     return new ForegroundCommand(cmd_line,this->jobs_list);
@@ -136,12 +134,10 @@ Command * SmallShell::CreateCommand(const char* cmd_line) {
     return new BackgroundCommand(cmd_line,this->jobs_list);
   }
   else if (cmd_s.find("quit") == 0){
-      QuitCommand *cmd = new QuitCommand(cmd_line,this->jobs_list);
-      return cmd;
+     return new QuitCommand(cmd_line,this->jobs_list);
   }
   else if (cmd_s.find(">") >= 0){
-      RedirectionCommand *cmd = new RedirectionCommand(cmd_line);
-      return cmd;
+      return new RedirectionCommand(cmd_line);
   }
   else if (cmd_s.find("|&") >= 0){
       //todo: handle |&
