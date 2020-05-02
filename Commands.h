@@ -24,6 +24,7 @@
 #include "JobsList.h"
 #include "RedirectionCommand.h"
 #include "MyExceptions.h"
+#include "PipeCommand.h"
 
 
 class Command {
@@ -139,7 +140,7 @@ class KillCommand : public BuiltInCommand {
     int signum;
 public:
     KillCommand(const char* cmd_line,JobsList* jobs);
-    virtual ~KillCommand() {}
+    virtual ~KillCommand();
     void execute() override;
 };
 
@@ -166,7 +167,7 @@ class CopyCommand : public Command {
     std::string cmd_line;
 public:
   explicit CopyCommand(const char* cmd_line);
-  virtual ~CopyCommand() {}
+  virtual ~CopyCommand();
   void execute() override;
   const char* cmd_string() override { return this->cmd.c_str();}
 };

@@ -116,11 +116,11 @@ Command * SmallShell::CreateCommand(const char* cmd_line) {
   else if (cmd_s.find(">") >= 0){
       return new RedirectionCommand(cmd_line);
   }
-  else if (cmd_s.find("|&") >= 0){
-      //todo: handle |&
-  }
   else if (cmd_s.find("|") >= 0){
-      //todo: handle |
+      return new PipeCommand(cmd_line);
+  }
+  else if (cmd_s.find("cp") == 0){
+      return new CopyCommand(cmd_line);
   }
   else {
     return new ExternalCommand(cmd_line);

@@ -7,11 +7,14 @@
 #include "Commands.h"
 
 class PipeCommand : public Command {
-    // TODO: Add your data members
+    std::string cmd_line;
 public:
-    PipeCommand(const char* cmd_line);
-    virtual ~PipeCommand() {}
+    explicit PipeCommand(const char* cmd_line);
+    virtual ~PipeCommand();
+    const char* cmd_string() override { return this->cmd_line.c_str();}
     void execute() override;
+    void execute_pipe(std::vector<string> args);
+    void execute_amp(std::vector<string> args);
 };
 
 #endif //SMASH_PIPECOMMAND_H

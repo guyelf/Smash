@@ -27,6 +27,8 @@ KillCommand::KillCommand(const char* cmd_line, JobsList* jobs):BuiltInCommand(cm
         throw MyKillCommandException("invalid arguments");
 }
 
+KillCommand::~KillCommand(){}
+
 void KillCommand::execute() {
     int res = kill(this->j_pid,this->signum);
     if(res < 0)
