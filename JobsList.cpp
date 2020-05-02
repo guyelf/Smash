@@ -134,3 +134,22 @@ void JobsList::removeJobById(int jobId) {
     }
 }
 
+bool JobsList::stopJobByPID(int PID) {
+    bool found = false;
+    for(list<JobEntry>::iterator current = this->jobs_list.begin(); current != this->jobs_list.end() ; current++) {
+        if (current->pid == PID) {
+            current->stopped = true;
+            found = true;
+        }
+    }
+    return found;
+
+}
+void JobsList::killJob(int PID) {
+    for(list<JobEntry>::iterator current = this->jobs_list.begin(); current != this->jobs_list.end() ; current++){
+        if (current->pid == PID){
+            this->jobs_list.erase(current);
+        }
+    }
+}
+

@@ -54,6 +54,8 @@ public:
     void removeStoppedSign(int jobId);
     void stopJobById(int jobID);
     void setJobAsFinished(int jobId);
+    bool stopJobByPID(int PID);
+    void killJob(int PID);
 };
 
 

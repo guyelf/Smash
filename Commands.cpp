@@ -74,7 +74,7 @@ void _removeBackgroundSign(char* cmd_line) {
 }
 
 
-SmallShell::SmallShell() {
+SmallShell::SmallShell(): last_cmd(nullptr){
     this->jobs_list = new JobsList();
 }
 
@@ -131,6 +131,7 @@ Command * SmallShell::CreateCommand(const char* cmd_line) {
 void SmallShell::executeCommand(const char *cmd_line){
   // Todo: add to Jobs list if Background process
   // for example:
+    this->last_cmd = cmd_line;
     std:string command (cmd_line);
     bool isBg = (command.find("&") != std::string::npos);
     bool isNotBg = (command.find("|&") != std::string::npos);
@@ -151,6 +152,16 @@ void SmallShell::executeCommand(const char *cmd_line){
 
 }
 
+bool SmallShell::stopProcess(int pid) {
+    return this->jobs_list->stopJobByPID(pid);
+}
+void SmallShell::killProcess(int pid) {
+    this->jobs_list->killJob(pid);
+}
+
+void SmallShell::addCmd(Command *cmd,int pid){
+    this->jobs_list->addJob(cmd,pid,true);
+}
 
 #endif
 

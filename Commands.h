@@ -181,6 +181,7 @@ class SmallShell {
  public:
   ppid_t pid;
   const char* current_path;
+  const char* last_cmd;
   Command *CreateCommand(const char* cmd_line);
   SmallShell(SmallShell const&)      = delete; // disable copy ctor
   void operator=(SmallShell const&)  = delete; // disable = operator
@@ -192,7 +193,9 @@ class SmallShell {
   }
   ~SmallShell();
   void executeCommand(const char* cmd_line);
-  // TODO: add extra methods as needed
+  bool stopProcess(pipid_t pid);
+  void killProcess(pipid_t pid);
+  void addCmd(Command *cmd,int pid);
 };
 
 int _parseCommandLine(const char* cmd_line, char** args) {
