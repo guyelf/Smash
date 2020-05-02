@@ -14,7 +14,7 @@ ForegroundCommand::ForegroundCommand(const char* cmd_line, JobsList* jobs):Built
     if(args.size()>2)
        throw MyException("fg: invalid arguments");
 
-    if (args.size() == 1 && jobs->isEmpty())
+    if (args.size() == 1 && jobs->size() == 0)
         throw MyException("fg: jobs list is empty");
     /*if(args.size()==2 && jobs->getJobById(stoi(args[1]))){ //meaning there's a job_id assigned and it's not found
        //todo: once Carmel finishes with the jobs list check if that job_id exists

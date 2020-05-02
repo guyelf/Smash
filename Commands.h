@@ -40,9 +40,11 @@ class Command {
 };
 
 class BuiltInCommand : public Command {
- public:
+    std::string cmd;
+public:
   explicit BuiltInCommand(const char* cmd_line);
   virtual ~BuiltInCommand() {}
+  const char* cmd_string() override { return this->cmd.c_str();}
   // TOdo: Add generic error message function for sub class to derive from (page 2/18)
 };
 
@@ -63,7 +65,8 @@ private:
    int num_params;
    std:string cmd;
 public:
-  ChangeDirCommand(const char* cmd_line,const char* plastPwd);
+  ChangeDirCommand(const char* cmd_line,const char** plastPwd);
+  ChangeDirCommand::ChangeDirCommand(const char *cmd_line);
   virtual ~ChangeDirCommand() {}
   void execute() override;
     const char* cmd_string() override { return this->cmd.c_str();}
