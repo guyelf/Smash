@@ -7,7 +7,7 @@
 
 //plastPwd = a vec<string> consists of all the parameters passed to the "cd" command
 ChangeDirCommand::ChangeDirCommand(const char *cmd_line,const char** plastPwd):BuiltInCommand(cmd_line){
-
+  ///todo: maybe remove this c'tor
     int count_params = -1; //ignore the first which is not a param
     auto args = _parseCommandLineStrings(cmd_line);
     this->params = args;
@@ -24,7 +24,7 @@ ChangeDirCommand::ChangeDirCommand(const char *cmd_line,const char** plastPwd):B
 
 }
 
-ChangeDirCommand::ChangeDirCommand(const char *cmd_line):BuiltInCommand(cmd_line), {
+ChangeDirCommand::ChangeDirCommand(const char *cmd_line):BuiltInCommand(cmd_line){
     auto args = _parseCommandLineStrings(cmd_line);
     this->params = args;
     this->num_params = args.size() - 1; //if this is bigger than 1 an exception will be thrown in execute.
