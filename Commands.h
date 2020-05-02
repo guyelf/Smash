@@ -162,12 +162,13 @@ class BackgroundCommand : public BuiltInCommand {
 };
 
 
-// TODO: should it really inhirit from BuiltInCommand ?
-class CopyCommand : public BuiltInCommand {
- public:
-  CopyCommand(const char* cmd_line);
+class CopyCommand : public Command {
+    std::string cmd_line;
+public:
+  explicit CopyCommand(const char* cmd_line);
   virtual ~CopyCommand() {}
   void execute() override;
+  const char* cmd_string() override { return this->cmd.c_str();}
 };
 
 // TODO: add more classes if needed 

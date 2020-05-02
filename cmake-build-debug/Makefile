@@ -39,10 +39,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /opt/clion-2020.1/bin/cmake/linux/bin/cmake
+CMAKE_COMMAND = /opt/clion-2020.1.1/bin/cmake/linux/bin/cmake
 
 # The command to remove a file.
-RM = /opt/clion-2020.1/bin/cmake/linux/bin/cmake -E remove -f
+RM = /opt/clion-2020.1.1/bin/cmake/linux/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /home/student/CLionProjects/Smash/cmake-build-debug
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/opt/clion-2020.1/bin/cmake/linux/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/opt/clion-2020.1.1/bin/cmake/linux/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -70,7 +70,7 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/opt/clion-2020.1/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	/opt/clion-2020.1.1/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -231,6 +231,33 @@ Commands.cpp.s:
 	$(MAKE) -f CMakeFiles/smash.dir/build.make CMakeFiles/smash.dir/Commands.cpp.s
 .PHONY : Commands.cpp.s
 
+CopyCommand.o: CopyCommand.cpp.o
+
+.PHONY : CopyCommand.o
+
+# target to build an object file
+CopyCommand.cpp.o:
+	$(MAKE) -f CMakeFiles/smash.dir/build.make CMakeFiles/smash.dir/CopyCommand.cpp.o
+.PHONY : CopyCommand.cpp.o
+
+CopyCommand.i: CopyCommand.cpp.i
+
+.PHONY : CopyCommand.i
+
+# target to preprocess a source file
+CopyCommand.cpp.i:
+	$(MAKE) -f CMakeFiles/smash.dir/build.make CMakeFiles/smash.dir/CopyCommand.cpp.i
+.PHONY : CopyCommand.cpp.i
+
+CopyCommand.s: CopyCommand.cpp.s
+
+.PHONY : CopyCommand.s
+
+# target to generate assembly for a file
+CopyCommand.cpp.s:
+	$(MAKE) -f CMakeFiles/smash.dir/build.make CMakeFiles/smash.dir/CopyCommand.cpp.s
+.PHONY : CopyCommand.cpp.s
+
 ExternalCommand.o: ExternalCommand.cpp.o
 
 .PHONY : ExternalCommand.o
@@ -311,33 +338,6 @@ GetCurrDirCommand.s: GetCurrDirCommand.cpp.s
 GetCurrDirCommand.cpp.s:
 	$(MAKE) -f CMakeFiles/smash.dir/build.make CMakeFiles/smash.dir/GetCurrDirCommand.cpp.s
 .PHONY : GetCurrDirCommand.cpp.s
-
-JobsCommand.o: JobsCommand.cpp.o
-
-.PHONY : JobsCommand.o
-
-# target to build an object file
-JobsCommand.cpp.o:
-	$(MAKE) -f CMakeFiles/smash.dir/build.make CMakeFiles/smash.dir/JobsCommand.cpp.o
-.PHONY : JobsCommand.cpp.o
-
-JobsCommand.i: JobsCommand.cpp.i
-
-.PHONY : JobsCommand.i
-
-# target to preprocess a source file
-JobsCommand.cpp.i:
-	$(MAKE) -f CMakeFiles/smash.dir/build.make CMakeFiles/smash.dir/JobsCommand.cpp.i
-.PHONY : JobsCommand.cpp.i
-
-JobsCommand.s: JobsCommand.cpp.s
-
-.PHONY : JobsCommand.s
-
-# target to generate assembly for a file
-JobsCommand.cpp.s:
-	$(MAKE) -f CMakeFiles/smash.dir/build.make CMakeFiles/smash.dir/JobsCommand.cpp.s
-.PHONY : JobsCommand.cpp.s
 
 JobsList.o: JobsList.cpp.o
 
@@ -630,6 +630,9 @@ help:
 	@echo "... Commands.o"
 	@echo "... Commands.i"
 	@echo "... Commands.s"
+	@echo "... CopyCommand.o"
+	@echo "... CopyCommand.i"
+	@echo "... CopyCommand.s"
 	@echo "... ExternalCommand.o"
 	@echo "... ExternalCommand.i"
 	@echo "... ExternalCommand.s"
@@ -639,9 +642,6 @@ help:
 	@echo "... GetCurrDirCommand.o"
 	@echo "... GetCurrDirCommand.i"
 	@echo "... GetCurrDirCommand.s"
-	@echo "... JobsCommand.o"
-	@echo "... JobsCommand.i"
-	@echo "... JobsCommand.s"
 	@echo "... JobsList.o"
 	@echo "... JobsList.i"
 	@echo "... JobsList.s"

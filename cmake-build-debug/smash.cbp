@@ -87,9 +87,6 @@
 		<Unit filename="/home/student/CLionProjects/Smash/BackgroundCommand.cpp">
 			<Option target="smash"/>
 		</Unit>
-		<Unit filename="/home/student/CLionProjects/Smash/BackgroundCommand.h">
-			<Option target="smash"/>
-		</Unit>
 		<Unit filename="/home/student/CLionProjects/Smash/ChangeDirCommand.cpp">
 			<Option target="smash"/>
 		</Unit>
@@ -102,22 +99,16 @@
 		<Unit filename="/home/student/CLionProjects/Smash/Commands.h">
 			<Option target="smash"/>
 		</Unit>
+		<Unit filename="/home/student/CLionProjects/Smash/CopyCommand.cpp">
+			<Option target="smash"/>
+		</Unit>
 		<Unit filename="/home/student/CLionProjects/Smash/ExternalCommand.cpp">
 			<Option target="smash"/>
 		</Unit>
 		<Unit filename="/home/student/CLionProjects/Smash/ForegroundCommand.cpp">
 			<Option target="smash"/>
 		</Unit>
-		<Unit filename="/home/student/CLionProjects/Smash/ForegroundCommand.h">
-			<Option target="smash"/>
-		</Unit>
 		<Unit filename="/home/student/CLionProjects/Smash/GetCurrDirCommand.cpp">
-			<Option target="smash"/>
-		</Unit>
-		<Unit filename="/home/student/CLionProjects/Smash/JobsCommand.cpp">
-			<Option target="smash"/>
-		</Unit>
-		<Unit filename="/home/student/CLionProjects/Smash/JobsCommand.h">
 			<Option target="smash"/>
 		</Unit>
 		<Unit filename="/home/student/CLionProjects/Smash/JobsList.cpp">
@@ -139,9 +130,6 @@
 			<Option target="smash"/>
 		</Unit>
 		<Unit filename="/home/student/CLionProjects/Smash/QuitCommand.cpp">
-			<Option target="smash"/>
-		</Unit>
-		<Unit filename="/home/student/CLionProjects/Smash/QuitCommand.h">
 			<Option target="smash"/>
 		</Unit>
 		<Unit filename="/home/student/CLionProjects/Smash/RedirectionCommand.cpp">
