@@ -2,13 +2,16 @@
 // Created by student on 4/22/20.
 //
 #include "Commands.h"
+#include "Commands.cpp"
 #include "MyExceptions.h"
 
 //plastPwd = a vec<string> consists of all the parameters passed to the "cd" command
-ChangeDirCommand::ChangeDirCommand(const char *cmd_line,const char* plastPwd):BuiltInCommand(cmd_line){
-
+ChangeDirCommand::ChangeDirCommand(const char *cmd_line,const char** plastPwd):BuiltInCommand(cmd_line){
+  ///todo: maybe remove this c'tor
     int count_params = -1; //ignore the first which is not a param
-
+    auto args = _parseCommandLineStrings(cmd_line);
+    this->params = args;
+/*
     char** cpy_plastPwd = plastPwd; //to keep the origin normal while iterating the params
     while(*cpy_plastPwd){
         char* cur_param = *cpy_plastPwd;
@@ -16,9 +19,18 @@ ChangeDirCommand::ChangeDirCommand(const char *cmd_line,const char* plastPwd):Bu
         count_params++;
         cpy_plastPwd++;
     }
-    this->num_params = count_params; //if this is bigger than 1 an exception will be thrown in execute.
+    */
+    this->num_params = args.size() - 1; //if this is bigger than 1 an exception will be thrown in execute.
 
 }
+
+ChangeDirCommand::ChangeDirCommand(const char *cmd_line):BuiltInCommand(cmd_line){
+    auto args = _parseCommandLineStrings(cmd_line);
+    this->params = args;
+    this->num_params = args.size() - 1; //if this is bigger than 1 an exception will be thrown in execute.
+}
+
+
 void ChangeDirCommand::execute() {
 
     //get the current pwd (saving that later)
@@ -28,7 +40,7 @@ void ChangeDirCommand::execute() {
     if (num_params > 1)
         throw MyCdException("too many arguments");
 
-    else if(this->params[0].compare("-")==0){
+    else if(this->params[1].compare("-")==0){
        if(prev_pwd.empty())
            MyCdException("OLDPWD not set");
        try{
@@ -42,7 +54,7 @@ void ChangeDirCommand::execute() {
 
 
     try{
-        if(this->params[0].compare("..")==0){
+        if(this->params[1].compare("..")==0){
             std::string tmp (pwd_buf);
             int count_dash = 0;
             int i = 0;
@@ -62,15 +74,15 @@ void ChangeDirCommand::execute() {
 
         }
 
-        else if(this->params[0].compare(0,1,"/",0,1)==0){//check if it's a full path
-            ::chdir(this->params[0].c_str()); //parsing the string to char*
+        else if(this->params[1].compare(0,1,"/",0,1)==0){//check if it's a full path
+            ::chdir(this->params[1].c_str()); //parsing the string to char*
             prev_pwd = pwd_buf;
         }
         else{
             //relative
             char* path;
             strcpy(pwd_buf,path);
-            strcat(path,this->params[0].c_str()); //add relative to current dir
+            strcat(path,this->params[1].c_str()); //add relative to current dir
             ::chdir(path);
             prev_pwd = pwd_buf;
             free(path); //hopefully won't throw an error

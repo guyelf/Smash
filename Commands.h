@@ -21,6 +21,7 @@
 
 //my includes:
 #include "Wrappers.h"
+#include "JobsCommand.h"
 #include "JobsList.h"
 #include "RedirectionCommand.h"
 #include "MyExceptions.h"
@@ -84,7 +85,6 @@ class ShowPidCommand : public BuiltInCommand {
   explicit ShowPidCommand(const char* cmd_line);
   virtual ~ShowPidCommand() {}
   void execute() override;
-
 };
 
 //class JobsList;
@@ -97,7 +97,6 @@ public:
   QuitCommand(const char* cmd_line, JobsList* jobs);
   virtual ~QuitCommand();
   void execute() override;
-
 };
 class JobsCommand : public BuiltInCommand{
     // TODO: Add your data members
@@ -114,7 +113,6 @@ public:
     ChangePrompt(const char* cmd_line);
     virtual ~ChangePrompt();
     void execute() override;
-
 };
 
 class CommandsHistory {
@@ -136,8 +134,8 @@ class HistoryCommand : public BuiltInCommand {
   HistoryCommand(const char* cmd_line, CommandsHistory* history);
   virtual ~HistoryCommand() {}
   void execute() override;
-
 };
+
 
 class KillCommand : public BuiltInCommand {
     // TODO: Add your data members
@@ -169,6 +167,7 @@ class BackgroundCommand : public BuiltInCommand {
   virtual ~BackgroundCommand();
   void execute() override;
 };
+
 
 // TODO: should it really inhirit from BuiltInCommand ?
 class CopyCommand : public BuiltInCommand {
