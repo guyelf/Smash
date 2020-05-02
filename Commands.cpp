@@ -46,31 +46,9 @@ string _trim(const std::string& s)
   return _rtrim(_ltrim(s));
 }
 
-int _parseCommandLine(const char* cmd_line, char** args) {
-  FUNC_ENTRY()
-  int i = 0;
-  std::istringstream iss(_trim(string(cmd_line)).c_str());
-  for(std::string s; iss >> s; ) {
-    args[i] = (char*)malloc(s.length()+1);
-    memset(args[i], 0, s.length()+1);
-    strcpy(args[i], s.c_str());
-    args[++i] = NULL;
-  }
-  return i;
 
-  FUNC_EXIT()
-}
 
-std::vector<string> _parseCommandLineStrings(const char* cmd_line) {
-    char** f_args = nullptr;
-    vector<string> args;
-    _parseCommandLine(cmd_line,f_args);
-    while(*f_args){
-        args.push_back(*f_args);
-        f_args++;
-    }
-    return args;
-}
+
 
 bool _isBackgroundComamnd(const char* cmd_line) {
   const string str(cmd_line);
@@ -118,8 +96,7 @@ Command * SmallShell::CreateCommand(const char* cmd_line) {
     return new ShowPidCommand(cmd_line);
   }
   else if (cmd_s.find("cd") == 0){
-    //todo: hanle the path that needs to be send to the c'tor
-    //return new ChangeDirCommand(cmd_line;
+    return new ChangeDirCommand(cmd_line);
   }
   else if (cmd_s.find("jobs") == 0){
     return new JobsCommand(cmd_line,this->jobs_list);

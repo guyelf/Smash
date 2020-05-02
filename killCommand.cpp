@@ -6,16 +6,11 @@
 //
 #ifndef SMASH_KILLCOMMAND_H
 #define SMASH_KILLCOMMAND_H
-#include "Commands.cpp"
+
+#include "Commands.h"
 #include "MyExceptions.h"
 
-KillCommand::KillCommand(const char *cmd_line) :BuiltInCommand(cmd_line){
-    //todo: if we decide to go with a global (&static) jobs list
-}
-
-
 KillCommand::KillCommand(const char* cmd_line, JobsList* jobs):BuiltInCommand(cmd_line){
-
     auto args = _parseCommandLineStrings(cmd_line);
     if(args.size() != 3)
         throw MyKillCommandException("invalid arguments");
