@@ -17,11 +17,14 @@ void QuitCommand::execute() {
     if(this->_killFlag){ //kill flag is true
         int numJobs = this->_jobsList->size();
         cout<< "sending SIGKILL signal to " + to_string(numJobs) + " jobs:" << endl;
-        for (int i = 0; i < numJobs; ++i) {
-            //todo: implement a way to run on the jobsList and print them
-            // "pid: cmd"
+
+        for (int i = 0; i < numJobs; ++i) { //deletes the top_job each iteration
+            int top_job_id = this->_jobsList->getTopJobId();
+            auto top_job = this->_jobsList->getJobById(top_job_id);
+            cout<< to_string(top_job->pid) + ": "+ top_job->command << endl; // format: "pid: command"
+            this->_jobsList->killJob(top_job->pid);
         }
-        this->_jobsList->killAllJobs(); //kill all jobs
+        this->_jobsList->killAllJobs(); //kill all jobs //todo maybe remove this?
         kill(smash.pid,SIGKILL); //kill smash
     }
 }
