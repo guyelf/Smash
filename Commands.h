@@ -21,7 +21,6 @@
 
 //my includes:
 #include "Wrappers.h"
-#include "JobsCommand.h"
 #include "JobsList.h"
 #include "RedirectionCommand.h"
 #include "MyExceptions.h"
@@ -63,9 +62,8 @@ private:
    static std::string prev_pwd; //all instances should have same prev
    std::vector<std::string> params;
    int num_params;
-   std:string cmd;
 public:
-  ChangeDirCommand(const char* cmd_line,const char* plastPwd);
+  explicit ChangeDirCommand(const char* cmd_line);
   virtual ~ChangeDirCommand() {}
   void execute() override;
 
@@ -136,20 +134,16 @@ class HistoryCommand : public BuiltInCommand {
   void execute() override;
 };
 
-
 class KillCommand : public BuiltInCommand {
-    // TODO: Add your data members
     pipid_t j_pid; //job's pid
     int signum;
 public:
-    explicit KillCommand(const char* cmd_line);
-    KillCommand(const char* cmd_line, JobsList* jobs);
+    KillCommand(const char* cmd_line,JobsList* jobs);
     virtual ~KillCommand() {}
     void execute() override;
 };
 
 class ForegroundCommand : public BuiltInCommand {
- // TODO: Add your data members
  int _job_id;
  JobsList* _jobsList;
  public:
@@ -159,7 +153,6 @@ class ForegroundCommand : public BuiltInCommand {
 };
 
 class BackgroundCommand : public BuiltInCommand {
- // TODO: Add your data members
  int _job_id;
  JobsList* _jobsList;
  public:
@@ -202,5 +195,30 @@ class SmallShell {
   // TODO: add extra methods as needed
 };
 
+int _parseCommandLine(const char* cmd_line, char** args) {
+    FUNC_ENTRY()
+    int i = 0;
+    std::istringstream iss(_trim(string(cmd_line)).c_str());
+    for(std::string s; iss >> s; ) {
+        args[i] = (char*)malloc(s.length()+1);
+        memset(args[i], 0, s.length()+1);
+        strcpy(args[i], s.c_str());
+        args[++i] = NULL;
+    }
+    return i;
+
+    FUNC_EXIT()
+}
+
+std::vector<string> _parseCommandLineStrings(const char* cmd_line) {
+    char** f_args = nullptr;
+    vector<string> args;
+    _parseCommandLine(cmd_line,f_args);
+    while(*f_args){
+        args.push_back(*f_args);
+        f_args++;
+    }
+    return args;
+}
 
 #endif //SMASH_COMMAND_H_
