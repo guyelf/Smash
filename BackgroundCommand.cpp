@@ -3,7 +3,6 @@
 //
 
 #include "Commands.h"
-#include "Commands.cpp"
 
 BackgroundCommand::BackgroundCommand(const char *cmd_line, JobsList *jobs):BuiltInCommand(cmd_line),_job_id(-1){
 

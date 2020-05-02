@@ -21,7 +21,7 @@ int main(int argc, char* argv[]) {
     while(true) {
 
         try {
-            std::cout << prompt_name; // TODO: change this (why?)
+            std::cout << prompt_name;
             std::string cmd_line;
             std::getline(std::cin, cmd_line);
             smash.executeCommand(cmd_line.c_str());
@@ -41,7 +41,6 @@ int main(int argc, char* argv[]) {
         }
         catch (MyException& my) { //using the virtual method what to print to stdErr
             perror(my.what());
-            //todo: print the error message maybe using just cerr<< my.what() <<endl;
             //todo: kill smash depends if it's a fatal error or not
         }
     }

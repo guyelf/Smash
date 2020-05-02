@@ -10,7 +10,6 @@
 using namespace std;
 
 CopyCommand::CopyCommand(const char *cmd_line):Command(cmd_line),cmd_line(cmd_line){}
-CopyCommand::~CopyCommand(){}
 
 void CopyCommand::execute() {
     std::vector<string> args = _parseCommandLineStrings(cmd_line.c_str());

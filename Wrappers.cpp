@@ -10,16 +10,12 @@ int doFork() {
     bool isFg = (smash.pid == ::getpid());
     int child = fork();
     if(child < 0){
-        doPerror("fork");
-        throw MySpecialCommandException();
+        throw MyException("fork");
     }
     else if (child == 0 && isFg) //if in the child and also forking from fg --> change parent_group
         ::setpgrp();
     return child;
 }
 
-void doPerror(char *sysCall_name) {
-
-}
 
 

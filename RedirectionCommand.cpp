@@ -5,7 +5,7 @@
 #include <fcntl.h>
 #include <wait.h>
 //#include <sys/wait.h>
-#include "RedirectionCommand.h"
+#include "Commands.h"
 
 RedirectionCommand::RedirectionCommand(const char *cmd_line):Command(cmd_line){
 
@@ -20,7 +20,6 @@ RedirectionCommand::RedirectionCommand(const char *cmd_line):Command(cmd_line){
         }
         else
             i++; //don't advance i if you're on the sign
-
         cmd_line++;
     }
     this->r_type = numSigns == 1 ? ONE_REDIRECTION : TWO_REDIRECTIONS;
@@ -34,13 +33,13 @@ void RedirectionCommand::execute() {
         close(1);//stdOUT
         if (this->r_type == ONE_REDIRECTION) { // ">"
             output = this->current_cmd.substr(this->sign_index + 1); // gets the file to write to after the '>'
-            open(output.c_str(), O_CREAT | O_WRONLY, 0555); //should create the file with r&w permissions to everyone
+            open(output.c_str(), O_CREAT | O_WRONLY, 0666); //should create the file with r&w permissions to everyone
             SmallShell &smash = SmallShell::getInstance();
             smash.executeCommand(cmd1.c_str()); //run the command
         }
         else if (this->r_type == TWO_REDIRECTIONS) { // ">>"
             output = this->current_cmd.substr(this->sign_index + 2);
-            open(output.c_str(), O_CREAT | O_APPEND, 0555); //should create the file with r&w permissions to everyone
+            open(output.c_str(), O_CREAT | O_APPEND, 0666); //should create the file with r&w permissions to everyone
             SmallShell &smash = SmallShell::getInstance();
             smash.executeCommand(cmd1.c_str());
         }

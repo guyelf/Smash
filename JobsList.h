@@ -33,9 +33,9 @@ class JobsList {
         // TODO : How I get pid, which class is pid
         JobEntry(Command *command,pid_t pid,int job_id,std::chrono::system_clock::time_point time,bool stopped):command(command),
             pid(pid),job_id(job_id),schedule_time(time),stopped(stopped),out(false){};
-        ~JobEntry();
+        ~JobEntry(){}
         std::string print_job();
-        void kill();
+       //todo: Remove? -> void kill();
     };
 public:
     list<JobEntry> jobs_list;

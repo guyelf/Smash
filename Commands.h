@@ -45,6 +45,7 @@ public:
   explicit BuiltInCommand(const char* cmd_line);
   virtual ~BuiltInCommand() {}
   const char* cmd_string() override { return this->cmd.c_str();}
+
   // Todo: Add generic error message function for sub class to derive from (page 2/18)
 };
 
@@ -136,7 +137,7 @@ class HistoryCommand : public BuiltInCommand {
 };
 
 class KillCommand : public BuiltInCommand {
-    pipid_t j_pid; //job's pid
+    pid_t  j_pid; //job's pid
     int signum;
 public:
     KillCommand(const char* cmd_line,JobsList* jobs);
@@ -157,23 +158,55 @@ class BackgroundCommand : public BuiltInCommand {
  int _job_id;
  JobsList* _jobsList;
  public:
-  BackgroundComlmand(const char* cmd_line, JobsList* jobs);
+    BackgroundCommand(const char* cmd_line, JobsList* jobs);
   virtual ~BackgroundCommand();
   void execute() override;
 };
+
+enum RedirectionType {ONE_REDIRECTION, TWO_REDIRECTIONS};
+class RedirectionCommand : public Command {
+    RedirectionType r_type;
+    int sign_index;
+    std::string current_cmd;
+public:
+    explicit RedirectionCommand(const char* cmd_line);
+    void execute() override;
+    const char* cmd_string() override { return this->current}
+    virtual ~RedirectionCommand() {}
+    //void prepare() override;
+    //void cleanup() override;
+};
+
 
 
 class CopyCommand : public Command {
     std::string cmd_line;
 public:
   explicit CopyCommand(const char* cmd_line);
-  virtual ~CopyCommand();
+  virtual ~CopyCommand(){}
   void execute() override;
   const char* cmd_string() override { return this->cmd.c_str();}
 };
 
 // TODO: add more classes if needed 
 // maybe chprompt-done on main , timeout ?
+
+class PipeCommand : public Command {
+    std::string cmd_line;
+public:
+    explicit PipeCommand(const char* cmd_line);
+    virtual ~PipeCommand();
+    const char* cmd_string() override { return this->cmd_line.c_str();}
+    void execute() override;
+    void execute_pipe(std::vector<string> args);
+    void execute_amp(std::vector<string> args);
+};
+
+
+
+
+
+
 
 //Following the design pattern of a singleton classs
 class SmallShell {
@@ -195,8 +228,8 @@ class SmallShell {
   }
   ~SmallShell();
   void executeCommand(const char* cmd_line);
-  bool stopProcess(pipid_t pid);
-  void killProcess(pipid_t pid);
+  bool stopProcess(pid_t pid);
+  void killProcess(pid_t pid);
   void addCmd(Command *cmd,int pid);
 };
 

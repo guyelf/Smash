@@ -2,7 +2,6 @@
 // Created by student on 4/22/20.
 //
 #include "Commands.h"
-#include "Commands.cpp"
 #include "MyExceptions.h"
 
 //plastPwd = a vec<string> consists of all the parameters passed to the "cd" command

@@ -6,7 +6,7 @@
 using namespace std;
 
 void ctrlZHandler(int sig_num) {
-    cout << "smash: got ctrl-Z" << "\n";
+    cout << "smash: got ctrl-Z" << endl;
     string res = "smash: process";
     pid_t pid_process = ::getpid();
     SmallShell& smash = SmallShell::getInstance();
@@ -17,12 +17,12 @@ void ctrlZHandler(int sig_num) {
             Command *cmd = smash.CreateCommand(smash.last_cmd);
             smash.addCmd(cmd,pid_process);
         }
-        cout<< res << "\n";
+        cout<< res << endl;
     }
 }
 
 void ctrlCHandler(int sig_num) {
-    cout << "smash: got ctrl-C" << "\n";
+    cout << "smash: got ctrl-C" << endl;
     string res = "smash: process";
     pid_t pid_proccess = ::getpid();
     SmallShell& smash = SmallShell::getInstance();
@@ -30,11 +30,11 @@ void ctrlCHandler(int sig_num) {
         kill(pid_proccess,SIGKILL);
         smash.killProcess(pid_proccess);
         res = res + to_string(pid_proccess) + "was killed";
-        cout<< res << "\n";
+        cout<< res << endl;
     }
 }
 
 void alarmHandler(int sig_num) {
-    cout << "smash got an alarm" << "\n";
+    cout << "smash got an alarm" << endl;
 }
 

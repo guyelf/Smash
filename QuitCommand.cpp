@@ -3,7 +3,6 @@
 //
 
 #include "Commands.h"
-#include "Commands.cpp"
 
 QuitCommand::QuitCommand(const char *cmd_line, JobsList *jobs):BuiltInCommand(cmd_line),_killFlag(false) {
     auto args = _parseCommandLineStrings(cmd_line);

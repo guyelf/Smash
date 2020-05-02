@@ -1,7 +1,7 @@
 //
 // Created by student on 4/28/20.
 //
-#include "Commands.cpp"
+
 #include "Commands.h"
 
 ForegroundCommand::ForegroundCommand(const char* cmd_line, JobsList* jobs):BuiltInCommand(cmd_line),_job_id(-1){
@@ -37,6 +37,7 @@ void ForegroundCommand::execute() {
         cout<< jobToFg->command + " : " + jobToFg->pid << endl; //print the job like asked to
         kill(jobToFg->pid,SIGCONT);
         this->_jobsList->removeJobById(j_id); //removing the job after bringing it back to FG //todo: handle what if someone stops it again -> ctrl+c
+        //todo: how can I make sure smash is running it on the FG
         waitpid(jobToFg->pid,nullptr); //wait for that job to finish bc it's FG now.
     }
     catch (std::exception& e) {
@@ -49,6 +50,4 @@ ForegroundCommand::~ForegroundCommand() {
 }
 
 
-const char * ForegroundCommand::cmd_string() {
 
-}
