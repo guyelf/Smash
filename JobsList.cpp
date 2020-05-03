@@ -103,6 +103,14 @@ void JobsList::removeFinishedJobs() {
     }
 }
 
+bool JobsList::isJobStopped(int job_id){
+    for(list<JobEntry>::iterator current = this->jobs_list.begin(); current != this->jobs_list.end() ; current++){
+        if (current->job_id == job_id){
+            return current->stopped;
+        }
+    }
+}
+
 void JobsList::removeStoppedSign(int jobId) {
     for(list<JobEntry>::iterator current = this->jobs_list.begin(); current != this->jobs_list.end() ; current++){
         if (current->job_id == jobId){

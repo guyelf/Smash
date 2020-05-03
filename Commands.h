@@ -185,7 +185,7 @@ public:
   const char* cmd_string() override { return this->cmd.c_str();}
 };
 
-// TODO: add more classes if needed 
+
 // maybe chprompt-done on main , timeout ?
 
 class PipeCommand : public Command {
@@ -232,15 +232,16 @@ public:
     void addJob(Command* cmd,pid_t pid,bool isStopped = false);
     void printJobsList();
     void killAllJobs();
-    void removeFinishedJobs(); //TODO
+    void removeFinishedJobs();
     JobEntry *getJobById(int jobId);
     void removeJobById(int jobId);
-    JobEntry *getLastJob(int* lastJobId); //TODO
+    JobEntry *getLastJob(int* lastJobId);
     JobEntry *getLastStoppedJob(int *jobId);
     int getTopJobId();
     void removeStoppedSign(int jobId);
     void stopJobById(int jobID);
     void setJobAsFinished(int jobId);
+    bool isJobStopped(int job_id);
     bool stopJobByPID(int PID);
     void killJob(int PID);
     JobEntry* getJobByPID(pid_t pid);
