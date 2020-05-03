@@ -44,6 +44,8 @@ string _rtrim(const std::string& s);
 string _trim(const std::string& s);
 bool _isBackgroundComamnd(const char* cmd_line);
 void _removeBackgroundSign(char* cmd_line);
+std::vector<string> _parseCommandLineStrings(const char* cmd_line);
+int _parseCommandLine(const char* cmd_line, char** args);
 
 
 
@@ -51,9 +53,9 @@ class JobsList;
 class JobCompare;
 
 class Command {
-    const char * cmd;
+    const char *cmd;
  public:
-  explicit Command(const char* cmd_line);
+  explicit Command(const char* cmd_line):cmd(cmd_line){}
   virtual ~Command();
   virtual void execute() = 0;
   virtual const char* cmd_string()=0;
@@ -64,8 +66,8 @@ class Command {
 class BuiltInCommand : public Command {
     std::string cmd;
 public:
-  explicit BuiltInCommand(const char* cmd_line);
-  virtual ~BuiltInCommand() {}
+  explicit BuiltInCommand(const char* cmd_line):Command(cmd_line),cmd(cmd_line){}
+  virtual ~BuiltInCommand(){}
   const char* cmd_string() override { return this->cmd.c_str();}
 };
 
@@ -186,7 +188,7 @@ public:
     explicit RedirectionCommand(const char* cmd_line);
     void execute() override;
     const char* cmd_string() override { return this->current_cmd.c_str();}
-    virtual ~RedirectionCommand() {}
+    virtual ~RedirectionCommand(){}
     //void prepare() override;
     //void cleanup() override;
 };
@@ -300,32 +302,6 @@ class SmallShell {
     bool isJobInList(pid_t pid);
     void addJobToListZ(JobEntry *je);
 };
-
-int _parseCommandLine(const char* cmd_line, char** args) {
-    FUNC_ENTRY()
-    int i = 0;
-    std::istringstream iss(_trim(string(cmd_line)).c_str());
-    for(std::string s; iss >> s; ) {
-        args[i] = (char*)malloc(s.length()+1);
-        memset(args[i], 0, s.length()+1);
-        strcpy(args[i], s.c_str());
-        args[++i] = NULL;
-    }
-    return i;
-
-    FUNC_EXIT()
-}
-
-std::vector<string> _parseCommandLineStrings(const char* cmd_line) {
-    char** f_args = nullptr;
-    vector<string> args;
-    _parseCommandLine(cmd_line,f_args);
-    while(*f_args){
-        args.push_back(*f_args);
-        f_args++;
-    }
-    return args;
-}
 
 
 

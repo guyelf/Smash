@@ -7,8 +7,7 @@
 
 PipeCommand::PipeCommand(const char *cmd_line):Command(cmd_line),cmd_line(cmd_line){}
 
-PipeCommand::~PipeCommand() {
-}
+PipeCommand::~PipeCommand(){}
 
 void PipeCommand::execute() {
     std::vector<string> args = _parseCommandLineStrings(cmd_line.c_str());

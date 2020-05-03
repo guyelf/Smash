@@ -12,6 +12,31 @@ using namespace std;
 
 const std::string WHITESPACE = " \n\r\t\f\v";
 
+int _parseCommandLine(const char* cmd_line, char** args) {
+    FUNC_ENTRY()
+    int i = 0;
+    std::istringstream iss(_trim(string(cmd_line)).c_str());
+    for(std::string s; iss >> s; ) {
+        args[i] = (char*)malloc(s.length()+1);
+        memset(args[i], 0, s.length()+1);
+        strcpy(args[i], s.c_str());
+        args[++i] = NULL;
+    }
+    return i;
+
+    FUNC_EXIT()
+}
+
+std::vector<string> _parseCommandLineStrings(const char* cmd_line) {
+    char** f_args = nullptr;
+    vector<string> args;
+    _parseCommandLine(cmd_line,f_args);
+    while(*f_args){
+        args.push_back(*f_args);
+        f_args++;
+    }
+    return args;
+}
 
 
 string _ltrim(const std::string& s)
