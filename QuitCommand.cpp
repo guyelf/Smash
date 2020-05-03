@@ -21,8 +21,8 @@ void QuitCommand::execute() {
         for (int i = 0; i < numJobs; ++i) { //deletes the top_job each iteration
             int top_job_id = this->_jobsList->getTopJobId();
             auto top_job = this->_jobsList->getJobById(top_job_id);
-            cout<< to_string(top_job->pid) + ": "+ top_job->command << endl; // format: "pid: command"
-            this->_jobsList->killJob(top_job->pid);
+            cout<< to_string(top_job->getpid()) + ": "+ top_job->getcommand()->cmd_string() << endl; // format: "pid: command"
+            this->_jobsList->killJob(top_job->getpid());
         }
         this->_jobsList->killAllJobs(); //kill all jobs //todo maybe remove this?
         kill(smash.pid,SIGKILL); //kill smash

@@ -204,7 +204,7 @@ class JobEntry { //TODO move to public??
     friend JobsList;
     friend JobCompare;
     Command *command;
-    pipid_t pid;
+    pid_t pid;
     int job_id;
     bool stopped;
     bool out;
@@ -214,7 +214,7 @@ public:
     JobEntry(Command *command,pid_t pid,int job_id,std::chrono::system_clock::time_point time,bool stopped):
             command(command),pid(pid),job_id(job_id),schedule_time(time),stopped(stopped),out(false){}
     ~JobEntry(){}
-    int pid(){return this.pid;}
+    pid_t getpid(){return this.pid;}
     Command* getcommand(){return this.command;}
     void setNewId(int newid);
     std::string print_job();

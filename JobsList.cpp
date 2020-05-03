@@ -3,7 +3,6 @@
 //
 
 #include "Commands.h"
-
 #include <string>
 
 
@@ -11,7 +10,7 @@ JobsList::JobsList() {
     this->jobs_list = list<JobEntry>();
 }
 
-JobsList::~JobsList() {}
+JobsList::~JobsList(){}
 
 void JobsList::addJob(Command *cmd,pid_t pid,bool isStopped) {
     std::chrono::system_clock::time_point now = std::chrono::system_clock::now();

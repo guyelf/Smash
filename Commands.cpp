@@ -152,8 +152,16 @@ void SmallShell::executeCommand(const char *cmd_line){
         }
     }
     else{
-        *this->fg_job = JobEntry(cmd,getpid(),-1,std::chrono::system_clock::now(),false);
-        cmd->execute();
+        pid_t pid = doFork();
+        if ( pid == 0){
+            *this->fg_job = JobEntry(cmd,getpid(),-1,std::chrono::system_clock::now(),false);
+            cmd->execute();
+        }
+        else {
+            waitpid(pid,nullptr,0);
+        }
+
+
     }
 }
 

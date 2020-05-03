@@ -43,8 +43,8 @@ void BackgroundCommand::execute() {
            j_id = this->_jobsList->getTopJobId();
 
        auto jobToBg = this->_jobsList->getJobById(j_id);
-       cout<< jobToBg->command + " : " + jobToBg->pid;
-       kill(jobToBg->pid,SIGCONT);
+       cout<< jobToBg->getcommand()->cmd_string() << " : " + jobToBg->getpid() << endl;
+       kill(jobToBg->getpid(),SIGCONT);
        this->_jobsList->removeStoppedSign(j_id);
 
    }
