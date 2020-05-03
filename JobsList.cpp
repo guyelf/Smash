@@ -156,10 +156,11 @@ void JobsList::stopJobById(int jobID){
     }
 }
 
-void JobsList::removeJobById(int jobId) {
+JobEntry JobsList::removeJobById(int jobId) {
     for(list<JobEntry>::iterator current = this->jobs_list.begin(); current != this->jobs_list.end() ; current++){
         if (current->job_id == jobId){
             current->out = true;
+            return *current;
         }
     }
 }
@@ -168,6 +169,7 @@ bool JobsList::stopJobByPID(int PID) {
     bool found = false;
     for(list<JobEntry>::iterator current = this->jobs_list.begin(); current != this->jobs_list.end() ; current++) {
         if (current->pid == PID) {
+            current->stop_time = std::chrono::system_clock::now();
             current->stopped = true;
             found = true;
         }

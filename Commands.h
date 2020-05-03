@@ -234,7 +234,7 @@ public:
     void killAllJobs();
     void removeFinishedJobs();
     JobEntry *getJobById(int jobId);
-    void removeJobById(int jobId);
+    JobEntry removeJobById(int jobId);
     JobEntry *getLastJob(int* lastJobId);
     JobEntry *getLastStoppedJob(int *jobId);
     int getTopJobId();
