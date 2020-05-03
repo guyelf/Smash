@@ -131,7 +131,7 @@ void SmallShell::executeCommand(const char *cmd_line){
     bool isNotBg = (command.find("|&") != std::string::npos);
     Command* cmd = CreateCommand(cmd_line);
 
-    if(isBg && !isNotBg){
+    if(isBg && !isNotBg){//if BG job
         pid_t pid = doFork();
         if(pid == 0){//son
             cmd->execute();
