@@ -11,32 +11,19 @@ void ctrlZHandler(int sig_num) {
     if (pid_process != smash.pid){
         return;
     }
+    cout << "smash: got ctrl-Z" << endl;
     JobEntry *jb = smash.fg_job;
     if (!jb->getpid()){
         return;
     }
-    else{
-        if (!smash.isJobInList(jb->getpid())){
-            smash.addJobToListZ(jb);
-        }
+    if (!smash.isJobInList(jb->getpid())){
+        smash.addJobToListZ(jb);
     }
-    cout << "smash: got ctrl-Z" << endl;
-    string res = "smash: process";
-
-
-    if (smash.pid == pid_process){
-        kill(pid_process,SIGSTOP);
-        res = res + to_string(pid_process) + "was stopped";
-        if (!smash.stopProcess(pid_process)){
-            int newjobid = smash.getTopJobId() +1;
-            smash.setCurrentJobId(newjobid);
-            //smash.addCurrentJob();
-        }
-        cout<< res << endl;
-    }
-    else{
-
-    }
+    smash.setJobAsStopped(jb->getpid());
+    string res = "smash: process ";
+    kill(pid_process,SIGSTOP);
+    res = res + to_string(pid_process) + " was stopped";
+    cout << res << endl;
 }
 
 void ctrlCHandler(int sig_num) {

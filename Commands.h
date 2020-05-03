@@ -218,6 +218,9 @@ public:
     Command* getcommand(){return this.command;}
     void setNewId(int newid);
     std::string print_job();
+    void setJobAsStopped(){
+        this.stopped = true;
+    }
 };
 
 class JobsList {
@@ -242,7 +245,6 @@ public:
     void killJob(int PID);
     JobEntry* getJobByPID(pid_t pid);
     void addJobZ(JobEntry *je);
-
 };
 
 class JobCompare{
@@ -273,9 +275,9 @@ class SmallShell {
   }
     ~SmallShell();
     void executeCommand(const char* cmd_line);
-    bool stopProcess(pid_t pid);
-     void killProcess(pid_t pid);
-     void addCmd(Command *cmd,int pid);
+    bool setJobAsStopped(pid_t pid);
+    void killProcess(pid_t pid);
+    void addCmd(Command *cmd,int pid);
     int getTopJobId();
     void setCurrentJobId(int newJobId);
     bool isJobInList(pid_t pid);

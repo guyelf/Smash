@@ -89,7 +89,7 @@ bool SmallShell::isJobInList(pid_t pid){
 
 void SmallShell::addJobToListZ(JobEntry *je){
     je->setNewId(this->jobs_list->getTopJobId() +1);
-    this->jobs_list.addJobZ(je);
+    this->jobs_list->addJobZ(je);
 }
 
 SmallShell::~SmallShell() {
@@ -173,7 +173,7 @@ void SmallShell::executeCommand(const char *cmd_line){
     }
 }
 
-bool SmallShell::stopProcess(int pid) {
+bool SmallShell::setJobAsStopped(int pid) {
     return this->jobs_list->stopJobByPID(pid);
 
 }
