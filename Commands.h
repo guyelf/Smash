@@ -240,6 +240,8 @@ public:
     void setJobAsFinished(int jobId);
     bool stopJobByPID(int PID);
     void killJob(int PID);
+    JobEntry* getJobByPID(pid_t pid);
+    void addJobZ(JobEntry *je);
 
 };
 
@@ -254,27 +256,30 @@ public:
 class SmallShell {
     JobsList *jobs_list;
     SmallShell();
-    JobEntry *fg_job;
+
  public:
-  pid_t pid;
-  const char* current_path;
-  const char* last_cmd;
-  Command *CreateCommand(const char* cmd_line);
-  SmallShell(SmallShell const&)      = delete; // disable copy ctor
-  void operator=(SmallShell const&)  = delete; // disable = operator
-  static SmallShell& getInstance() // make SmallShell singleton
-  {
+    JobEntry *fg_job;
+    pid_t pid;
+    const char* current_path;
+    const char* last_cmd;
+    Command *CreateCommand(const char* cmd_line);
+    SmallShell(SmallShell const&)      = delete; // disable copy ctor
+    void operator=(SmallShell const&)  = delete; // disable = operator
+    static SmallShell& getInstance() // make SmallShell singleton
+    {
     static SmallShell instance; // Guaranteed to be destroyed.
     // Instantiated on first use.
     return instance;
   }
-  ~SmallShell();
-  void executeCommand(const char* cmd_line);
-  bool stopProcess(pid_t pid);
-  void killProcess(pid_t pid);
-  void addCmd(Command *cmd,int pid);
-  int getTopJobId();
-  void setCurrentJobId(int newJobId);
+    ~SmallShell();
+    void executeCommand(const char* cmd_line);
+    bool stopProcess(pid_t pid);
+     void killProcess(pid_t pid);
+     void addCmd(Command *cmd,int pid);
+    int getTopJobId();
+    void setCurrentJobId(int newJobId);
+    bool isJobInList(pid_t pid);
+    void addJobToListZ(JobEntry *je);
 };
 
 int _parseCommandLine(const char* cmd_line, char** args) {

@@ -83,6 +83,15 @@ SmallShell::SmallShell(): last_cmd(nullptr),fg_job(nullptr){
 
 }
 
+bool SmallShell::isJobInList(pid_t pid){
+    return this->jobs_list->getJobByPID(pid)->getpid() == pid;
+}
+
+void SmallShell::addJobToListZ(JobEntry *je){
+    je->setNewId(this->jobs_list->getTopJobId() +1);
+    this->jobs_list.addJobZ(je);
+}
+
 SmallShell::~SmallShell() {
     delete jobs_list;
 }
@@ -141,7 +150,6 @@ void SmallShell::executeCommand(const char *cmd_line){
     bool isBg = (command.find("&") != std::string::npos);
     bool isNotBg = (command.find("|&") != std::string::npos);
     Command* cmd = CreateCommand(cmd_line);
-
     if(isBg && !isNotBg){
         pid_t pid = doFork();
         if(pid == 0){//son

@@ -31,7 +31,19 @@ std::string JobEntry::print_job() {
 int JobsList::size() {
     return this->jobs_list.size();
 }
+JobEntry* JobsList::getJobByPID(pid_t pid){
+    JobEntry *je= nullptr;
+    for (list<JobEntry>::iterator current = this->jobs_list.begin();current != this->jobs_list.end();current++){
+        if (current->pid == pid){
+            *je = *current;
+        }
+    }
+    return je;
+}
 
+void JobsList::addJobZ(JobEntry *je){
+    this->jobs_list.push_back(*je);
+}
 
 void JobsList::printJobsList() {
     removeFinishedJobs();

@@ -6,10 +6,24 @@
 using namespace std;
 
 void ctrlZHandler(int sig_num) {
+    SmallShell& smash = SmallShell::getInstance();
+    pid_t pid_process = ::getpid();
+    if (pid_process != smash.pid){
+        return;
+    }
+    JobEntry *jb = smash.fg_job;
+    if (!jb->getpid()){
+        return;
+    }
+    else{
+        if (!smash.isJobInList(jb->getpid())){
+            smash.addJobToListZ(jb);
+        }
+    }
     cout << "smash: got ctrl-Z" << endl;
     string res = "smash: process";
-    pid_t pid_process = ::getpid();
-    SmallShell& smash = SmallShell::getInstance();
+
+
     if (smash.pid == pid_process){
         kill(pid_process,SIGSTOP);
         res = res + to_string(pid_process) + "was stopped";
