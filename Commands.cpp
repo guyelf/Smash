@@ -68,7 +68,7 @@ void _removeBackgroundSign(char* cmd_line) {
   // truncate the command line string up to the last non-space character
   cmd_line[str.find_last_not_of(WHITESPACE, idx) + 1] = 0;
 }
-int JobCompare::operator()(JobsList::JobEntry je1,JobsList::JobEntry je2){
+int JobCompare::operator()(JobEntry je1,JobEntry je2){
     return (je1.job_id - je2.job_id) < 0;
 }
 
@@ -142,8 +142,6 @@ Command * SmallShell::CreateCommand(const char* cmd_line) {
 }
 
 void SmallShell::executeCommand(const char *cmd_line){
-  // Todo: add to Jobs list if Background process
-  // for example:
     this->jobs_list->removeFinishedJobs();
     this->last_cmd = cmd_line;
     std:string command (cmd_line);

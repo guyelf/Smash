@@ -200,7 +200,7 @@ public:
 };
 
 //Following the design pattern of a singleton classs
-class JobEntry { //TODO move to public??
+class JobEntry {
     friend JobsList;
     friend JobCompare;
     Command *command;
@@ -231,7 +231,7 @@ public:
     int size();
     void addJob(Command* cmd,pid_t pid,bool isStopped = false);
     void printJobsList();
-    void killAllJobs(); //TODO NEEDED TO BE COMPLETED
+    void killAllJobs();
     void removeFinishedJobs(); //TODO
     JobEntry *getJobById(int jobId);
     void removeJobById(int jobId);
