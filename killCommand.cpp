@@ -20,7 +20,7 @@ KillCommand::KillCommand(const char* cmd_line, JobsList* jobs):BuiltInCommand(cm
     if(jobs->getJobById(j_id) == nullptr)
         throw MyKillCommandException(j_id);
 
-    this->j_pid = jobs->getJobById(j_id)->pid;
+    this->j_pid = jobs->getJobById(j_id)->getpid();
 
     this->signum = stoi(args[1]);
     if(signum<1 || signum > 31)

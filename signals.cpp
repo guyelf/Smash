@@ -6,37 +6,48 @@
 using namespace std;
 
 void ctrlZHandler(int sig_num) {
-
     SmallShell& smash = SmallShell::getInstance();
-    if(smash.pid != getpid())//if a sibling process got the same interrupt signal
+    pid_t pid_process = ::getpid();
+    if (pid_process != smash.pid){
         return;
-
-    cout << "smash: got ctrl-Z" << endl;
-    string res = "smash: process";
-    pid_t pid_process = getpid();
-
-    if (smash.pid == pid_process){
-        kill(pid_process,SIGSTOP);
-        res = res + to_string(pid_process) + "was stopped";
-        if (!smash.stopProcess(pid_process)){
-            Command *cmd = smash.CreateCommand(smash.last_cmd);
-            smash.addCmd(cmd,pid_process);
-        }
-        cout<< res << endl;
     }
+    cout << "smash: got ctrl-Z" << endl;
+    JobEntry *jb = smash.fg_job;
+    if (!jb->getpid()){
+        return;
+    }
+    if (!smash.isJobInList(jb->getpid())){
+        smash.addJobToListZ(jb);
+    }
+    smash.setJobAsStopped(jb->getpid());
+    string res = "smash: process ";
+    kill(pid_process,SIGSTOP);
+    res = res + to_string(pid_process) + " was stopped";
+    cout << res << endl;
 }
 
 void ctrlCHandler(int sig_num) {
+    SmallShell &smash = SmallShell::getInstance();
     cout << "smash: got ctrl-C" << endl;
-    string res = "smash: process";
-    pid_t pid_proccess = ::getpid();
-    SmallShell& smash = SmallShell::getInstance(); //todo: fix this is wrong
-    if (smash.pid != pid_proccess){
-        kill(pid_proccess,SIGKILL);
-        smash.killProcess(pid_proccess);
-        res = res + to_string(pid_proccess) + "was killed";
-        cout<< res << endl;
+    pid_t pid = smash.fg_job->getpid();
+    if (pid) {
+        string res = "smash: process";
+        kill(pid, SIGKILL);
+        if (smash.isJobInList(pid)) {
+            smash.killProcess(pid);
+        }
+        res = res + to_string(pid) + "was killed";
+        cout << res << endl;
     }
+}
+
+
+
+
+
+
+
+
 }
 
 void alarmHandler(int sig_num) {

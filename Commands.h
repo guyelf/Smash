@@ -18,13 +18,14 @@
 #define COMMAND_MAX_ARGS (20)
 #define HISTORY_MAX_RECORDS (50)
 
-
 //my includes:
 #include "Wrappers.h"
-#include "RedirectionCommand.h"
 #include "MyExceptions.h"
-#include "PipeCommand.h"
+
 using namespace std;
+
+class JobsList;
+class JobCompare;
 
 class Command {
     const char * cmd;
@@ -98,12 +99,11 @@ public:
   void execute() override;
 };
 class JobsCommand : public BuiltInCommand{
-    // TODO: Add your data members
     JobsList* myJobs;
 public:
     JobsCommand(const char *cmd_line, JobsList *jobs): BuiltInCommand(cmd_line),myJobs(jobs){}
-    virtual ~JobsCommand() {}
-    void execute() {this->myJobs->printJobsList();}
+    virtual ~JobsCommand(){}
+    void execute();
 };
 
 
@@ -170,13 +170,11 @@ class RedirectionCommand : public Command {
 public:
     explicit RedirectionCommand(const char* cmd_line);
     void execute() override;
-    const char* cmd_string() override { return this->current}
+    const char* cmd_string() override { return this->current_cmd.c_str();}
     virtual ~RedirectionCommand() {}
     //void prepare() override;
     //void cleanup() override;
 };
-
-
 
 class CopyCommand : public Command {
     std::string cmd_line;
@@ -202,28 +200,88 @@ public:
 };
 
 //Following the design pattern of a singleton classs
+class JobEntry {
+    friend JobsList;
+    friend JobCompare;
+    Command *command;
+    pid_t pid;
+    int job_id;
+    bool stopped;
+    bool out;
+    std::chrono::system_clock::time_point schedule_time;
+    std::chrono::system_clock::time_point stop_time;
+public:
+    JobEntry(Command *command,pid_t pid,int job_id,std::chrono::system_clock::time_point time,bool stopped):
+            command(command),pid(pid),job_id(job_id),schedule_time(time),stopped(stopped),out(false){}
+    ~JobEntry(){}
+    pid_t getpid(){return this.pid;}
+    Command* getcommand(){return this.command;}
+    void setNewId(int newid);
+    std::string print_job();
+    void setJobAsStopped(){
+        this.stopped = true;
+    }
+};
+
+class JobsList {
+    list<JobEntry> jobs_list;
+public:
+    JobsList();
+    ~JobsList();
+    int size();
+    void addJob(Command* cmd,pid_t pid,bool isStopped = false);
+    void printJobsList();
+    void killAllJobs();
+    void removeFinishedJobs(); //TODO
+    JobEntry *getJobById(int jobId);
+    void removeJobById(int jobId);
+    JobEntry *getLastJob(int* lastJobId); //TODO
+    JobEntry *getLastStoppedJob(int *jobId);
+    int getTopJobId();
+    void removeStoppedSign(int jobId);
+    void stopJobById(int jobID);
+    void setJobAsFinished(int jobId);
+    bool stopJobByPID(int PID);
+    void killJob(int PID);
+    JobEntry* getJobByPID(pid_t pid);
+    void addJobZ(JobEntry *je);
+};
+
+class JobCompare{
+public:
+    JobCompare(){}
+    ~JobCompare(){}
+    int operator()(JobsList::JobEntry je1,JobsList::JobEntry je2);
+};
+
+
 class SmallShell {
- private:
     JobsList *jobs_list;
-  SmallShell();
+    SmallShell();
+
  public:
-  pid_t pid;
-  const char* current_path;
-  const char* last_cmd;
-  Command *CreateCommand(const char* cmd_line);
-  SmallShell(SmallShell const&)      = delete; // disable copy ctor
-  void operator=(SmallShell const&)  = delete; // disable = operator
-  static SmallShell& getInstance() // make SmallShell singleton
-  {
+    JobEntry *fg_job;
+    pid_t pid;
+    const char* current_path;
+    const char* last_cmd;
+    Command *CreateCommand(const char* cmd_line);
+    SmallShell(SmallShell const&)      = delete; // disable copy ctor
+    void operator=(SmallShell const&)  = delete; // disable = operator
+    static SmallShell& getInstance() // make SmallShell singleton
+    {
     static SmallShell instance; // Guaranteed to be destroyed.
     // Instantiated on first use.
     return instance;
   }
-  ~SmallShell();
-  void executeCommand(const char* cmd_line);
-  bool stopProcess(pid_t pid);
-  void killProcess(pid_t pid);
-  void addCmd(Command *cmd,int pid);
+    ~SmallShell();
+    void executeCommand(const char* cmd_line);
+    bool setJobAsStopped(pid_t pid);
+    void killProcess(pid_t pid);
+    void addCmd(Command *cmd,int pid);
+    int getTopJobId();
+    void setCurrentJobId(int newJobId);
+    bool isJobInList(pid_t pid);
+    void addJobToListZ(JobEntry *je);
 };
 
 int _parseCommandLine(const char* cmd_line, char** args) {
@@ -251,47 +309,6 @@ std::vector<string> _parseCommandLineStrings(const char* cmd_line) {
     }
     return args;
 }
-
-class JobsList {
-    class JobEntry { //TODO move to public??
-    public:
-        Command *command;
-        pipid_t pid;
-        int job_id;
-        bool stopped;
-        bool out;
-        std::chrono::system_clock::time_point schedule_time;
-        std::chrono::system_clock::time_point stop_time;
-        // for getting the elapsed seconds use - std::chrono::duration<double> elapsed
-        // TODO : How I get pid, which class is pid
-        JobEntry(Command *command,pid_t pid,int job_id,std::chrono::system_clock::time_point time,bool stopped):command(command),
-                                                                                                                pid(pid),job_id(job_id),schedule_time(time),stopped(stopped),out(false){};
-        ~JobEntry(){}
-        std::string print_job();
-        //todo: Remove? -> void kill();
-    };
-public:
-    list<JobEntry> jobs_list;
-    JobsList();
-    ~JobsList();
-    int size();
-    void addJob(Command* cmd,pid_t pid,bool isStopped = false);
-    void printJobsList();
-    void killAllJobs(); //NEEDED TO BE COMPLETED
-    void removeFinishedJobs(); //TODO
-    JobEntry *getJobById(int jobId);
-    void removeJobById(int jobId);
-    JobEntry *getLastJob(int* lastJobId); //TODO
-    JobEntry *getLastStoppedJob(int *jobId);
-    int getTopJobId();
-    void removeStoppedSign(int jobId);
-    void stopJobById(int jobID);
-    void setJobAsFinished(int jobId);
-    bool stopJobByPID(int PID);
-    void killJob(int PID);
-};
-
-
 
 
 
