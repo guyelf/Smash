@@ -21,8 +21,31 @@
 //my includes:
 #include "Wrappers.h"
 #include "MyExceptions.h"
-
 using namespace std;
+
+#if 0
+#define FUNC_ENTRY()  \
+  cerr << __PRETTY_FUNCTION__ << " --> " << endl;
+
+#define FUNC_EXIT()  \
+  cerr << __PRETTY_FUNCTION__ << " <-- " << endl;
+#else
+#define FUNC_ENTRY()
+#define FUNC_EXIT()
+#endif
+
+#define DEBUG_PRINT cerr << "DEBUG: "
+
+#define EXEC(path, arg) \
+  execvp((path), (arg));
+
+string _ltrim(const std::string& s);
+string _rtrim(const std::string& s);
+string _trim(const std::string& s);
+bool _isBackgroundComamnd(const char* cmd_line);
+void _removeBackgroundSign(char* cmd_line);
+
+
 
 class JobsList;
 class JobCompare;
@@ -174,7 +197,7 @@ public:
   explicit CopyCommand(const char* cmd_line);
   virtual ~CopyCommand(){}
   void execute() override;
-  const char* cmd_string() override { return this->cmd.c_str();}
+  const char* cmd_string() override { return this->cmd_line.c_str();}
 };
 
 
@@ -204,14 +227,14 @@ class JobEntry {
     std::chrono::system_clock::time_point stop_time;
 public:
     JobEntry(Command *command,pid_t pid,int job_id,std::chrono::system_clock::time_point time,bool stopped):
-            command(command),pid(pid),job_id(job_id),schedule_time(time),stopped(stopped),out(false){}
+            command(command),pid(pid),job_id(job_id),schedule_time(time),stopped(stopped),out(false),stop_time(std::chrono::system_clock::now()){}
     ~JobEntry(){}
-    pid_t getpid(){return this.pid;}
-    Command* getcommand(){return this.command;}
+    pid_t getpid(){return this->pid;}
+    Command* getcommand(){return this->command;}
     void setNewId(int newid);
     std::string print_job();
     void setJobAsStopped(){
-        this.stopped = true;
+        this->stopped = true;
     }
     bool isOut(){return this->out;}
 };
@@ -245,7 +268,7 @@ class JobCompare{
 public:
     JobCompare(){}
     ~JobCompare(){}
-    int operator()(JobsList::JobEntry je1,JobsList::JobEntry je2);
+    int operator()(JobEntry je1,JobEntry je2);
 };
 
 

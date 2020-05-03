@@ -12,21 +12,6 @@ using namespace std;
 
 const std::string WHITESPACE = " \n\r\t\f\v";
 
-#if 0
-#define FUNC_ENTRY()  \
-  cerr << __PRETTY_FUNCTION__ << " --> " << endl;
-
-#define FUNC_EXIT()  \
-  cerr << __PRETTY_FUNCTION__ << " <-- " << endl;
-#else
-#define FUNC_ENTRY()
-#define FUNC_EXIT()
-#endif
-
-#define DEBUG_PRINT cerr << "DEBUG: "
-
-#define EXEC(path, arg) \
-  execvp((path), (arg));
 
 
 string _ltrim(const std::string& s)
@@ -188,7 +173,7 @@ int SmallShell::getTopJobId() {
 }
 
 void SmallShell::setCurrentJobId(int newJobid){
-    this->fg_job.setNewId(newJobid);
+    this->fg_job->setNewId(newJobid);
 }
 
 #endif
