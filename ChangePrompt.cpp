@@ -4,12 +4,19 @@
 
 #include "Commands.h"
 
-ChangePrompt::ChangePrompt(const char *cmd_line): BuiltInCommand(cmd_line){}
+ChangePrompt::ChangePrompt(const char *cmd_line): BuiltInCommand(cmd_line),cmd_line(cmd_line){}
 
 ChangePrompt::~ChangePrompt() noexcept {}
 
 void ChangePrompt::execute() {
-    //We're handling the command in the main function.
-    return;
+    auto args = _parseCommandLineStrings(this->cmd_line.c_str());
+    auto &smash = SmallShell::getInstance();
+    if(args.size() == 1){ //the case where you go default
+        smash.prompt_name = "smash> ";
+    }
+    else{
+        string res = args[1] +  "> ";
+        smash.prompt_name = res.c_str();
+    }
 }
 
