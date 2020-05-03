@@ -201,19 +201,13 @@ public:
     void execute_amp(std::vector<string> args);
 };
 
-
-
-
-
-
-
 //Following the design pattern of a singleton classs
 class SmallShell {
  private:
     JobsList *jobs_list;
   SmallShell();
  public:
-  ppid_t pid;
+  pid_t pid;
   const char* current_path;
   const char* last_cmd;
   Command *CreateCommand(const char* cmd_line);

@@ -46,10 +46,6 @@ string _trim(const std::string& s)
   return _rtrim(_ltrim(s));
 }
 
-
-
-
-
 bool _isBackgroundComamnd(const char* cmd_line) {
   const string str(cmd_line);
   return str[str.find_last_not_of(WHITESPACE)] == '&';
@@ -73,7 +69,6 @@ void _removeBackgroundSign(char* cmd_line) {
   cmd_line[str.find_last_not_of(WHITESPACE, idx) + 1] = 0;
 }
 
-
 SmallShell::SmallShell(): last_cmd(nullptr){
     this->jobs_list = new JobsList();
 }
@@ -81,7 +76,6 @@ SmallShell::SmallShell(): last_cmd(nullptr){
 SmallShell::~SmallShell() {
     delete jobs_list;
 }
-
 
 Command * SmallShell::CreateCommand(const char* cmd_line) {
 
