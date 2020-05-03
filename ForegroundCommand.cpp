@@ -13,8 +13,8 @@ ForegroundCommand::ForegroundCommand(const char* cmd_line, JobsList* jobs):Built
 
     if (args.size() == 1 && jobs->size()==0)
         throw MyFgException("jobs list is empty");
-    if(args.size()==2 && jobs->getJobById(stoi(args[1]))){ //meaning there's a job_id assigned and it's not found
-        throw MyFgException(stoi(args[1])); //overload for c'tor to throw with the job id - I'm so smart XD
+    if(args.size()==2 && jobs->getJobById(stoi(args[1])) == nullptr){ //meaning there's a job_id assigned and it's not found
+        throw MyFgException(stoi(args[1]));
     }
 
     if(args.size() == 2)
@@ -33,14 +33,18 @@ void ForegroundCommand::execute() {
             j_id = this->_jobsList->getTopJobId();
 
         JobEntry *jobToFg = this->_jobsList->getJobById(j_id);
-                //->getJobById(j_id);
 
         cout<< jobToFg->getcommand()->cmd_string() << " : " + to_string(jobToFg->getpid()) << endl; //print the job like asked to
 
         kill(jobToFg->getpid(),SIGCONT);
-        this->_jobsList->removeJobById(j_id); //removing the job after bringing it back to FG //todo: handle what if someone stops it again -> ctrl+c
-        //todo: how can I make sure smash is running it on the FG
-        waitpid(jobToFg->getpid(),nullptr, 0); //wait for that job to finish bc it's FG now.
+        this->_jobsList->removeJobById(j_id); //removing the job after bringing it back to FG
+
+        auto smash = &SmallShell::getInstance();
+        smash->fg_job = jobToFg;
+
+        waitpid(jobToFg->getpid(),nullptr,0);
+
+        //wait for that job to finish bc it's FG now.
     }
     catch (std::exception& e) {
         throw MyException("fg"); // for generic fg failure as instructed in the Error handling part

@@ -29,12 +29,12 @@ void CopyCommand::execute() {
         files[0] = open(args[1].c_str(),O_RDONLY,0666);
         if (files[0] == -1){ //Checking if file open
             close(files[0]);
-            //TODO:Exception??
+            MyException("open");
         }
         files[1] = open(args[2].c_str(),O_WRONLY|O_CREAT|O_TRUNC,0666);
         if (files[1] == -1){ //Checking if file open
             close(files[1]);
-            //TODO:Exception??
+            MyException("open");
         }
         while (count_bytes = read(files[0],buff,BUFF_SIZE) != 0){ //On reading the number of bytes read is returned, 0 if we reached EOF
             write(files[1],buff,count_bytes);

@@ -36,7 +36,6 @@ class Command {
   virtual const char* cmd_string()=0;
   //virtual void prepare();
   //virtual void cleanup();
-  // TODO: Add your extra methods if needed
 };
 
 class BuiltInCommand : public Command {
@@ -45,8 +44,6 @@ public:
   explicit BuiltInCommand(const char* cmd_line);
   virtual ~BuiltInCommand() {}
   const char* cmd_string() override { return this->cmd.c_str();}
-
-  // Todo: Add generic error message function for sub class to derive from (page 2/18)
 };
 
 class ExternalCommand : public Command {
@@ -89,8 +86,6 @@ class ShowPidCommand : public BuiltInCommand {
 
 //class JobsList;
 class QuitCommand : public BuiltInCommand {
-// TODO: Add your data members public:
-
     bool _killFlag;
     JobsList* _jobsList;
 public:
@@ -117,9 +112,7 @@ public:
 class CommandsHistory {
  protected:
   class CommandHistoryEntry {
-	  // TODO: Add your data members
   };
- // TODO: Add your data members
  public:
   CommandsHistory();
   ~CommandsHistory() {}
@@ -128,7 +121,6 @@ class CommandsHistory {
 };
 
 class HistoryCommand : public BuiltInCommand {
- // TODO: Add your data members
  public:
   HistoryCommand(const char* cmd_line, CommandsHistory* history);
   virtual ~HistoryCommand() {}
@@ -185,7 +177,6 @@ public:
   const char* cmd_string() override { return this->cmd.c_str();}
 };
 
-// TODO: add more classes if needed 
 // maybe chprompt-done on main , timeout ?
 
 class PipeCommand : public Command {
@@ -232,10 +223,10 @@ public:
     void addJob(Command* cmd,pid_t pid,bool isStopped = false);
     void printJobsList();
     void killAllJobs();
-    void removeFinishedJobs(); //TODO
+    void removeFinishedJobs();
     JobEntry *getJobById(int jobId);
     void removeJobById(int jobId);
-    JobEntry *getLastJob(int* lastJobId); //TODO
+    JobEntry *getLastJob(int* lastJobId);
     JobEntry *getLastStoppedJob(int *jobId);
     int getTopJobId();
     void removeStoppedSign(int jobId);
