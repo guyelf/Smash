@@ -29,7 +29,7 @@ ChangeDirCommand::ChangeDirCommand(const char *cmd_line):BuiltInCommand(cmd_line
     this->params = args;
     this->num_params = args.size() - 1; //if this is bigger than 1 an exception will be thrown in execute.
 }
-
+std::string ChangeDirCommand::prev_pwd = "";
 
 void ChangeDirCommand::execute() {
 

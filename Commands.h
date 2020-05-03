@@ -56,7 +56,7 @@ class Command {
     const char *cmd;
  public:
   explicit Command(const char* cmd_line):cmd(cmd_line){}
-  virtual ~Command();
+  virtual ~Command(){}
   virtual void execute() = 0;
   virtual const char* cmd_string()=0;
   //virtual void prepare();
