@@ -24,7 +24,7 @@ void QuitCommand::execute() {
             cout<< to_string(top_job->getpid()) + ": "+ top_job->getcommand()->cmd_string() << endl; // format: "pid: command"
             this->_jobsList->killJob(top_job->getpid());
         }
-        this->_jobsList->killAllJobs(); //kill all jobs //todo maybe remove this?
+        //had kill all jobs here before
         kill(smash.pid,SIGKILL); //kill smash
     }
 }
