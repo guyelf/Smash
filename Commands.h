@@ -212,6 +212,7 @@ public:
     void setJobAsStopped(){
         this.stopped = true;
     }
+    bool isOut(){return this->out;}
 };
 
 class JobsList {
