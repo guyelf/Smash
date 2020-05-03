@@ -41,7 +41,6 @@ int main(int argc, char* argv[]) {
         }
         catch (MyException& my) { //using the virtual method what to print to stdErr
             perror(my.what());
-            //todo: kill smash depends if it's a fatal error or not
         }
     }
     return 0;
