@@ -366,33 +366,6 @@ JobsList.cpp.s:
 	$(MAKE) -f CMakeFiles/smash.dir/build.make CMakeFiles/smash.dir/JobsList.cpp.s
 .PHONY : JobsList.cpp.s
 
-MyException.o: MyException.cpp.o
-
-.PHONY : MyException.o
-
-# target to build an object file
-MyException.cpp.o:
-	$(MAKE) -f CMakeFiles/smash.dir/build.make CMakeFiles/smash.dir/MyException.cpp.o
-.PHONY : MyException.cpp.o
-
-MyException.i: MyException.cpp.i
-
-.PHONY : MyException.i
-
-# target to preprocess a source file
-MyException.cpp.i:
-	$(MAKE) -f CMakeFiles/smash.dir/build.make CMakeFiles/smash.dir/MyException.cpp.i
-.PHONY : MyException.cpp.i
-
-MyException.s: MyException.cpp.s
-
-.PHONY : MyException.s
-
-# target to generate assembly for a file
-MyException.cpp.s:
-	$(MAKE) -f CMakeFiles/smash.dir/build.make CMakeFiles/smash.dir/MyException.cpp.s
-.PHONY : MyException.cpp.s
-
 PipeCommand.o: PipeCommand.cpp.o
 
 .PHONY : PipeCommand.o
@@ -645,9 +618,6 @@ help:
 	@echo "... JobsList.o"
 	@echo "... JobsList.i"
 	@echo "... JobsList.s"
-	@echo "... MyException.o"
-	@echo "... MyException.i"
-	@echo "... MyException.s"
 	@echo "... PipeCommand.o"
 	@echo "... PipeCommand.i"
 	@echo "... PipeCommand.s"

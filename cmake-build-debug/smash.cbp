@@ -117,25 +117,16 @@
 		<Unit filename="/home/student/CLionProjects/Smash/JobsList.h">
 			<Option target="smash"/>
 		</Unit>
-		<Unit filename="/home/student/CLionProjects/Smash/MyException.cpp">
-			<Option target="smash"/>
-		</Unit>
 		<Unit filename="/home/student/CLionProjects/Smash/MyExceptions.h">
 			<Option target="smash"/>
 		</Unit>
 		<Unit filename="/home/student/CLionProjects/Smash/PipeCommand.cpp">
 			<Option target="smash"/>
 		</Unit>
-		<Unit filename="/home/student/CLionProjects/Smash/PipeCommand.h">
-			<Option target="smash"/>
-		</Unit>
 		<Unit filename="/home/student/CLionProjects/Smash/QuitCommand.cpp">
 			<Option target="smash"/>
 		</Unit>
 		<Unit filename="/home/student/CLionProjects/Smash/RedirectionCommand.cpp">
-			<Option target="smash"/>
-		</Unit>
-		<Unit filename="/home/student/CLionProjects/Smash/RedirectionCommand.h">
 			<Option target="smash"/>
 		</Unit>
 		<Unit filename="/home/student/CLionProjects/Smash/ShowPidCommand.cpp">

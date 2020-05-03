@@ -13,7 +13,6 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/student/CLionProjects/Smash/ForegroundCommand.cpp" "/home/student/CLionProjects/Smash/cmake-build-debug/CMakeFiles/smash.dir/ForegroundCommand.cpp.o"
   "/home/student/CLionProjects/Smash/GetCurrDirCommand.cpp" "/home/student/CLionProjects/Smash/cmake-build-debug/CMakeFiles/smash.dir/GetCurrDirCommand.cpp.o"
   "/home/student/CLionProjects/Smash/JobsList.cpp" "/home/student/CLionProjects/Smash/cmake-build-debug/CMakeFiles/smash.dir/JobsList.cpp.o"
-  "/home/student/CLionProjects/Smash/MyException.cpp" "/home/student/CLionProjects/Smash/cmake-build-debug/CMakeFiles/smash.dir/MyException.cpp.o"
   "/home/student/CLionProjects/Smash/PipeCommand.cpp" "/home/student/CLionProjects/Smash/cmake-build-debug/CMakeFiles/smash.dir/PipeCommand.cpp.o"
   "/home/student/CLionProjects/Smash/QuitCommand.cpp" "/home/student/CLionProjects/Smash/cmake-build-debug/CMakeFiles/smash.dir/QuitCommand.cpp.o"
   "/home/student/CLionProjects/Smash/RedirectionCommand.cpp" "/home/student/CLionProjects/Smash/cmake-build-debug/CMakeFiles/smash.dir/RedirectionCommand.cpp.o"

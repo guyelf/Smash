@@ -2,7 +2,7 @@
 // Created by Dell on 30/04/2020.
 //
 
-#include "JobsList.h"
+#include "Commands.h"
 
 JobsList::JobsList() {
     this->jobs_list = list<JobEntry>();

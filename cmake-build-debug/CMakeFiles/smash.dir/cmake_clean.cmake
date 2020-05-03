@@ -8,7 +8,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/smash.dir/ForegroundCommand.cpp.o"
   "CMakeFiles/smash.dir/GetCurrDirCommand.cpp.o"
   "CMakeFiles/smash.dir/JobsList.cpp.o"
-  "CMakeFiles/smash.dir/MyException.cpp.o"
   "CMakeFiles/smash.dir/PipeCommand.cpp.o"
   "CMakeFiles/smash.dir/QuitCommand.cpp.o"
   "CMakeFiles/smash.dir/RedirectionCommand.cpp.o"
