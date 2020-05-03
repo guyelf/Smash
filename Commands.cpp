@@ -68,6 +68,15 @@ void _removeBackgroundSign(char* cmd_line) {
   // truncate the command line string up to the last non-space character
   cmd_line[str.find_last_not_of(WHITESPACE, idx) + 1] = 0;
 }
+int JobCompare::operator()(JobsList::JobEntry je1,JobsList::JobEntry je2){
+    return (je1.job_id - je2.job_id) < 0;
+}
+
+
+void JobsCommand::execute() {
+    this->myJobs->printJobsList();
+}
+
 
 SmallShell::SmallShell(): last_cmd(nullptr),fg_job(nullptr){
     this->jobs_list = new JobsList();
@@ -143,7 +152,7 @@ void SmallShell::executeCommand(const char *cmd_line){
         }
     }
     else{
-        *this->fg_job = JobsList::JobEntry(cmd,getpid(),-1,std::chrono::system_clock::now(),false);
+        *this->fg_job = JobEntry(cmd,getpid(),-1,std::chrono::system_clock::now(),false);
         cmd->execute();
     }
 }

@@ -4,9 +4,13 @@
 
 #include "Commands.h"
 
+#include <string>
+
+
 JobsList::JobsList() {
     this->jobs_list = list<JobEntry>();
 }
+
 JobsList::~JobsList() {}
 
 void JobsList::addJob(Command *cmd,pid_t pid,bool isStopped) {
@@ -15,7 +19,7 @@ void JobsList::addJob(Command *cmd,pid_t pid,bool isStopped) {
     JobEntry new_job = JobEntry(cmd,pid,job_id,now,isStopped);
     this->jobs_list.assign(job_id,new_job);
 }
-std::string JobsList::JobEntry::print_job() {
+std::string JobEntry::print_job() {
     std::string res = "[" + to_string(job_id) + "]" + this->command->cmd_string() + " : " + to_string(this->pid);
     std::chrono::duration<double> elapsed_time = std::chrono::system_clock::now() - this->schedule_time;
     res = res + " " + to_string(elapsed_time.count()) + " secs";
@@ -28,15 +32,18 @@ std::string JobsList::JobEntry::print_job() {
 int JobsList::size() {
     return this->jobs_list.size();
 }
+
+
 void JobsList::printJobsList() {
     removeFinishedJobs();
-    this->jobs_list.sort();
+    this->jobs_list.sort(JobCompare());
     for (list<JobEntry>::iterator current = this->jobs_list.begin();current != this->jobs_list.end();current++){
         if(current->out == false) {
             std::string res = current->print_job();
             cout << res << "\n";
         }
     }
+
 }
 void JobsList::killAllJobs() {
     for (list<JobEntry>::iterator current = this->jobs_list.begin(); current!=this->jobs_list.end() ; current++) {
@@ -45,7 +52,7 @@ void JobsList::killAllJobs() {
         kill(current_job.pid,SIGKILL);
     }
 }
-JobsList::JobEntry * JobsList::getJobById(int jobId) {
+JobEntry * JobsList::getJobById(int jobId) {
     for(list<JobEntry>::iterator current = this->jobs_list.begin(); current != this->jobs_list.end() ; current++){
         if (current->job_id == jobId){
             JobEntry res = *current;
@@ -65,7 +72,7 @@ void JobsList::setJobAsFinished(int jobId){
     }
 }
 
-JobsList::JobEntry * JobsList::getLastJob(int *lastJobId) {
+JobEntry * JobsList::getLastJob(int *lastJobId) {
     std::chrono::system_clock::time_point time = this->jobs_list.begin()->schedule_time;
     JobEntry *lastjob = nullptr;
     for(list<JobEntry>::iterator current = this->jobs_list.begin(); current != this->jobs_list.end() ; current++){
@@ -93,7 +100,7 @@ void JobsList::removeStoppedSign(int jobId) {
     }
 }
 
-JobsList::JobEntry* JobsList::getLastStoppedJob(int *jobId) {
+JobEntry* JobsList::getLastStoppedJob(int *jobId) {
     std::chrono::system_clock::time_point current_last_stop_time = std::chrono::system_clock::now();
     bool found_stopped = false;
     JobEntry *last_stopped = nullptr;
@@ -108,7 +115,7 @@ JobsList::JobEntry* JobsList::getLastStoppedJob(int *jobId) {
     }
     return last_stopped;
 }
-void JobsList::JobEntry::setNewId(int newid){
+void JobEntry::setNewId(int newid){
     this->job_id = newid;
 }
 

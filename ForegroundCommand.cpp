@@ -34,7 +34,7 @@ void ForegroundCommand::execute() {
 
         auto jobToFg = this->_jobsList->getJobById(j_id);
 
-        cout<< jobToFg->command + " : " + jobToFg->pid << endl; //print the job like asked to
+        cout<< jobToFg->getcommand()->cmd_string() << " : " + to_string(jobToFg->pid) << endl; //print the job like asked to
         kill(jobToFg->pid,SIGCONT);
         this->_jobsList->removeJobById(j_id); //removing the job after bringing it back to FG //todo: handle what if someone stops it again -> ctrl+c
         //todo: how can I make sure smash is running it on the FG

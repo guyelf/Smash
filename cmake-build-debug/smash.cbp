@@ -114,9 +114,6 @@
 		<Unit filename="/home/student/CLionProjects/Smash/JobsList.cpp">
 			<Option target="smash"/>
 		</Unit>
-		<Unit filename="/home/student/CLionProjects/Smash/JobsList.h">
-			<Option target="smash"/>
-		</Unit>
 		<Unit filename="/home/student/CLionProjects/Smash/MyExceptions.h">
 			<Option target="smash"/>
 		</Unit>

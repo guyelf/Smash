@@ -20,10 +20,12 @@
 
 //my includes:
 #include "Wrappers.h"
-#include "RedirectionCommand.h"
 #include "MyExceptions.h"
-#include "PipeCommand.h"
+
 using namespace std;
+
+class JobsList;
+class JobCompare;
 
 class Command {
     const char * cmd;
@@ -97,12 +99,11 @@ public:
   void execute() override;
 };
 class JobsCommand : public BuiltInCommand{
-    // TODO: Add your data members
     JobsList* myJobs;
 public:
     JobsCommand(const char *cmd_line, JobsList *jobs): BuiltInCommand(cmd_line),myJobs(jobs){}
     virtual ~JobsCommand(){}
-    void execute() {this->myJobs->printJobsList();}
+    void execute();
 };
 
 
@@ -169,7 +170,7 @@ class RedirectionCommand : public Command {
 public:
     explicit RedirectionCommand(const char* cmd_line);
     void execute() override;
-    const char* cmd_string() override { return this->current}
+    const char* cmd_string() override { return this->current_cmd.c_str();}
     virtual ~RedirectionCommand() {}
     //void prepare() override;
     //void cleanup() override;
@@ -199,27 +200,28 @@ public:
 };
 
 //Following the design pattern of a singleton classs
+class JobEntry { //TODO move to public??
+    friend JobsList;
+    friend JobCompare;
+    Command *command;
+    pipid_t pid;
+    int job_id;
+    bool stopped;
+    bool out;
+    std::chrono::system_clock::time_point schedule_time;
+    std::chrono::system_clock::time_point stop_time;
+public:
+    JobEntry(Command *command,pid_t pid,int job_id,std::chrono::system_clock::time_point time,bool stopped):
+            command(command),pid(pid),job_id(job_id),schedule_time(time),stopped(stopped),out(false){}
+    ~JobEntry(){}
+    int pid(){return this.pid;}
+    Command* getcommand(){return this.command;}
+    void setNewId(int newid);
+    std::string print_job();
+};
 
 class JobsList {
     list<JobEntry> jobs_list;
-public:
-    class JobEntry { //TODO move to public??
-        friend JobsList;
-        Command *command;
-        pipid_t pid;
-        int job_id;
-        bool stopped;
-        bool out;
-        std::chrono::system_clock::time_point schedule_time;
-        std::chrono::system_clock::time_point stop_time;
-
-    public:
-        JobEntry(Command *command,pid_t pid,int job_id,std::chrono::system_clock::time_point time,bool stopped):
-        command(command),pid(pid),job_id(job_id),schedule_time(time),stopped(stopped),out(false){};
-        ~JobEntry(){}
-        void setNewId(int newid);
-        std::string print_job();
-    };
 public:
     JobsList();
     ~JobsList();
@@ -238,13 +240,21 @@ public:
     void setJobAsFinished(int jobId);
     bool stopJobByPID(int PID);
     void killJob(int PID);
+
+};
+
+class JobCompare{
+public:
+    JobCompare(){}
+    ~JobCompare(){}
+    int operator()(JobsList::JobEntry je1,JobsList::JobEntry je2);
 };
 
 
 class SmallShell {
     JobsList *jobs_list;
     SmallShell();
-    JobList::JobEntry *fg_job;
+    JobEntry *fg_job;
  public:
   pid_t pid;
   const char* current_path;
