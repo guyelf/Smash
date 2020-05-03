@@ -28,7 +28,11 @@ int _parseCommandLine(const char* cmd_line, char** args) {
 }
 
 std::vector<string> _parseCommandLineStrings(const char* cmd_line) {
-    char** f_args = nullptr;
+
+    char** f_args;
+    for (int i = 0; i < 20; ++i) //max 20 args
+        f_args[i] = (char*)malloc(80); //max size for cmd
+
     vector<string> args;
     _parseCommandLine(cmd_line,f_args);
     while(*f_args){
@@ -170,7 +174,7 @@ void SmallShell::executeCommand(const char *cmd_line){
     else{
         pid_t pid = doFork();
         if ( pid == 0){
-            *this->fg_job = JobEntry(cmd,getpid(),-1,std::chrono::system_clock::now(),false);
+            this->fg_job = new JobEntry(cmd,getpid(),-1,std::chrono::system_clock::now(),false);
             cmd->execute();
         }
         else {
