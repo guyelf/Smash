@@ -30,6 +30,7 @@ int JobsList::size() {
 }
 void JobsList::printJobsList() {
     removeFinishedJobs();
+    this->jobs_list.sort();
     for (list<JobEntry>::iterator current = this->jobs_list.begin();current != this->jobs_list.end();current++){
         if(current->out == false) {
             std::string res = current->print_job();
@@ -106,6 +107,9 @@ JobsList::JobEntry* JobsList::getLastStoppedJob(int *jobId) {
         }
     }
     return last_stopped;
+}
+void JobsList::JobEntry::setNewId(int newid){
+    this->job_id = newid;
 }
 
 int JobsList::getTopJobId(){

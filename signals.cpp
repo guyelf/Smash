@@ -10,14 +10,18 @@ void ctrlZHandler(int sig_num) {
     string res = "smash: process";
     pid_t pid_process = ::getpid();
     SmallShell& smash = SmallShell::getInstance();
-    if (smash.pid != pid_process){
+    if (smash.pid == pid_process){
         kill(pid_process,SIGSTOP);
         res = res + to_string(pid_process) + "was stopped";
         if (!smash.stopProcess(pid_process)){
-            Command *cmd = smash.CreateCommand(smash.last_cmd);
-            smash.addCmd(cmd,pid_process);
+            int newjobid = smash.getTopJobId() +1;
+            smash.setCurrentJobId(newjobid);
+            //smash.addCurrentJob();
         }
         cout<< res << endl;
+    }
+    else{
+
     }
 }
 

@@ -69,8 +69,9 @@ void _removeBackgroundSign(char* cmd_line) {
   cmd_line[str.find_last_not_of(WHITESPACE, idx) + 1] = 0;
 }
 
-SmallShell::SmallShell(): last_cmd(nullptr){
+SmallShell::SmallShell(): last_cmd(nullptr),fg_job(nullptr){
     this->jobs_list = new JobsList();
+
 }
 
 SmallShell::~SmallShell() {
@@ -125,6 +126,7 @@ Command * SmallShell::CreateCommand(const char* cmd_line) {
 void SmallShell::executeCommand(const char *cmd_line){
   // Todo: add to Jobs list if Background process
   // for example:
+    this->jobs_list->removeFinishedJobs();
     this->last_cmd = cmd_line;
     std:string command (cmd_line);
     bool isBg = (command.find("&") != std::string::npos);
@@ -141,13 +143,14 @@ void SmallShell::executeCommand(const char *cmd_line){
         }
     }
     else{
+        *this->fg_job = JobsList::JobEntry(cmd,getpid(),-1,std::chrono::system_clock::now(),false);
         cmd->execute();
     }
-
 }
 
 bool SmallShell::stopProcess(int pid) {
     return this->jobs_list->stopJobByPID(pid);
+
 }
 void SmallShell::killProcess(int pid) {
     this->jobs_list->killJob(pid);
@@ -155,6 +158,14 @@ void SmallShell::killProcess(int pid) {
 
 void SmallShell::addCmd(Command *cmd,int pid){
     this->jobs_list->addJob(cmd,pid,true);
+}
+
+int SmallShell::getTopJobId() {
+    return this->jobs_list->getTopJobId();
+}
+
+void SmallShell::setCurrentJobId(int newJobid){
+    this->fg_job.setNewId(newJobid);
 }
 
 #endif
