@@ -156,11 +156,10 @@ void JobsList::stopJobById(int jobID){
     }
 }
 
-JobEntry JobsList::removeJobById(int jobId) {
+void JobsList::removeJobById(int jobId) {
     for(list<JobEntry>::iterator current = this->jobs_list.begin(); current != this->jobs_list.end() ; current++){
         if (current->job_id == jobId){
             current->out = true;
-            return *current;
         }
     }
 }
