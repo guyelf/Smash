@@ -99,7 +99,8 @@ JobEntry * JobsList::getLastJob(int *lastJobId) {
 void JobsList::removeFinishedJobs() {
     if ( !this->jobs_list.empty()) {
         for (list<JobEntry>::iterator current = this->jobs_list.begin(); current != this->jobs_list.end(); current++) {
-            pid_t pid = waitpid(current->pid, nullptr, WUNTRACED);
+            int res = kill(current->pid,0);
+            pid_t pid = waitpid(current->pid, nullptr, WNOHANG);
             if ( !current->out &&  pid == current->pid) {
                 current->out = true;
                 this->size_ --;

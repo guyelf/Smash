@@ -138,10 +138,10 @@
 		<Unit filename="/home/student/CLionProjects/Smash/killCommand.cpp">
 			<Option target="smash"/>
 		</Unit>
-		<Unit filename="/home/student/CLionProjects/Smash/quit_nojobs2.exp">
+		<Unit filename="/home/student/CLionProjects/Smash/kill_errors.exp">
 			<Option target="smash"/>
 		</Unit>
-		<Unit filename="/home/student/CLionProjects/Smash/quit_nojobs2.in">
+		<Unit filename="/home/student/CLionProjects/Smash/kill_errors.in">
 			<Option target="smash"/>
 		</Unit>
 		<Unit filename="/home/student/CLionProjects/Smash/signals.cpp">
