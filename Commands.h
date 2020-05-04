@@ -32,6 +32,7 @@ using namespace std;
 #else
 #define FUNC_ENTRY()
 #define FUNC_EXIT()
+#define MAX_ARG_SIZE = 80
 #endif
 
 #define DEBUG_PRINT cerr << "DEBUG: "

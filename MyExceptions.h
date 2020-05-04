@@ -18,6 +18,10 @@ public:
          // this is for a generic system call that fails
         this->_msg.append(syscall).append(" failed");
     }
+    MyException(const char* syscall,const char* syscall_e_msg): _msg("smash error: "){
+        this->_msg.append(syscall).append(" failed:").append(syscall_e_msg); //add the syscall's error msg
+    }
+
     virtual const char* what()  noexcept  {
          return this->_msg.c_str();}
 };

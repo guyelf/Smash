@@ -42,12 +42,12 @@ void ChangeDirCommand::execute() {
 
     else if(this->params[1].compare("-")==0){
        if(prev_pwd.empty())
-           MyCdException("OLDPWD not set");
+         throw MyCdException("OLDPWD not set");
        try{
            ::chdir(prev_pwd.c_str());
        }
        catch (std::exception& e) {
-           throw MyException("cd");
+           throw MyException("chdir");
        }
        prev_pwd = pwd_buf;
     }
@@ -80,7 +80,7 @@ void ChangeDirCommand::execute() {
         }
         else{
             //relative
-            char* path;
+            char* path = (char*) malloc(sizeof(pwd_buf));
             strcpy(pwd_buf,path);
             strcat(path,this->params[1].c_str()); //add relative to current dir
             ::chdir(path);
