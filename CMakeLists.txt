@@ -23,6 +23,8 @@ add_executable(smash
         ForegroundCommand.cpp
         QuitCommand.cpp ExternalCommand.cpp
         JobsList.cpp ChangePrompt.cpp
-        CopyCommand.cpp)
+        CopyCommand.cpp
+        cd.exp
+        cd.in)
 
 #todo: Might come handy, otherwise remove //system_functions.h cmake-build-debug/BuiltInCommand.cpp

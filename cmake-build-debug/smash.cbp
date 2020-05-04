@@ -135,6 +135,12 @@
 		<Unit filename="/home/student/CLionProjects/Smash/Wrappers.h">
 			<Option target="smash"/>
 		</Unit>
+		<Unit filename="/home/student/CLionProjects/Smash/cd.exp">
+			<Option target="smash"/>
+		</Unit>
+		<Unit filename="/home/student/CLionProjects/Smash/cd.in">
+			<Option target="smash"/>
+		</Unit>
 		<Unit filename="/home/student/CLionProjects/Smash/killCommand.cpp">
 			<Option target="smash"/>
 		</Unit>
