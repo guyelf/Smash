@@ -110,7 +110,13 @@ SmallShell::~SmallShell() {
 Command * SmallShell::CreateCommand(const char* cmd_line) {
 
   string cmd_s = string(cmd_line);
-  if (cmd_s.find("pwd") == 0) {
+  if (cmd_s.find(">") != string::npos){
+    return new RedirectionCommand(cmd_line);
+  }
+  else if (cmd_s.find("|") != string::npos){
+    return new PipeCommand(cmd_line);
+  }
+  else if (cmd_s.find("pwd") == 0) {
     return new GetCurrDirCommand(cmd_line);
   }
   else if (cmd_s.find("chprompt") == 0){
@@ -136,12 +142,6 @@ Command * SmallShell::CreateCommand(const char* cmd_line) {
   }
   else if (cmd_s.find("quit") == 0){
      return new QuitCommand(cmd_line,this->jobs_list);
-  }
-  else if (cmd_s.find(">") != string::npos){
-      return new RedirectionCommand(cmd_line);
-  }
-  else if (cmd_s.find("|") != string::npos){
-      return new PipeCommand(cmd_line);
   }
   else if (cmd_s.find("cp") == 0){
       return new CopyCommand(cmd_line);

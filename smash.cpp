@@ -21,7 +21,7 @@ int main(int argc, char* argv[]) {
 
     //TODO: setup sig alarm handler
     SmallShell& smash = SmallShell::getInstance();
-    ifstream in_fli("/home/student/CLionProjects/Smash/kill_errors.in");
+ /*   ifstream in_fli("/home/student/CLionProjects/Smash/kill_errors.in");
     char* cmd_line = (char*)malloc(MAX_STRING_INPUT_SIZE*sizeof(char));
 
     //char buffer[MAX_STRING_INPUT_SIZE];"/home/student/CLionProjects/Smash/test_input1.txt"
@@ -44,13 +44,11 @@ int main(int argc, char* argv[]) {
     };
 
     return 0;
+*/
 
 
-    /*
     //set detach-on-fork off
     //set follow-fork-mode child
-
-    SmallShell& smash = SmallShell::getInstance();
     while(true) {
 
         try {
@@ -64,5 +62,5 @@ int main(int argc, char* argv[]) {
         }
     }
     return 0;
-     */
+
 }// cp txt1.txt txt2.txt

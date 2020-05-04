@@ -4,7 +4,7 @@
 
 #include "Commands.h"
 #include <string>
-
+#include "Wrappers.h"
 
 JobsList::JobsList():size_(0){
     this->jobs_list = list<JobEntry>();
@@ -99,9 +99,9 @@ JobEntry * JobsList::getLastJob(int *lastJobId) {
 void JobsList::removeFinishedJobs() {
     if ( !this->jobs_list.empty()) {
         for (list<JobEntry>::iterator current = this->jobs_list.begin(); current != this->jobs_list.end(); current++) {
-            int res = doKill(current->pid,0);
-            pid_t pid = waitpid(current->pid, nullptr, WNOHANG);
+            pid_t pid = doWaitPID(current->pid, WNOHANG);
             if ( !current->out &&  pid == current->pid) {
+                //erase the job here
                 current->out = true;
                 this->size_ --;
             }

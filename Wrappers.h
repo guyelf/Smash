@@ -10,5 +10,5 @@ void doExecvp(const char* command);
 void doChngDir(const char* newDir);
 int doKill(pid_t pid, int signal);
 int doClose(int fd);
-
+pid_t doWaitPID(pid_t pid, int options);
 #endif //SMASH_WRAPPERS_H
