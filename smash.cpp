@@ -12,6 +12,7 @@
 
 
 int main(int argc, char* argv[]) {
+
     if(signal(SIGTSTP , ctrlZHandler)==SIG_ERR) {
         perror("smash error: failed to set ctrl-Z handler");
     }
@@ -21,7 +22,7 @@ int main(int argc, char* argv[]) {
 
     //TODO: setup sig alarm handler
     SmallShell& smash = SmallShell::getInstance();
-    ifstream in_fli("/home/student/CLionProjects/Smash/test_input1.txt");
+    ifstream in_fli("/home/student/CLionProjects/Smash/cd.in");
     char* cmd_line = (char*)malloc(MAX_STRING_INPUT_SIZE*sizeof(char));
 
     //char buffer[MAX_STRING_INPUT_SIZE];"/home/student/CLionProjects/Smash/test_input1.txt"
@@ -31,7 +32,7 @@ int main(int argc, char* argv[]) {
         //while (fgets(buffer, MAX_STRING_INPUT_SIZE, stdin) != NULL) {
         while(in_fli.getline(cmd_line,MAX_STRING_INPUT_SIZE)){
         try {
-            std::cout << smash.prompt_name;
+            std::cout << smash.prompt_name << endl;
 
             //getline(in_file, cmd_line);
             //std::getline(std::cin, cmd_line);
@@ -42,6 +43,7 @@ int main(int argc, char* argv[]) {
         }
 
     };
+
     return 0;
 
 
