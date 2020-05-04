@@ -285,7 +285,7 @@ class SmallShell {
     pid_t pid;
     const char* current_path;
     const char* last_cmd;
-    const char* prompt_name= "smash> " ;
+    string prompt_name= "smash> " ;
     Command *CreateCommand(const char* cmd_line);
     SmallShell(SmallShell const&)      = delete; // disable copy ctor
     void operator=(SmallShell const&)  = delete; // disable = operator

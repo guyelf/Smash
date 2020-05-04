@@ -20,7 +20,7 @@ int main(int argc, char* argv[]) {
     while(true) {
 
         try {
-            std::cout << smash.prompt_name;
+            std::cout << smash.prompt_name <<ends;
             std::string cmd_line;
             std::getline(std::cin, cmd_line);
             smash.executeCommand(cmd_line.c_str());

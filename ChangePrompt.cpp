@@ -15,8 +15,8 @@ void ChangePrompt::execute() {
         smash.prompt_name = "smash> ";
     }
     else{
-        string res = args[1] +  "> ";
-        smash.prompt_name = res.c_str();
+        string res = args[1].append("> ");
+        smash.prompt_name = res;
     }
 }
 
