@@ -135,13 +135,13 @@
 		<Unit filename="/home/student/CLionProjects/Smash/Wrappers.h">
 			<Option target="smash"/>
 		</Unit>
-		<Unit filename="/home/student/CLionProjects/Smash/jobs.exp">
-			<Option target="smash"/>
-		</Unit>
-		<Unit filename="/home/student/CLionProjects/Smash/jobs.in">
-			<Option target="smash"/>
-		</Unit>
 		<Unit filename="/home/student/CLionProjects/Smash/killCommand.cpp">
+			<Option target="smash"/>
+		</Unit>
+		<Unit filename="/home/student/CLionProjects/Smash/quit_nojobs2.exp">
+			<Option target="smash"/>
+		</Unit>
+		<Unit filename="/home/student/CLionProjects/Smash/quit_nojobs2.in">
 			<Option target="smash"/>
 		</Unit>
 		<Unit filename="/home/student/CLionProjects/Smash/signals.cpp">
