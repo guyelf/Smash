@@ -137,10 +137,10 @@ Command * SmallShell::CreateCommand(const char* cmd_line) {
   else if (cmd_s.find("quit") == 0){
      return new QuitCommand(cmd_line,this->jobs_list);
   }
-  else if (cmd_s.find(">") >= 0){
+  else if (cmd_s.find(">") != string::npos){
       return new RedirectionCommand(cmd_line);
   }
-  else if (cmd_s.find("|") >= 0){
+  else if (cmd_s.find("|") != string::npos){
       return new PipeCommand(cmd_line);
   }
   else if (cmd_s.find("cp") == 0){
