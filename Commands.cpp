@@ -175,7 +175,7 @@ void SmallShell::executeCommand(const char *cmd_line){
             cmd->execute();
         }
         else {
-            waitpid(pid,nullptr,0);
+            waitpid(pid,nullptr,WUNTRACED);
         }
 
 
