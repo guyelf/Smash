@@ -5,8 +5,6 @@
 
 GetCurrDirCommand::GetCurrDirCommand(const char *cmd_line):BuiltInCommand(cmd_line) {}
 void GetCurrDirCommand::execute() {
-    char* pwd  = nullptr;
-    ::getcwd(pwd,0); // should allocate the correct size itself, based on documentation
+    std::string pwd  = ::getcwd(nullptr,0);
     std::cout<< pwd << std::endl; //print the pwd to the screen
-    free(pwd);
 }

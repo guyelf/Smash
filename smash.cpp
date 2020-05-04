@@ -22,7 +22,7 @@ int main(int argc, char* argv[]) {
 
     //TODO: setup sig alarm handler
     SmallShell& smash = SmallShell::getInstance();
-    ifstream in_fli("/home/student/CLionProjects/Smash/cd.in");
+    ifstream in_fli("/home/student/CLionProjects/Smash/quit_nojobs2.in");
     char* cmd_line = (char*)malloc(MAX_STRING_INPUT_SIZE*sizeof(char));
 
     //char buffer[MAX_STRING_INPUT_SIZE];"/home/student/CLionProjects/Smash/test_input1.txt"
@@ -43,7 +43,7 @@ int main(int argc, char* argv[]) {
         }
 
     };
-
+    in_fli.close();
     return 0;
 
 
@@ -55,7 +55,7 @@ int main(int argc, char* argv[]) {
     while(true) {
 
         try {
-            std::cout << smash.prompt_name;
+            std::cout << smash.prompt_name <<ends;
             std::string cmd_line;
             std::getline(std::cin, cmd_line);
             smash.executeCommand(cmd_line.c_str());
