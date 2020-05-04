@@ -61,7 +61,7 @@ void JobsList::killAllJobs() {
     for (list<JobEntry>::iterator current = this->jobs_list.begin(); current!=this->jobs_list.end() ; current++) {
         JobEntry current_job = *current;
         this->jobs_list.erase(current);
-        kill(current_job.pid,SIGKILL);
+        doKill(current_job.pid,SIGKILL);
     }
 }
 JobEntry * JobsList::getJobById(int jobId) {
@@ -99,7 +99,7 @@ JobEntry * JobsList::getLastJob(int *lastJobId) {
 void JobsList::removeFinishedJobs() {
     if ( !this->jobs_list.empty()) {
         for (list<JobEntry>::iterator current = this->jobs_list.begin(); current != this->jobs_list.end(); current++) {
-            int res = kill(current->pid,0);
+            int res = doKill(current->pid,0);
             pid_t pid = waitpid(current->pid, nullptr, WNOHANG);
             if ( !current->out &&  pid == current->pid) {
                 current->out = true;

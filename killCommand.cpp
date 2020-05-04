@@ -32,7 +32,7 @@ KillCommand::~KillCommand(){}
 
 void KillCommand::execute() {
 
-    int res = kill(this->j_pid,this->signum);
+    int res = doKill(this->j_pid,this->signum);
     if(res < 0)
         throw MyException("kill");
 

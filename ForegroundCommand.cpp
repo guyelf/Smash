@@ -34,9 +34,9 @@ void ForegroundCommand::execute() {
 
         JobEntry *jobToFg = this->_jobsList->getJobById(j_id);
 
-        cout<< jobToFg->getcommand()->cmd_string() << " : " + to_string(jobToFg->getpid()) << endl; //print the job like asked to
+        cout<< jobToFg->getcommand()->cmd_string() << " : " << to_string(jobToFg->getpid()) << endl; //print the job like asked to
 
-        kill(jobToFg->getpid(),SIGCONT);
+        doKill(jobToFg->getpid(),SIGCONT);
         this->_jobsList->removeJobById(j_id); //removing the job after bringing it back to FG
 
         auto smash = &SmallShell::getInstance();
