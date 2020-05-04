@@ -30,4 +30,4 @@ int main(int argc, char* argv[]) {
         }
     }
     return 0;
-}
+}// cp txt1.txt txt2.txt

@@ -30,4 +30,18 @@ void doChngDir(const char* newDir){
         throw MyException("chdir");
 }
 
+int doKill(pid_t pid, int signal){
+    int val = killpg(pid,signal);
+    if(val != 0)
+        throw MyException("kill");
+    return val;
+}
+
+int doClose(int fd){
+    int res = close(fd);
+    if(res == -1)
+        throw MyException("close");
+    return res;
+}
+
 
