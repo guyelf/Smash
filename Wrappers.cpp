@@ -18,4 +18,16 @@ int doFork() {
 }
 
 
+void doExecvp(const char* command){
+    const char* const args[4] = {"/bin/bash","-c",command, nullptr};
+    execvp(args[0], const_cast<char* const*>(args));
+    throw MyException("execvp");
+}
+
+
+void doChngDir(const char* newDir){
+      if(chdir(newDir) == -1)
+        throw MyException("chdir");
+}
+
 
