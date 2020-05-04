@@ -43,8 +43,9 @@ void RedirectionCommand::execute() {
             SmallShell &smash = SmallShell::getInstance();
             smash.executeCommand(cmd1.c_str());
         }
+        exit(0);
     }
     else
-        waitpid(pid, nullptr,WNOHANG); //maybe the father needs more
+        doWaitPID(pid,WUNTRACED); //maybe the father needs more
 }
 

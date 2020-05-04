@@ -18,7 +18,7 @@ int main(int argc, char* argv[]) {
     if(signal(SIGINT , ctrlCHandler)==SIG_ERR) {
         perror("smash error: failed to set ctrl-C handler");
     }
-
+/*
     //TODO: setup sig alarm handler
     SmallShell& smash = SmallShell::getInstance();
     ifstream in_fli("/home/student/CLionProjects/Smash/quit_kill1.in");
@@ -44,11 +44,15 @@ int main(int argc, char* argv[]) {
     };
 
     return 0;
-    /*
+    */
+
 
 
     //set detach-on-fork off
     //set follow-fork-mode child
+
+    SmallShell& smash = SmallShell::getInstance();
+    char* cmd_line = (char*)malloc(MAX_STRING_INPUT_SIZE*sizeof(char));
     while(true) {
 
         try {
@@ -62,6 +66,6 @@ int main(int argc, char* argv[]) {
         }
     }
     return 0;
-     */
+
 
 }// cp txt1.txt txt2.txt
