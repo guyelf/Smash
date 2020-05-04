@@ -55,20 +55,20 @@ void JobsList::printJobsList() {
             cout << res << "\n";
         }
     }
-
 }
 void JobsList::killAllJobs() {
     for (list<JobEntry>::iterator current = this->jobs_list.begin(); current!=this->jobs_list.end() ; current++) {
         JobEntry current_job = *current;
         this->jobs_list.erase(current);
+        int res = doWaitPID(current_job.pid,WNOHANG);
         doKill(current_job.pid,SIGKILL);
     }
 }
-JobEntry * JobsList::getJobById(int jobId) {
+JobEntry* JobsList::getJobById(int jobId) {
     for(list<JobEntry>::iterator current = this->jobs_list.begin(); current != this->jobs_list.end() ; current++){
         if (current->job_id == jobId){
-            JobEntry res = *current;
-            return &res;
+            //JobEntry res = *current;
+            return &*current;
         }
     }
     return nullptr;
@@ -102,8 +102,9 @@ void JobsList::removeFinishedJobs() {
             pid_t pid = doWaitPID(current->pid, WNOHANG);
             if ( !current->out &&  pid == current->pid) {
                 //erase the job here
-                current->out = true;
-                this->size_ --;
+                this->jobs_list.erase(current);
+                current = this->jobs_list.begin();
+                this->size_--;
             }
         }
     }

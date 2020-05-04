@@ -86,6 +86,7 @@ int JobCompare::operator()(JobEntry je1,JobEntry je2){
 
 void JobsCommand::execute() {
     this->myJobs->printJobsList();
+    exit(0);
 }
 
 
