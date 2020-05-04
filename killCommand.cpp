@@ -30,10 +30,7 @@ KillCommand::KillCommand(const char* cmd_line, JobsList* jobs):BuiltInCommand(cm
 KillCommand::~KillCommand(){}
 
 void KillCommand::execute() {
-    int res = kill(this->j_pid,this->signum);
-    if(res < 0)
-        throw MyException("kill");
-
+    doKill(this->j_pid,this->signum);
     cout << "signal number " << this->signum << " was sent to pid " << this->j_pid << endl;
 }
 
