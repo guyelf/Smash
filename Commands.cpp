@@ -29,17 +29,14 @@ int _parseCommandLine(const char* cmd_line, char** args) {
 
 std::vector<string> _parseCommandLineStrings(const char* cmd_line) {
 
-    char** f_args;
-    for (int i = 0; i < 20; ++i) //max 20 args
-        f_args[i] = (char*)malloc(80); //max size for cmd
-
-    vector<string> args;
-    _parseCommandLine(cmd_line,f_args);
-    while(*f_args){
-        args.push_back(*f_args);
-        f_args++;
+    FUNC_ENTRY()
+    vector<string> args;//COMMAND_MAX_ARGS
+    std::istringstream iss(_trim(cmd_line));
+    for (std::string str; iss >> str;) {
+        args.push_back(str);
     }
     return args;
+    FUNC_EXIT()
 }
 
 
