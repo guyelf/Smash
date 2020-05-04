@@ -245,6 +245,7 @@ public:
 
 class JobsList {
     list<JobEntry> jobs_list;
+    int size_;
 public:
     JobsList();
     ~JobsList();

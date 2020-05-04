@@ -6,7 +6,7 @@
 #include <string>
 
 
-JobsList::JobsList() {
+JobsList::JobsList():size_(0){
     this->jobs_list = list<JobEntry>();
 }
 
@@ -16,7 +16,8 @@ void JobsList::addJob(Command *cmd,pid_t pid,bool isStopped) {
     std::chrono::system_clock::time_point now = std::chrono::system_clock::now();
     int job_id = getTopJobId() +1;
     JobEntry new_job = JobEntry(cmd,pid,job_id,now,isStopped);
-    this->jobs_list.assign(job_id,new_job);
+    this->jobs_list.push_back(new_job);
+    this->size_ +=1;
 }
 std::string JobEntry::print_job() {
     std::string res = "[" + to_string(job_id) + "]" + this->command->cmd_string() + " : " + to_string(this->pid);
@@ -96,9 +97,13 @@ JobEntry * JobsList::getLastJob(int *lastJobId) {
 }
 
 void JobsList::removeFinishedJobs() {
-    for(list<JobEntry>::iterator current = this->jobs_list.begin(); current != this->jobs_list.end() ; current++){
-        if (waitpid(current->pid, nullptr,WNOHANG) > 0){
-            this->jobs_list.erase(current);
+    if ( !this->jobs_list.empty()) {
+        for (list<JobEntry>::iterator current = this->jobs_list.begin(); current != this->jobs_list.end(); current++) {
+            pid_t pid = waitpid(current->pid, nullptr, WUNTRACED);
+            if ( !current->out &&  pid == current->pid) {
+                current->out = true;
+                this->size_ --;
+            }
         }
     }
 }
@@ -124,7 +129,7 @@ JobEntry* JobsList::getLastStoppedJob(int *jobId) {
     bool found_stopped = false;
     JobEntry *last_stopped = nullptr;
     for(list<JobEntry>::iterator current = this->jobs_list.begin(); current != this->jobs_list.end() ; current++) {
-        if(current->stopped == true){
+        if( !current->out && current->stopped == true){
             found_stopped = true;
             if (current_last_stop_time > current->stop_time) {
                 *jobId = current->job_id;
