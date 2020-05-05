@@ -58,9 +58,12 @@ void JobsList::printJobsList() {
 }
 void JobsList::killAllJobs() {
     for (list<JobEntry>::iterator current = this->jobs_list.begin(); current!=this->jobs_list.end() ; current++) {
+        if(!current->out){
+            cout<< to_string(current->pid) << ": " << current->command->cmd_string() << endl; // format: "pid: command"
+        }
+        int res = doWaitPID(current->pid, WNOHANG);
         JobEntry current_job = *current;
         this->jobs_list.erase(current);
-        int res = doWaitPID(current_job.pid,WNOHANG);
         doKill(current_job.pid,SIGKILL);
     }
 }
