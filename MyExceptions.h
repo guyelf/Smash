@@ -50,15 +50,15 @@ public:
 class MyKillCommandException : public MyException {
     std::string _killMsg;
 public:
-    MyKillCommandException():_killMsg("kill: "){}
-    MyKillCommandException(char* errMsg):_killMsg("kill: "){
+    MyKillCommandException():_killMsg("smash error: kill: "){}
+    MyKillCommandException(char* errMsg):_killMsg("smash error: kill: "){
         this->_msg.append(this->_killMsg.append(errMsg));
         ; //should append the different cd errors to the origin
     }
-    MyKillCommandException(std::string errMsg):_killMsg("kill: "){
+    MyKillCommandException(std::string errMsg):_killMsg("smash error: kill: "){
         this->_killMsg.append(errMsg); //should append the different cd errors to the origin
     }
-    MyKillCommandException(int job_id):_killMsg("kill: "){
+    MyKillCommandException(int job_id):_killMsg("smash error: kill: "){
         std::string tmp = "job-id ";
         tmp.append(std::to_string(job_id));
         tmp = tmp + " does not exist";
@@ -138,8 +138,6 @@ public:
 
 
 
-
-
 /*
 class MyNoArgsException : public std::exception{
 public:
@@ -160,9 +158,6 @@ public:
     MySpecialCommandException (const char* msg) : MyException(msg) {this->_msg.append("failed");} //appends the failed to the rest of the message
     virtual const char* what() const noexcept { return this->_msg.c_str();}
 };
-
-
-
 
 
 
