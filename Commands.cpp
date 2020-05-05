@@ -169,10 +169,10 @@ void SmallShell::executeCommand(const char *cmd_line){
             this->jobs_list->addJob(cmd,pid,false);
         }
     }
-    else{
+    else{ // fg run
         pid_t pid = doFork();
         if ( pid == 0){
-            this->fg_job = new JobEntry(cmd,getpid(),-1,std::chrono::system_clock::now(),false);
+            this->fg_job = new JobEntry(cmd,getpid(),-1,std::chrono::system_clock::now(),false,true);
             cmd->execute();
         }
         else {
