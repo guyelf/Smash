@@ -11,7 +11,8 @@ ShowPidCommand::ShowPidCommand(const char* cmd_line):BuiltInCommand(cmd_line)
 
 //takes the pid using the builtIn function
 void  ShowPidCommand::execute()  {
-    int smash_pid = ::getpid(); // Todo: Make sure it's the smash's Pid and not the SHELL's !!!
+    auto &smash = SmallShell::getInstance();
+    int smash_pid = smash.pid;
     std::cout << "smash pid is " << to_string(smash_pid) << std::endl;
 }
 

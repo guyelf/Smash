@@ -49,11 +49,27 @@ int doClose(int fd){
     return res;
 }
 
+/*pid_t doWaitPID(pid_t pid, int options){
+    if(pid == 0)
+        return pid;
+    return waitpid(pid,nullptr,options);
+}*/
+
 pid_t doWaitPID(pid_t pid, int options){
+    if(options != WNOHANG){
+        if(isSmash()){
+            options = WUNTRACED;
+        }
+        else{
+            options = 0;
+        }
+    }
     if(pid == 0)
         return pid;
     return waitpid(pid,nullptr,options);
 }
+
+
 
 void doDup2(int fd, int received_fd){
     if(dup2(fd,received_fd) == -1){//e.g fails

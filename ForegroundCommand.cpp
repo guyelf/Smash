@@ -5,7 +5,7 @@
 #include "Commands.h"
 
 ForegroundCommand::ForegroundCommand(const char* cmd_line, JobsList* jobs):BuiltInCommand(cmd_line),_job_id(-1){
-    auto args = _parseCommandLineStrings(cmd_line);
+    vector<string> args = _parseCommandLineStrings(cmd_line);
 
     //invalid args: any invalid args should be caught and handled here
     if(args.size()>2)
@@ -17,38 +17,43 @@ ForegroundCommand::ForegroundCommand(const char* cmd_line, JobsList* jobs):Built
         throw MyFgException(stoi(args[1]));
     }
 
-    if(args.size() == 2)
-        this->_job_id = stoi(args[1]);
+    if(args.size() == 2){
+        try{ //checking format for the args
+            int jobId = stoi(args[1]);
+        }
+        catch (exception& e) {
+            throw MyFgException("invalid arguments");
+        }
 
+        this->_job_id = stoi(args[1]);
+    }
     this->_jobsList = jobs;
 }
 
 
 void ForegroundCommand::execute() {
 
-    try{
+
         int j_id = this->_job_id;
 
         if(this->_job_id == -1) //if no job id was provided
             j_id = this->_jobsList->getTopJobId();
 
-        JobEntry *jobToFg = this->_jobsList->getJobById(j_id);
 
-        cout<< jobToFg->getcommand()->cmd_string() << " : " << to_string(jobToFg->getpid()) << endl; //print the job like asked to
+     JobEntry *jobToFg = this->_jobsList->getJobById(j_id);
 
-        doKill(jobToFg->getpid(),SIGCONT);
-        this->_jobsList->removeJobById(j_id); //removing the job after bringing it back to FG
+      cout<< jobToFg->getcommand()->cmd_string() << " : " << to_string(jobToFg->getpid()) << endl; //print jothe job like asked to
+
+      int res = kill(jobToFg->getpid(),SIGCONT);
+      //doKill(jobToFg->getpid(),SIGCONT);
+
+        this->_jobsList->removeJobById(j_id); //removing by setting out = true;
 
         auto smash = &SmallShell::getInstance();
         smash->fg_job = jobToFg;
 
-        waitpid(jobToFg->getpid(),nullptr,WUNTRACED);
+       doWaitPID(jobToFg->getpid(),WUNTRACED); //wait for that job to finish bc it's FG now.
 
-        //wait for that job to finish bc it's FG now.
-    }
-    catch (std::exception& e) {
-        throw MyException("fg"); // for generic fg failure as instructed in the Error handling part
-    }
 }
 
 ForegroundCommand::~ForegroundCommand() {

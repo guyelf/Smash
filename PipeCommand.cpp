@@ -59,7 +59,10 @@ void PipeCommand::execute() {
         exit(0);
     }
     else{ //here wait for the childes to complete
-        doWaitPID(main_pipe_pid,WUNTRACED);
+        if(!this->isBg){//fg
+            smash.fg_job->setpid(main_pipe_pid);
+        }
+        doWaitPID(main_pipe_pid);
     }
 
 }

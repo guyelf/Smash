@@ -49,15 +49,15 @@ class MyKillCommandException : public MyException {
 public:
     MyKillCommandException():_killMsg("kill: "){}
     MyKillCommandException(char* errMsg):_killMsg("kill: "){
-        this->_killMsg.append(errMsg); //should append the different cd errors to the origin
+        this->_msg.append(_killMsg).append(errMsg); //should append the different cd errors to the origin
     }
     MyKillCommandException(std::string errMsg):_killMsg("kill: "){
         this->_killMsg.append(errMsg); //should append the different cd errors to the origin
     }
     MyKillCommandException(int job_id):_killMsg("kill: "){
-        std::string tmp = "job-id <" + job_id;
+        std::string tmp = "job-id " + std::to_string(job_id);
         this->_killMsg.append(tmp);
-        tmp = "> does not exist";
+        tmp.append(" does not exist");
         this->_killMsg.append(tmp); //appends the correct error message that needed to be split to half
     }
 

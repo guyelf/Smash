@@ -62,7 +62,7 @@ void JobsList::killAllJobs() {
             cout<< to_string(current->pid) << ": " << current->command->cmd_string() << endl; // format: "pid: command"
         }
         int res3 = kill(current->pid,SIGKILL);
-        //doKill(current->pid,SIGKILL);
+        //doKill(current->pid,SIGKILL); //buggy for QuitCommand from main process
         JobEntry current_job = *current;
         this->jobs_list.erase(current);
         current = this->jobs_list.begin();
@@ -171,6 +171,7 @@ void JobsList::removeJobById(int jobId) {
     for(list<JobEntry>::iterator current = this->jobs_list.begin(); current != this->jobs_list.end() ; current++){
         if (current->job_id == jobId){
             current->out = true;
+            return;
         }
     }
 }

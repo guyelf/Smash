@@ -21,6 +21,7 @@ int main(int argc, char* argv[]) {
     }
 
     //TODO: setup sig alarm handler
+/*
     SmallShell& smash = SmallShell::getInstance();
     ifstream in_fli("/home/student/CLionProjects/Smash/quit_kill3.in");
     char* cmd_line = (char*)malloc(MAX_STRING_INPUT_SIZE*sizeof(char));
@@ -46,8 +47,9 @@ int main(int argc, char* argv[]) {
     in_fli.close();
     return 0;
 
+*/
 
-    /*
+
     //set detach-on-fork off
     //set follow-fork-mode child
 
@@ -65,7 +67,6 @@ int main(int argc, char* argv[]) {
         }
     }
     return 0;
-<<<<<<<<< Temporary merge branch 1
-     */
+
 }
 

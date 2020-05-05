@@ -13,17 +13,18 @@ void ctrlZHandler(int sig_num) {
     }
     cout << "smash: got ctrl-Z" << endl;
     JobEntry *jb = smash.fg_job;
-    if (!jb->getpid()){
+    if (jb->getpid() <= 0){ //illegal pid , 0 is for the smash son
         return;
     }
-    if (!smash.isJobInList(jb->getpid())){
+    if (!smash.isJobInList(jb->getpid()) || smash.fg_job->getpid()==0){//might be buggy if more than 1 fg process - replaces the fg
         smash.addJobToListZ(jb);
     }
     smash.setJobAsStopped(jb->getpid());
     string res = "smash: process ";
-    doKill(pid_process,SIGSTOP);
-    res = res + to_string(pid_process) + " was stopped";
+    doKill(jb->getpid(),SIGSTOP);
+    res = res.append(to_string(jb->getpid())).append(" was stopped");
     cout << res << endl;
+    smash.fg_job = nullptr;
 }
 
 void ctrlCHandler(int sig_num) {

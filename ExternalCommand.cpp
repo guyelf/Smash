@@ -18,7 +18,20 @@ void ExternalCommand::execute() {
      if(ampSign != std::string::npos){
           noAmp = tmp.substr(0,ampSign); //assumes & is the last char
      }
-    doExecvp(noAmp.c_str()); //consider dropping the & ---> this should run in the bg
+
+
+     auto &smash = SmallShell::getInstance();
+     pid_t pid = doFork();
+     if(pid == 0){//child
+
+         doExecvp(noAmp.c_str()); //consider dropping the & ---> this should run in the bg
+     }
+     else{
+         if(this->isFg){
+             smash.fg_job->setpid(pid);
+         }
+         doWaitPID(pid); //might also stop at ctrl+z
+     }
 }
 
 

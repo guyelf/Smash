@@ -86,17 +86,16 @@ int JobCompare::operator()(JobEntry je1,JobEntry je2){
 
 void JobsCommand::execute() {
     this->myJobs->printJobsList();
-    exit(0);
 }
 
 
-SmallShell::SmallShell(): last_cmd(nullptr),fg_job(nullptr){
+SmallShell::SmallShell(): last_cmd(nullptr),fg_job(nullptr),pid(getpid()){
     this->jobs_list = new JobsList();
 
 }
 
 bool SmallShell::isJobInList(pid_t pid){
-    return this->jobs_list->getJobByPID(pid)->getpid() == pid;
+    return (this->jobs_list->getJobByPID(pid) != nullptr);
 }
 
 void SmallShell::addJobToListZ(JobEntry *je){
@@ -153,7 +152,7 @@ Command * SmallShell::CreateCommand(const char* cmd_line) {
   return nullptr;
 }
 
-void SmallShell::executeCommand(const char *cmd_line){
+/*void SmallShell::executeCommand(const char *cmd_line){
     this->jobs_list->removeFinishedJobs();
     this->last_cmd = cmd_line;
     std:string command (cmd_line);
@@ -163,27 +162,80 @@ void SmallShell::executeCommand(const char *cmd_line){
     if (string(cmd_line).find("quit") == 0) {
         cmd->execute();
         exit(0);
-    }else {
-        if (isBg && !isNotBg) {
+    }
+    else
+        {if (isBg && !isNotBg) {
             pid_t pid = doFork();
             if (pid == 0) {//son
                 cmd->execute();
-            } else {
+            }
+            else {
                 this->jobs_list->addJob(cmd, pid, false);
             }
-        } else { // fg run
+        }
+        else{ // fg run
+
             pid_t pid = doFork();
             if (pid == 0) {
                 this->fg_job = new JobEntry(cmd, getpid(), -1, std::chrono::system_clock::now(), false, true);
                 cmd->execute();
-            } else {
+            }
+            else {
                 doWaitPID(pid, WUNTRACED);
             }
 
 
         }
     }
+}*/
+
+void SmallShell::executeCommand(const char *cmd_line){
+    this->jobs_list->removeFinishedJobs();
+    this->last_cmd = cmd_line;
+    std:string command (cmd_line);
+    bool isBg = (command.find("&") != std::string::npos);
+    bool isNotBg = (command.find("|&") != std::string::npos);
+
+    Command* cmd = CreateCommand(cmd_line);
+    if (isBg && !isNotBg) {// a check if it's a bg process
+        pid_t pid = doFork();
+        if (pid == 0) {//son
+            cmd->execute();
+        }
+        else {
+            this->jobs_list->addJob(cmd, pid, false);
+        }
+    }
+    else{ // if this is fg:
+     this->fg_job = new JobEntry(cmd, 0, -1, std::chrono::system_clock::now(), false);
+     cmd->execute();
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //int res = doWaitPID(this->jobs_list->getJobById(this->getTopJobId())->getpid(), WNOHANG);
 
 bool SmallShell::setJobAsStopped(int pid) {

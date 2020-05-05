@@ -54,9 +54,11 @@ class JobsList;
 class JobCompare;
 
 class Command {
+protected:
     const char *cmd;
+    bool isBg;
  public:
-  explicit Command(const char* cmd_line):cmd(cmd_line){}
+  explicit Command(const char* cmd_line):cmd(cmd_line),isBg(_isBackgroundComamnd(cmd_line)){}
   virtual ~Command(){}
   virtual void execute() = 0;
   virtual const char* cmd_string()=0;
@@ -243,7 +245,8 @@ public:
         this->stop_time=std::chrono::system_clock::now();
     }
     ~JobEntry(){}
-    pid_t getpid(){return this->pid;}
+    pid_t getpid(){return pid;}
+    void setpid(pid_t new_pid){this->pid = new_pid;}
     Command* getcommand(){return this->command;}
     void setNewId(int newid);
     std::string print_job();

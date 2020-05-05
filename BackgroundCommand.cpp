@@ -14,18 +14,24 @@ BackgroundCommand::BackgroundCommand(const char *cmd_line, JobsList *jobs):Built
     if (args.size() == 1 && jobs->size()==0)
         throw MyBgException("jobs list is empty");
 
+    try{
+       int jobId = stoi(args[1]);
+    }
+    catch(exception& e){
+       throw MyBgException("invalid arguments");
+    }
+
     if(args.size()==2 && jobs->getJobById(stoi(args[1])) == nullptr){ //meaning there's a job_id assigned and it's not found
         throw MyBgException(stoi(args[1]),"does not exist"); //overload for c'tor to throw with the job id - I'm so smart XD
     }
     if(args.size() == 2 && !jobs->isJobStopped(stoi(args[1]))) //if the job is not stopped but is in the list
         throw MyBgException(stoi(args[1]),"is already running in the background");
 
-    int* tmpStopedId;
-    jobs->getLastStoppedJob(tmpStopedId);
-    if(tmpStopedId == nullptr){//e.g no stopped jobs
+
+    auto last_stopped_job = jobs->getLastStoppedJob(nullptr);
+    if(last_stopped_job == nullptr){//e.g no stopped jobs
         throw MyBgException("there is no stopped jobs to resume");
     }
-    free(tmpStopedId);
     //Finished handling exceptions
 
     if(args.size() == 2)
@@ -44,8 +50,8 @@ void BackgroundCommand::execute() {
        else
            jobToBg = this->_jobsList->getJobById(j_id);
 
-       cout<< jobToBg->getcommand()->cmd_string() << " : " + jobToBg->getpid() << endl;
-       kill(jobToBg->getpid(),SIGCONT);
+       cout<< jobToBg->getcommand()->cmd_string() << " : "  << std::to_string(jobToBg->getpid()) << endl;
+       kill(jobToBg->getpid(),SIGCONT); //might actually do here what i want it to do (as opposed to fg)
        this->_jobsList->removeStoppedSign(j_id);
    }
    catch (std::exception& e) {

@@ -13,7 +13,7 @@ CopyCommand::CopyCommand(const char *cmd_line):Command(cmd_line),cmd_line(cmd_li
 
 void CopyCommand::execute() {
     std::vector<string> args = _parseCommandLineStrings(cmd_line.c_str());
-
+    auto &smash = SmallShell::getInstance();
     if (args[1].compare(args[2].c_str()) == 0){// in case it's the same file
         if (open(args[1].c_str(),O_RDONLY,0666) != -1) { //and checking if it exists
             cout << "smash: " << args[1] << " was copied to " << args[2] << endl;
@@ -21,12 +21,12 @@ void CopyCommand::execute() {
         }
         throw MyException("open");
     }
-    int pid = doFork();
 
     char* buff = (char *) malloc(BUFF_SIZE);
     if(!buff)
         throw MyException("malloc");
 
+    int pid = doFork();
     if (pid == 0){
         doClose(1);
         doClose(0);
@@ -48,13 +48,15 @@ void CopyCommand::execute() {
 
             count_bytes =  read(files[0],buff,BUFF_SIZE);
         }
-
         doClose(files[0]);
         doClose(files[1]);
         exit(0); //otherwise the son goes to the smash and fucks up everything
     }
     else {
-        waitpid(pid,nullptr, WUNTRACED);
+        if(this->isBg){
+            smash.fg_job->setpid(pid);
+        }
+        doWaitPID(pid);
         free(buff);
         cout << "smash: " << args[1] << " was copied to " << args[2] << endl;
     }
