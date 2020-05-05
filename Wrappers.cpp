@@ -5,6 +5,11 @@
 #include "Wrappers.h"
 #include "MyExceptions.h"
 
+
+static bool isSmash(){
+    return SmallShell::getInstance().pid == getpid();
+}
+
 int doFork() {
     SmallShell& smash = SmallShell::getInstance();
     bool isFg = (smash.pid == ::getpid());
@@ -42,6 +47,24 @@ int doClose(int fd){
     if(res == -1)
         throw MyException("close");
     return res;
+}
+
+pid_t doWaitPID(pid_t pid, int options){
+    if(pid == 0)
+        return pid;
+    return waitpid(pid,nullptr,options);
+}
+
+void doDup2(int fd, int received_fd){
+    if(dup2(fd,received_fd) == -1){//e.g fails
+        throw MyException("dup2");
+    }
+}
+
+void doPipe(int *p_des){
+    if(pipe(p_des) == -1){ //e.g fails
+        throw MyException("pipe");
+    }
 }
 
 

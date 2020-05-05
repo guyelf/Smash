@@ -12,8 +12,13 @@ ExternalCommand::ExternalCommand(const char *cmd_line):Command(cmd_line),cmd(cmd
 
 void ExternalCommand::execute() {
 
- doExecvp(this->cmd.c_str()); //consider dropping the & ---> this should run in the bg
-
+    int ampSign = this->cmd.find("&");
+    string noAmp = this->cmd;
+    string tmp = this->cmd; //helper
+     if(ampSign != std::string::npos){
+          noAmp = tmp.substr(0,ampSign); //assumes & is the last char
+     }
+    doExecvp(noAmp.c_str()); //consider dropping the & ---> this should run in the bg
 }
 
 

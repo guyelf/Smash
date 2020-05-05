@@ -209,6 +209,8 @@ public:
 
 class PipeCommand : public Command {
     std::string cmd_line;
+    int split_index; //of the delimiter
+    bool isAmp;
 public:
     explicit PipeCommand(const char* cmd_line);
     virtual ~PipeCommand();
@@ -231,7 +233,15 @@ class JobEntry {
     std::chrono::system_clock::time_point stop_time;
 public:
     JobEntry(Command *command,pid_t pid,int job_id,std::chrono::system_clock::time_point time,bool stopped):
-            command(command),pid(pid),job_id(job_id),schedule_time(time),stopped(stopped),out(false),stop_time(std::chrono::system_clock::now()){}
+            command(command),pid(pid),job_id(job_id),schedule_time(time),stopped(stopped){
+        out = false;
+        stop_time = std::chrono::system_clock::now();
+    }
+
+    JobEntry(Command *command,pid_t pid,int job_id,std::chrono::system_clock::time_point time,bool stopped, bool isOut):
+            command(command),pid(pid),job_id(job_id),schedule_time(time),stopped(stopped),out(isOut){
+        this->stop_time=std::chrono::system_clock::now();
+    }
     ~JobEntry(){}
     pid_t getpid(){return this->pid;}
     Command* getcommand(){return this->command;}

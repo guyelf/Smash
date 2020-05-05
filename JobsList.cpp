@@ -4,7 +4,7 @@
 
 #include "Commands.h"
 #include <string>
-
+#include "Wrappers.h"
 
 JobsList::JobsList():size_(0){
     this->jobs_list = list<JobEntry>();
@@ -55,20 +55,20 @@ void JobsList::printJobsList() {
             cout << res << "\n";
         }
     }
-
 }
 void JobsList::killAllJobs() {
     for (list<JobEntry>::iterator current = this->jobs_list.begin(); current!=this->jobs_list.end() ; current++) {
         JobEntry current_job = *current;
         this->jobs_list.erase(current);
-        kill(current_job.pid,SIGKILL);
+        int res = doWaitPID(current_job.pid,WNOHANG);
+        doKill(current_job.pid,SIGKILL);
     }
 }
-JobEntry * JobsList::getJobById(int jobId) {
+JobEntry* JobsList::getJobById(int jobId) {
     for(list<JobEntry>::iterator current = this->jobs_list.begin(); current != this->jobs_list.end() ; current++){
         if (current->job_id == jobId){
-            JobEntry res = *current;
-            return &res;
+            //JobEntry res = *current;
+            return &*current;
         }
     }
     return nullptr;
@@ -99,10 +99,12 @@ JobEntry * JobsList::getLastJob(int *lastJobId) {
 void JobsList::removeFinishedJobs() {
     if ( !this->jobs_list.empty()) {
         for (list<JobEntry>::iterator current = this->jobs_list.begin(); current != this->jobs_list.end(); current++) {
-            pid_t pid = waitpid(current->pid, nullptr, WUNTRACED);
+            pid_t pid = doWaitPID(current->pid, WNOHANG);
             if ( !current->out &&  pid == current->pid) {
-                current->out = true;
-                this->size_ --;
+                //erase the job here
+                this->jobs_list.erase(current);
+                current = this->jobs_list.begin();
+                this->size_--;
             }
         }
     }

@@ -65,5 +65,9 @@ int main(int argc, char* argv[]) {
         }
     }
     return 0;
+<<<<<<<<< Temporary merge branch 1
      */
 }
+=========
+}// cp txt1.txt txt2.txt
+>>>>>>>>> Temporary merge branch 2
