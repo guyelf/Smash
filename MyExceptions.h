@@ -49,23 +49,25 @@ public:
 class MyKillCommandException : public MyException {
     std::string _killMsg;
 public:
-    MyKillCommandException():_killMsg("smash error: kill: "){}
-    MyKillCommandException(char* errMsg):_killMsg("smash error: kill: "){
-        this->_msg.append(this->_killMsg.append(errMsg));
-        ; //should append the different cd errors to the origin
+    MyKillCommandException():_killMsg("kill: "){}
+
+    MyKillCommandException(char* errMsg):_killMsg("kill: "){
+        this->_msg.append(this->_killMsg).append(errMsg);
+        //should append the different cd errors to the origin
     }
-    MyKillCommandException(std::string errMsg):_killMsg("smash error: kill: "){
-        this->_killMsg.append(errMsg); //should append the different cd errors to the origin
+    MyKillCommandException(std::string errMsg):_killMsg("kill: "){
+        this->_msg.append(this->_killMsg).append(errMsg); //should append the different cd errors to the origin
     }
-    MyKillCommandException(int job_id):_killMsg("smash error: kill: "){
+    MyKillCommandException(int job_id):_killMsg("kill: "){
         std::string tmp = "job-id ";
         tmp.append(std::to_string(job_id));
-        tmp = tmp + " does not exist";
+        tmp.append(" does not exist");
         this->_killMsg.append(tmp); //appends the correct error message that needed to be split to half
+        this->_msg.append(this->_killMsg);
     }
 
     virtual const char * what() noexcept override{
-        return this->_killMsg.c_str();
+        return this->_msg.c_str();
     }
 };
 
@@ -126,9 +128,6 @@ public:
         //as instructed in the error handling part,
         // this is for a generic system call that fails
         this->_msg.append(syscall).append(" failed");
-    }
-    MySystemCallException(const char* syscall,const char* syscall_e_msg): _msg("smash error: "){
-        this->_msg.append(syscall).append(" failed:").append(syscall_e_msg); //add the syscall's error msg
     }
     virtual const char* what()  noexcept  {
         return this->_msg.c_str();
