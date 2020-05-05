@@ -8,4 +8,7 @@
 int doFork();
 void doExecvp(const char* command);
 void doChngDir(const char* newDir);
+int doKill(pid_t pid, int signal);
+int doClose(int fd);
+
 #endif //SMASH_WRAPPERS_H

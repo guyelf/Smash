@@ -21,7 +21,7 @@ void ctrlZHandler(int sig_num) {
     }
     smash.setJobAsStopped(jb->getpid());
     string res = "smash: process ";
-    kill(pid_process,SIGSTOP);
+    doKill(pid_process,SIGSTOP);
     res = res + to_string(pid_process) + " was stopped";
     cout << res << endl;
 }
@@ -32,7 +32,7 @@ void ctrlCHandler(int sig_num) {
     pid_t pid = smash.fg_job->getpid();
     if (pid) {
         string res = "smash: process";
-        kill(pid, SIGKILL);
+        doKill(pid, SIGKILL);
         if (smash.isJobInList(pid)) {
             smash.killProcess(pid);
         }

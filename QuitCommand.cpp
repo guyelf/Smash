@@ -27,11 +27,11 @@ void QuitCommand::execute() {
                 continue;
 
             auto top_job = this->_jobsList->getJobById(top_job_id);
-            cout<< to_string(top_job->getpid()) + ": "+ top_job->getcommand()->cmd_string() << endl; // format: "pid: command"
+            cout<< to_string(top_job->getpid()) << ": " << top_job->getcommand()->cmd_string() << endl; // format: "pid: command"
             this->_jobsList->removeJobById(top_job_id);
         }
         this->_jobsList->killAllJobs();
-        kill(smash.pid,SIGKILL); //kill smash
+        doKill(smash.pid,SIGKILL); //kill smash
     }
 }
 
