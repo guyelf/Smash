@@ -66,7 +66,7 @@ public:
     }
 
     virtual const char * what() noexcept override{
-        return this->_msg.append(this->_killMsg).c_str();
+        return this->_killMsg.c_str();
     }
 };
 
@@ -118,12 +118,29 @@ public:
 //using MyException together with doPerror will print most of the needed error to the screen as they should be
 //some edge exceptions still need to be addressed
 
-/*
-class MyTooManyArgsException : public std::exception{
+
+class MySystemCallException : public std::exception{
+    std::string _msg;
 public:
-    virtual const char* what() const noexcept  { return "smash error: cd: too many arguments";}
+    MySystemCallException(): _msg("smash error: ") {};
+    MySystemCallException(const char* syscall): _msg("smash error: "){
+        //as instructed in the error handling part,
+        // this is for a generic system call that fails
+        this->_msg.append(syscall).append(" failed");
+    }
+    MySystemCallException(const char* syscall,const char* syscall_e_msg): _msg("smash error: "){
+        this->_msg.append(syscall).append(" failed:").append(syscall_e_msg); //add the syscall's error msg
+    }
+    virtual const char* what()  noexcept  {
+        return this->_msg.c_str();
+    }
 };
 
+
+
+
+
+/*
 class MyNoArgsException : public std::exception{
 public:
     virtual const char* what() const noexcept { return "smash error: no args provided";}

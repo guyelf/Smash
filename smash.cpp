@@ -38,8 +38,11 @@ int main(int argc, char* argv[]) {
             //std::getline(std::cin, cmd_line);
             smash.executeCommand(cmd_line);
         }
+        catch (MySystemCallException& my){
+            perror(my.what());
+        }
         catch (MyException& my) { //using the virtual method what to print to stdErr
-            cerr << my.what();
+            cerr << my.what() << endl;
         }
 
     };

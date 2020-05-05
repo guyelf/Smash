@@ -15,7 +15,7 @@ int doFork() {
     bool isFg = (smash.pid == ::getpid());
     int child = fork();
     if(child < 0){
-        throw MyException("fork");
+        throw MySystemCallException("fork");
     }
     else if (child == 0 && isFg) //if in the child and also forking from fg --> change parent_group
         ::setpgrp();
@@ -26,26 +26,26 @@ int doFork() {
 void doExecvp(const char* command){
     const char* const args[4] = {"/bin/bash","-c",command, nullptr};
     execvp(args[0], const_cast<char* const*>(args));
-    throw MyException("execvp");
+    throw MySystemCallException("execvp");
 }
 
 
 void doChngDir(const char* newDir){
       if(chdir(newDir) == -1)
-        throw MyException("chdir");
+        throw MySystemCallException("chdir");
 }
 
 int doKill(pid_t pid, int signal){
     int val = killpg(pid,signal);
     if(val != 0)
-        throw MyException("kill");
+        throw MySystemCallException("kill");
     return val;
 }
 
 int doClose(int fd){
     int res = close(fd);
     if(res == -1)
-        throw MyException("close");
+        throw MySystemCallException("close");
     return res;
 }
 
@@ -57,7 +57,7 @@ pid_t doWaitPID(pid_t pid, int options){
 
 void doDup2(int fd, int received_fd){
     if(dup2(fd,received_fd) == -1){//e.g fails
-        throw MyException("dup2");
+        throw MySystemCallException("dup2");
     }
 }
 
