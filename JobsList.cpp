@@ -61,13 +61,21 @@ void JobsList::killAllJobs() {
         if(!current->out){
             cout<< to_string(current->pid) << ": " << current->command->cmd_string() << endl; // format: "pid: command"
         }
-        int res3 = kill(current->pid,SIGKILL);
-        //doKill(current->pid,SIGKILL); //buggy for QuitCommand from main process
+        doKill(current->pid,SIGKILL);
         JobEntry current_job = *current;
         this->jobs_list.erase(current);
         current = this->jobs_list.begin();
     }
 }
+void JobsList::killAllJobs_no_print() {
+    for (list<JobEntry>::iterator current = this->jobs_list.begin(); current!=this->jobs_list.end() ; ) {
+        doKill(current->pid,SIGKILL);
+        JobEntry current_job = *current;
+        this->jobs_list.erase(current);
+        current = this->jobs_list.begin();
+    }
+}
+
 JobEntry* JobsList::getJobById(int jobId) {
     for(list<JobEntry>::iterator current = this->jobs_list.begin(); current != this->jobs_list.end() ; current++){
         if (current->job_id == jobId){
@@ -138,8 +146,9 @@ JobEntry* JobsList::getLastStoppedJob(int *jobId) {
         if( !current->out && current->stopped == true){
             found_stopped = true;
             if (current_last_stop_time > current->stop_time) {
-                *jobId = current->job_id;
-                *last_stopped = *current;
+                if(jobId)//not nullptr
+                    *jobId = current->job_id;
+                last_stopped = &*current;
             }
         }
     }

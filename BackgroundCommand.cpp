@@ -15,7 +15,8 @@ BackgroundCommand::BackgroundCommand(const char *cmd_line, JobsList *jobs):Built
         throw MyBgException("jobs list is empty");
 
     try{
-       int jobId = stoi(args[1]);
+        if(args.size() == 2)
+            int jobId = stoi(args[1]);
     }
     catch(exception& e){
        throw MyBgException("invalid arguments");
@@ -41,7 +42,6 @@ BackgroundCommand::BackgroundCommand(const char *cmd_line, JobsList *jobs):Built
 }
 
 void BackgroundCommand::execute() {
-   try{
        int j_id = this->_job_id;
        JobEntry* jobToBg;//the job that will be running in the BG (switched from stop)
 
@@ -51,12 +51,9 @@ void BackgroundCommand::execute() {
            jobToBg = this->_jobsList->getJobById(j_id);
 
        cout<< jobToBg->getcommand()->cmd_string() << " : "  << std::to_string(jobToBg->getpid()) << endl;
-       kill(jobToBg->getpid(),SIGCONT); //might actually do here what i want it to do (as opposed to fg)
+       doKill(jobToBg->getpid(),SIGCONT); //might actually do here what i want it to do (as opposed to fg)
        this->_jobsList->removeStoppedSign(j_id);
-   }
-   catch (std::exception& e) {
-        throw MyException("bg");
-   }
+
 }
 
 BackgroundCommand::~BackgroundCommand()  {

@@ -266,6 +266,7 @@ public:
     void addJob(Command* cmd,pid_t pid,bool isStopped = false);
     void printJobsList();
     void killAllJobs();
+    void killAllJobs_no_print();
     void removeFinishedJobs();
     JobEntry *getJobById(int jobId);
     void removeJobById(int jobId);

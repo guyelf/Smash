@@ -25,7 +25,7 @@ KillCommand::KillCommand(const char* cmd_line, JobsList* jobs):BuiltInCommand(cm
     int sig;
     try{
         j_id =  stoi(args[2]); //string to int helper
-        sig = stoi(args[1]);
+        sig = stoi(args[1].substr(1));
     }
     catch(exception &e){
         throw MyKillCommandException("invalid arguments");
