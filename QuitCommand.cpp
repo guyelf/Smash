@@ -12,19 +12,9 @@ QuitCommand::QuitCommand(const char *cmd_line, JobsList *jobs):BuiltInCommand(cm
 }
 
 void QuitCommand::execute() {
-
     SmallShell& smash = SmallShell::getInstance();
     if(this->_killFlag){ //kill flag is true
-        int numJobs = this->_jobsList->size();
-        cout<< "sending SIGKILL signal to " << to_string(numJobs) << " jobs:" << endl;
-
-        //for(list<JobEntry>::iterator current = this->_jobsList.; current != this->jobs_list.end() ; current++){
-
-
-        for (int i = 0; i < numJobs; ++i) { //deletes the top_job each iteration
-            int top_job_id = this->_jobsList->getTopJobId();
-
-        }
+        cout<< "sending SIGKILL signal to " << to_string(this->_jobsList->size()) << " jobs:" << endl;
         this->_jobsList->killAllJobs();
         doKill(smash.pid,SIGKILL); //kill smash
     }
