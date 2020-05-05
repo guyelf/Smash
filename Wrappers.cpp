@@ -49,12 +49,6 @@ int doClose(int fd){
     return res;
 }
 
-/*pid_t doWaitPID(pid_t pid, int options){
-    if(pid == 0)
-        return pid;
-    return waitpid(pid,nullptr,options);
-}*/
-
 pid_t doWaitPID(pid_t pid, int options){
     if(options != WNOHANG){
         if(isSmash()){
@@ -77,9 +71,10 @@ void doDup2(int fd, int received_fd){
     }
 }
 
+//Todo: why was it MyException beforehand?
 void doPipe(int *p_des){
     if(pipe(p_des) == -1){ //e.g fails
-        throw MyException("pipe");
+        throw MySystemCallException("pipe");
     }
 }
 
