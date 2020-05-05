@@ -18,8 +18,12 @@ void QuitCommand::execute() {
             cout << "sending SIGKILL signal to " << to_string(this->_jobsList->size()) << " jobs:" << endl;
             this->_jobsList->killAllJobs();
         }
-        doKill(smash.pid,SIGKILL); //kill smash
     }
+    else{ //kill flag is false
+        this->_jobsList->killAllJobs_no_print();
+    }
+
+    doKill(smash.pid,SIGKILL); //kill smash
 }
 
 QuitCommand::~QuitCommand() {

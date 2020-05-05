@@ -65,8 +65,11 @@ int main(int argc, char* argv[]) {
             std::getline(std::cin, cmd_line);
             smash.executeCommand(cmd_line.c_str());
         }
+        catch(MySpecialCommandException& err){
+            perror(err.what());
+        }
         catch (MyException& my) { //using the virtual method what to print to stdErr
-            perror(my.what());
+            cerr<< my.what() <<endl;
         }
     }
     return 0;
