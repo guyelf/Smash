@@ -39,7 +39,7 @@ int main(int argc, char* argv[]) {
             smash.executeCommand(cmd_line);
         }
         catch (MyException& my) { //using the virtual method what to print to stdErr
-            perror(my.what());
+            cerr << my.what();
         }
 
     };

@@ -25,7 +25,8 @@ public:
     }
 
     virtual const char* what()  noexcept  {
-         return this->_msg.c_str();}
+         return this->_msg.c_str();
+     }
 };
 
 class MyCdException : public MyException { //handles Change Dir commands errors
@@ -51,7 +52,8 @@ class MyKillCommandException : public MyException {
 public:
     MyKillCommandException():_killMsg("kill: "){}
     MyKillCommandException(char* errMsg):_killMsg("kill: "){
-        this->_killMsg.append(errMsg); //should append the different cd errors to the origin
+        this->_msg.append(this->_killMsg.append(errMsg));
+        ; //should append the different cd errors to the origin
     }
     MyKillCommandException(std::string errMsg):_killMsg("kill: "){
         this->_killMsg.append(errMsg); //should append the different cd errors to the origin
@@ -64,7 +66,7 @@ public:
     }
 
     virtual const char * what() noexcept override{
-        return this->_killMsg.c_str();
+        return this->_msg.append(this->_killMsg).c_str();
     }
 };
 
@@ -79,9 +81,9 @@ public:
         this->_fgMsg.append(errMsg); //should append the different cd errors to the origin
     }
     MyFgException(int job_id):_fgMsg("fg: "){
-        std::string tmp = "job-id <" + job_id;
+        std::string tmp = "job-id " + std::to_string(job_id);
         this->_fgMsg.append(tmp);
-        tmp = "> does not exist";
+        tmp = " does not exist";
         this->_fgMsg.append(tmp); //appends the correct error message that needed to be split to half
     }
     virtual const char * what() noexcept override{
@@ -102,9 +104,7 @@ public:
         this->_bgMsg.append(errMsg); //should append the different cd errors to the origin
     }
     MyBgException(int job_id,std::string msg):_bgMsg("bg: "){
-        std::string tmp = "job-id <" + job_id;
-        this->_bgMsg.append(tmp);
-        tmp = "> ";
+        std::string tmp = "job-id " + std::to_string( job_id) + " ";
         this->_bgMsg.append(tmp);
         this->_bgMsg.append(msg);
     }
