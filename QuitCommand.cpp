@@ -14,8 +14,10 @@ QuitCommand::QuitCommand(const char *cmd_line, JobsList *jobs):BuiltInCommand(cm
 void QuitCommand::execute() {
     SmallShell& smash = SmallShell::getInstance();
     if(this->_killFlag){ //kill flag is true
-        cout<< "sending SIGKILL signal to " << to_string(this->_jobsList->size()) << " jobs:" << endl;
-        this->_jobsList->killAllJobs();
+        if (this->_jobsList->size() > 0) {
+            cout << "sending SIGKILL signal to " << to_string(this->_jobsList->size()) << " jobs:" << endl;
+            this->_jobsList->killAllJobs();
+        }
         doKill(smash.pid,SIGKILL); //kill smash
     }
 }

@@ -160,28 +160,31 @@ void SmallShell::executeCommand(const char *cmd_line){
     bool isBg = (command.find("&") != std::string::npos);
     bool isNotBg = (command.find("|&") != std::string::npos);
     Command* cmd = CreateCommand(cmd_line);
-    if(isBg && !isNotBg){
-        pid_t pid = doFork();
-        if(pid == 0){//son
-            cmd->execute();
-        }
-        else {
-            this->jobs_list->addJob(cmd,pid,false);
-        }
-    }
-    else{ // fg run
-        pid_t pid = doFork();
-        if ( pid == 0){
-            this->fg_job = new JobEntry(cmd,getpid(),-1,std::chrono::system_clock::now(),false,true);
-            cmd->execute();
-        }
-        else {
-          doWaitPID(pid,WUNTRACED);
-        }
+    if (string(cmd_line).find("quit") == 0) {
+        cmd->execute();
+        exit(0);
+    }else {
+        if (isBg && !isNotBg) {
+            pid_t pid = doFork();
+            if (pid == 0) {//son
+                cmd->execute();
+            } else {
+                this->jobs_list->addJob(cmd, pid, false);
+            }
+        } else { // fg run
+            pid_t pid = doFork();
+            if (pid == 0) {
+                this->fg_job = new JobEntry(cmd, getpid(), -1, std::chrono::system_clock::now(), false, true);
+                cmd->execute();
+            } else {
+                doWaitPID(pid, WUNTRACED);
+            }
 
 
+        }
     }
 }
+//int res = doWaitPID(this->jobs_list->getJobById(this->getTopJobId())->getpid(), WNOHANG);
 
 bool SmallShell::setJobAsStopped(int pid) {
     return this->jobs_list->stopJobByPID(pid);

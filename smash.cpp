@@ -22,7 +22,7 @@ int main(int argc, char* argv[]) {
 
     //TODO: setup sig alarm handler
     SmallShell& smash = SmallShell::getInstance();
-    ifstream in_fli("/home/student/CLionProjects/Smash/quit_nojobs2.in");
+    ifstream in_fli("/home/student/CLionProjects/Smash/quit_kill3.in");
     char* cmd_line = (char*)malloc(MAX_STRING_INPUT_SIZE*sizeof(char));
 
     //char buffer[MAX_STRING_INPUT_SIZE];"/home/student/CLionProjects/Smash/test_input1.txt"
@@ -68,6 +68,4 @@ int main(int argc, char* argv[]) {
 <<<<<<<<< Temporary merge branch 1
      */
 }
-=========
-}// cp txt1.txt txt2.txt
->>>>>>>>> Temporary merge branch 2
+
