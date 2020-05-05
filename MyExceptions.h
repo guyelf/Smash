@@ -2,6 +2,8 @@
 // Created by student on 4/22/20.
 //
 #include "exception"
+#include <string>
+#include <string.h>
 
 #ifndef SMASH_MYEXCEPTIONS_H
 #define SMASH_MYEXCEPTIONS_H
@@ -47,22 +49,23 @@ public:
 class MyKillCommandException : public MyException {
     std::string _killMsg;
 public:
-    MyKillCommandException():_killMsg("kill: "){}
-    MyKillCommandException(char* errMsg):_killMsg("kill: "){
-        this->_msg.append(_killMsg).append(errMsg); //should append the different cd errors to the origin
+    MyKillCommandException():_killMsg("smash error: kill: "){}
+    MyKillCommandException(char* errMsg):_killMsg("smash error: kill: "){
+        this->_msg.append(this->_killMsg.append(errMsg));
+        ; //should append the different cd errors to the origin
     }
-    MyKillCommandException(std::string errMsg):_killMsg("kill: "){
+    MyKillCommandException(std::string errMsg):_killMsg("smash error: kill: "){
         this->_killMsg.append(errMsg); //should append the different cd errors to the origin
     }
-    MyKillCommandException(int job_id):_killMsg("kill: "){
-        std::string tmp = "job-id " + std::to_string(job_id);
-        this->_killMsg.append(tmp);
-        tmp.append(" does not exist");
+    MyKillCommandException(int job_id):_killMsg("smash error: kill: "){
+        std::string tmp = "job-id ";
+        tmp.append(std::to_string(job_id));
+        tmp = tmp + " does not exist";
         this->_killMsg.append(tmp); //appends the correct error message that needed to be split to half
     }
 
     virtual const char * what() noexcept override{
-        return this->_msg.c_str();
+        return this->_killMsg.c_str();
     }
 };
 
@@ -77,9 +80,9 @@ public:
         this->_fgMsg.append(errMsg); //should append the different cd errors to the origin
     }
     MyFgException(int job_id):_fgMsg("fg: "){
-        std::string tmp = "job-id <" + job_id;
+        std::string tmp = "job-id " + std::to_string(job_id);
         this->_fgMsg.append(tmp);
-        tmp = "> does not exist";
+        tmp = " does not exist";
         this->_fgMsg.append(tmp); //appends the correct error message that needed to be split to half
     }
     virtual const char * what() noexcept override{
@@ -100,9 +103,7 @@ public:
         this->_bgMsg.append(errMsg); //should append the different cd errors to the origin
     }
     MyBgException(int job_id,std::string msg):_bgMsg("bg: "){
-        std::string tmp = "job-id <" + job_id;
-        this->_bgMsg.append(tmp);
-        tmp = "> ";
+        std::string tmp = "job-id " + std::to_string( job_id) + " ";
         this->_bgMsg.append(tmp);
         this->_bgMsg.append(msg);
     }
@@ -116,12 +117,27 @@ public:
 //using MyException together with doPerror will print most of the needed error to the screen as they should be
 //some edge exceptions still need to be addressed
 
-/*
-class MyTooManyArgsException : public std::exception{
+
+class MySystemCallException : public std::exception{
+    std::string _msg;
 public:
-    virtual const char* what() const noexcept  { return "smash error: cd: too many arguments";}
+    MySystemCallException(): _msg("smash error: ") {};
+    MySystemCallException(const char* syscall): _msg("smash error: "){
+        //as instructed in the error handling part,
+        // this is for a generic system call that fails
+        this->_msg.append(syscall).append(" failed");
+    }
+    MySystemCallException(const char* syscall,const char* syscall_e_msg): _msg("smash error: "){
+        this->_msg.append(syscall).append(" failed:").append(syscall_e_msg); //add the syscall's error msg
+    }
+    virtual const char* what()  noexcept  {
+        return this->_msg.c_str();
+    }
 };
 
+
+
+/*
 class MyNoArgsException : public std::exception{
 public:
     virtual const char* what() const noexcept { return "smash error: no args provided";}
