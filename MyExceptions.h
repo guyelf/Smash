@@ -2,6 +2,8 @@
 // Created by student on 4/22/20.
 //
 #include "exception"
+#include <string>
+#include <string.h>
 
 #ifndef SMASH_MYEXCEPTIONS_H
 #define SMASH_MYEXCEPTIONS_H
@@ -55,14 +57,14 @@ public:
         this->_killMsg.append(errMsg); //should append the different cd errors to the origin
     }
     MyKillCommandException(int job_id):_killMsg("kill: "){
-        std::string tmp = "job-id <" + job_id;
-        this->_killMsg.append(tmp);
-        tmp = "> does not exist";
+        std::string tmp = "job-id ";
+        tmp.append(std::to_string(job_id));
+        tmp = tmp + " does not exist";
         this->_killMsg.append(tmp); //appends the correct error message that needed to be split to half
     }
 
     virtual const char * what() noexcept override{
-        return this->_msg.c_str();
+        return this->_killMsg.c_str();
     }
 };
 

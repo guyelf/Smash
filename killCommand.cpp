@@ -12,8 +12,10 @@
 
 KillCommand::KillCommand(const char* cmd_line, JobsList* jobs):BuiltInCommand(cmd_line){
     auto args = _parseCommandLineStrings(cmd_line);
-
-    if(args.size() != 3 && args[1].c_str()[0] == '-') //A check that - is the begging of the 2nd argument
+    if ( args.size() < 3 ){
+        throw MyKillCommandException("invalid arguments");
+    }
+    if( args[1].c_str()[0] == '-') //A check that - is the begging of the 2nd argument
         throw MyKillCommandException("invalid arguments");
 
     int j_id =  stoi(args[2]); //string to int helper
