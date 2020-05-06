@@ -51,6 +51,7 @@ void RedirectionCommand::execute() {
         if(!this->isBg){//fg
             smash.fg_job->setpid(pid);
         }
-        doWaitPID(pid);
+
+    doWaitPID(pid);
 }
 

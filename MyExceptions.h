@@ -15,14 +15,14 @@ protected:
 public:
 
     MyException(): _msg("smash error: ") {};
-     MyException(const char* syscall): _msg("smash error: "){
+     MyException(std::string syscall): _msg("smash error: "){
          //as instructed in the error handling part,
          // this is for a generic system call that fails
         this->_msg.append(syscall).append(" failed");
     }
-    MyException(const char* syscall,const char* syscall_e_msg): _msg("smash error: "){
+/*    MyException(const char* syscall,const char* syscall_e_msg): _msg("smash error: "){
         this->_msg.append(syscall).append(" failed:").append(syscall_e_msg); //add the syscall's error msg
-    }
+    }*/
 
     virtual const char* what()  noexcept  {
          return this->_msg.c_str();}
@@ -32,9 +32,9 @@ class MyCdException : public MyException { //handles Change Dir commands errors
     std::string _cdMsg;
 public:
     MyCdException(): _cdMsg("cd: "){}
-    MyCdException(char* errMsg): _cdMsg("cd: "){
+/*    MyCdException(char* errMsg): _cdMsg("cd: "){
        this->_cdMsg.append(errMsg); //should append the different cd errors to the origin
-    }
+    }*/
     MyCdException(std::string errMsg): _cdMsg("cd: "){
         this->_cdMsg.append(errMsg); //should append the different cd errors to the origin
     }
@@ -51,10 +51,10 @@ class MyKillCommandException : public MyException {
 public:
     MyKillCommandException():_killMsg("kill: "){}
 
-    MyKillCommandException(char* errMsg):_killMsg("kill: "){
+/*    MyKillCommandException(char* errMsg):_killMsg("kill: "){
         this->_msg.append(this->_killMsg).append(errMsg);
         //should append the different cd errors to the origin
-    }
+    }*/
     MyKillCommandException(std::string errMsg):_killMsg("kill: "){
         this->_msg.append(this->_killMsg).append(errMsg); //should append the different cd errors to the origin
     }
@@ -75,9 +75,9 @@ class MyFgException: public MyException { //handles Change Dir commands errors
     std::string _fgMsg;
 public:
     MyFgException(): _fgMsg("fg: "){}
-    MyFgException(char* errMsg): _fgMsg("fg: "){
+/*    MyFgException(char* errMsg): _fgMsg("fg: "){
         this->_fgMsg.append(errMsg); //should append the different cd errors to the origin
-    }
+    }*/
     MyFgException(std::string errMsg): _fgMsg("fg: "){
         this->_fgMsg.append(errMsg); //should append the different cd errors to the origin
     }
@@ -98,9 +98,9 @@ class MyBgException: public MyException { //handles Change Dir commands errors
     std::string _bgMsg;
 public:
     MyBgException(): _bgMsg("bg: "){}
-    MyBgException(char* errMsg): _bgMsg("bg: "){
+/*    MyBgException(char* errMsg): _bgMsg("bg: "){
         this->_bgMsg.append(errMsg); //should append the different cd errors to the origin
-    }
+    }*/
     MyBgException(std::string errMsg): _bgMsg("bg: "){
         this->_bgMsg.append(errMsg); //should append the different cd errors to the origin
     }
@@ -124,7 +124,7 @@ class MySystemCallException : public std::exception{
     std::string _msg;
 public:
     MySystemCallException(): _msg("smash error: ") {};
-    MySystemCallException(const char* syscall): _msg("smash error: "){
+    MySystemCallException(std::string syscall): _msg("smash error: "){
         //as instructed in the error handling part,
         // this is for a generic system call that fails
         this->_msg.append(syscall).append(" failed");
@@ -133,22 +133,6 @@ public:
         return this->_msg.c_str();
     }
 };
-
-
-
-/*
-class MyNoArgsException : public std::exception{
-public:
-    virtual const char* what() const noexcept { return "smash error: no args provided";}
-};
-
-
-class MyOldPWDNotSetException : public std::exception{
-public:
-    virtual const char* what() const noexcept { return "smash error: cd: OLDPWD not set";}
-};
-
-*/
 
 class MySpecialCommandException : public MyException{
 public:

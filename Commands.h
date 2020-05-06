@@ -224,14 +224,12 @@ public:
 
 //Following the design pattern of a singleton classs
 class JobEntry {
-    friend JobsList;
-    friend JobCompare;
     Command *command;
     pid_t pid;
     int job_id;
+    std::chrono::system_clock::time_point schedule_time;
     bool stopped;
     bool out;
-    std::chrono::system_clock::time_point schedule_time;
     std::chrono::system_clock::time_point stop_time;
 public:
     JobEntry(Command *command,pid_t pid,int job_id,std::chrono::system_clock::time_point time,bool stopped):
@@ -255,6 +253,8 @@ public:
     }
     bool isOut(){return this->out;}
     bool setIsOut(bool val){return this->out = val;}
+    friend JobsList;
+    friend JobCompare;
 };
 
 class JobsList {
@@ -297,10 +297,11 @@ class SmallShell {
     SmallShell();
 
  public:
+    const char* last_cmd;
     JobEntry *fg_job;
     pid_t pid;
     const char* current_path;
-    const char* last_cmd;
+
     string prompt_name= "smash> " ;
     Command *CreateCommand(const char* cmd_line);
     SmallShell(SmallShell const&)      = delete; // disable copy ctor
