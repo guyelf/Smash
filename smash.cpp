@@ -64,7 +64,7 @@ int main(int argc, char* argv[]) {
             std::string cmd_line;
             std::getline(std::cin, cmd_line);
             std::string trimmed_cmd = _trim(cmd_line);
-            smash.executeCommand(cmd_line.c_str());
+            smash.executeCommand(trimmed_cmd.c_str());
         }
         catch(MySpecialCommandException& err){
             perror(err.what());

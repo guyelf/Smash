@@ -247,6 +247,7 @@ public:
     void setpid(pid_t new_pid){this->pid = new_pid;}
     Command* getcommand(){return this->command;}
     void setNewId(int newid);
+    std::string _trimDecimalPoint(string str_num);
     std::string print_job();
     void setJobAsStopped(){
         this->stopped = true;

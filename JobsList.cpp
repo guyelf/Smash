@@ -19,15 +19,19 @@ void JobsList::addJob(Command *cmd,pid_t pid,bool isStopped) {
     this->jobs_list.push_back(new_job);
     this->size_ +=1;
 }
+
+
 std::string JobEntry::print_job() {
     std::string res = "[" + to_string(job_id) + "]" + this->command->cmd_string() + " : " + to_string(this->pid);
     std::chrono::duration<double> elapsed_time = std::chrono::system_clock::now() - this->schedule_time;
-    res = res + " " + to_string(elapsed_time.count()) + " secs";
+    string time = _trimDecimalPoint(to_string(elapsed_time.count()));
+    res = res + " " + time + " secs";
     if (this->stopped == true){
         res = res + " (stopped)";
     }
     return res;
 }
+
 
 int JobsList::size() {
     return this->jobs_list.size();
@@ -52,7 +56,7 @@ void JobsList::printJobsList() {
     for (list<JobEntry>::iterator current = this->jobs_list.begin();current != this->jobs_list.end();current++){
         if(current->out == false) {
             std::string res = current->print_job();
-            cout << res << "\n";
+            cout << res << endl;
         }
     }
 }
@@ -158,6 +162,14 @@ JobEntry* JobsList::getLastStoppedJob(int *jobId) {
 }
 void JobEntry::setNewId(int newid){
     this->job_id = newid;
+}
+
+std::string JobEntry::_trimDecimalPoint(string str_num) {
+    auto index = str_num.find(".");
+    string res = str_num;
+    if(index != string::npos)
+        res = str_num.substr(0,index);
+    return res;
 }
 
 int JobsList::getTopJobId(){

@@ -169,43 +169,6 @@ Command * SmallShell::CreateCommand(const char* cmd_line) {
   return nullptr;
 }
 
-/*void SmallShell::executeCommand(const char *cmd_line){
-    this->jobs_list->removeFinishedJobs();
-    this->last_cmd = cmd_line;
-    std:string command (cmd_line);
-    bool isBg = (command.find("&") != std::string::npos);
-    bool isNotBg = (command.find("|&") != std::string::npos);
-    Command* cmd = CreateCommand(cmd_line);
-    if (string(cmd_line).find("quit") == 0) {
-        cmd->execute();
-        exit(0);
-    }
-    else
-        {if (isBg && !isNotBg) {
-            pid_t pid = doFork();
-            if (pid == 0) {//son
-                cmd->execute();
-            }
-            else {
-                this->jobs_list->addJob(cmd, pid, false);
-            }
-        }
-        else{ // fg run
-
-            pid_t pid = doFork();
-            if (pid == 0) {
-                this->fg_job = new JobEntry(cmd, getpid(), -1, std::chrono::system_clock::now(), false, true);
-                cmd->execute();
-            }
-            else {
-                doWaitPID(pid, WUNTRACED);
-            }
-
-
-        }
-    }
-}*/
-
 void SmallShell::executeCommand(const char *cmd_line){
     this->jobs_list->removeFinishedJobs();
     this->last_cmd = cmd_line;
@@ -228,32 +191,6 @@ void SmallShell::executeCommand(const char *cmd_line){
      cmd->execute();
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//int res = doWaitPID(this->jobs_list->getJobById(this->getTopJobId())->getpid(), WNOHANG);
 
 bool SmallShell::setJobAsStopped(int pid) {
     return this->jobs_list->stopJobByPID(pid);
