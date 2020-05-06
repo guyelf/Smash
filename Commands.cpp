@@ -94,13 +94,30 @@ SmallShell::SmallShell(): last_cmd(nullptr),fg_job(nullptr),pid(getpid()){
 
 }
 
+//return if  a job is in the list or not, also based on the out flag!
 bool SmallShell::isJobInList(pid_t pid){
+    bool res = isJobExistsInList(pid);
+    if(res){//if this is in the list
+        return (!this->jobs_list->getJobByPID(pid)->isOut()); //only return it if it's not out
+    }
+
+
+    return res;// res = false
+}
+
+//return if  a job is in the list or not - don't care the out flag - just if it's in the list.
+bool SmallShell::isJobExistsInList(pid_t pid){
     return (this->jobs_list->getJobByPID(pid) != nullptr);
 }
 
 void SmallShell::addJobToListZ(JobEntry *je){
-    je->setNewId(this->jobs_list->getTopJobId() +1);
-    this->jobs_list->addJobZ(je);
+    if(isJobExistsInList(je->getpid())){ //if its out = true
+        this->jobs_list->getJobByPID(je->getpid())->setIsOut(false);
+    }
+    else{ //if it's a new job
+        je->setNewId(this->jobs_list->getTopJobId() +1);
+        this->jobs_list->addJobZ(je);
+    }
 }
 
 SmallShell::~SmallShell() {

@@ -16,13 +16,14 @@ void ctrlZHandler(int sig_num) {
     if (jb->getpid() <= 0){ //illegal pid , 0 is for the smash son
         return;
     }
-    if (!smash.isJobInList(jb->getpid()) || smash.fg_job->getpid()==0){//might be buggy if more than 1 fg process - replaces the fg
+    auto job_pid = jb->getpid();
+    if (!smash.isJobInList(job_pid) || smash.fg_job->getpid()==0){//might be buggy if more than 1 fg process - replaces the fg
         smash.addJobToListZ(jb);
     }
-    smash.setJobAsStopped(jb->getpid());
+    smash.setJobAsStopped(job_pid);
     string res = "smash: process ";
-    doKill(jb->getpid(),SIGSTOP);
-    res = res.append(to_string(jb->getpid())).append(" was stopped");
+    doKill(job_pid,SIGSTOP);
+    res = res.append(to_string(job_pid)).append(" was stopped");
     cout << res << endl;
     smash.fg_job = nullptr;
 }
