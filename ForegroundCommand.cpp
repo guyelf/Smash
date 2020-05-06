@@ -11,12 +11,6 @@ ForegroundCommand::ForegroundCommand(const char* cmd_line, JobsList* jobs):Built
     if(args.size()>2)
         throw MyFgException("invalid arguments");
 
-    if (args.size() == 1 && jobs->size()==0)
-        throw MyFgException("jobs list is empty");
-    if(args.size()==2 && jobs->getJobById(stoi(args[1])) == nullptr){ //meaning there's a job_id assigned and it's not found
-        throw MyFgException(stoi(args[1]));
-    }
-
     if(args.size() == 2){
         try{ //checking format for the args
             int jobId = stoi(args[1]);
@@ -24,6 +18,14 @@ ForegroundCommand::ForegroundCommand(const char* cmd_line, JobsList* jobs):Built
         catch (exception& e) {
             throw MyFgException("invalid arguments");
         }
+
+    if (args.size() == 1 && jobs->size()==0)
+        throw MyFgException("jobs list is empty");
+
+
+    if(args.size()==2 && jobs->getJobById(stoi(args[1])) == nullptr){ //meaning there's a job_id assigned and it's not found
+        throw MyFgException(stoi(args[1]));
+    }
 
         this->_job_id = stoi(args[1]);
     }
