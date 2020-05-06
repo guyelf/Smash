@@ -69,7 +69,7 @@ void JobsList::killAllJobs() {
 }
 void JobsList::killAllJobs_no_print() {
     for (list<JobEntry>::iterator current = this->jobs_list.begin(); current!=this->jobs_list.end() ; ) {
-        doKill(current->pid,SIGKILL);
+        kill(current->pid,SIGKILL);
         JobEntry current_job = *current;
         this->jobs_list.erase(current);
         current = this->jobs_list.begin();
@@ -142,14 +142,14 @@ void JobsList::removeStoppedSign(int jobId) {
 
 JobEntry* JobsList::getLastStoppedJob(int *jobId) {
     std::chrono::system_clock::time_point current_last_stop_time = std::chrono::system_clock::now();
-    bool found_stopped = false;
     JobEntry *last_stopped = nullptr;
     for(list<JobEntry>::iterator current = this->jobs_list.begin(); current != this->jobs_list.end() ; current++) {
         if( !current->out && current->stopped == true){
-            found_stopped = true;
             if (current_last_stop_time > current->stop_time) {
-                if(jobId)//not nullptr
+                if(jobId) {//not nullptr
                     *jobId = current->job_id;
+                    current_last_stop_time = current->stop_time;
+                }
                 last_stopped = &*current;
             }
         }
