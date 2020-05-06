@@ -30,9 +30,11 @@ KillCommand::KillCommand(const char* cmd_line, JobsList* jobs):BuiltInCommand(cm
     catch(exception &e){
         throw MyKillCommandException("invalid arguments");
     }
+    /*
     if(sig >31 ){
         throw MyKillCommandException("invalid arguments");
     }
+     */
     if(jobs->getJobById(j_id) == nullptr)
         throw MyKillCommandException(j_id);
 

@@ -12,7 +12,7 @@ BackgroundCommand::BackgroundCommand(const char *cmd_line, JobsList *jobs):Built
         throw MyBgException("invalid arguments");
 
     if (args.size() == 1 && jobs->size()==0)
-        throw MyBgException("jobs list is empty");
+        throw MyBgException("there is no stopped jobs to resume");
 
     try{
         if(args.size() == 2)
