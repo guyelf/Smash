@@ -254,6 +254,7 @@ public:
         this->stopped = true;
     }
     bool isOut(){return this->out;}
+    bool setIsOut(bool val){return this->out = val;}
 };
 
 class JobsList {
@@ -317,7 +318,11 @@ class SmallShell {
     void addCmd(Command *cmd,int pid);
     int getTopJobId();
     void setCurrentJobId(int newJobId);
+
+    //returns if a job is in the list, also based on the isOut flag
     bool isJobInList(pid_t pid);
+    //returns if a job is in the list doesn't care the out flag.
+    bool isJobExistsInList(pid_t pid);
     void addJobToListZ(JobEntry *je);
 };
 
