@@ -63,7 +63,8 @@ int main(int argc, char* argv[]) {
             std::cout << smash.prompt_name <<ends;
             std::string cmd_line;
             std::getline(std::cin, cmd_line);
-            smash.executeCommand(cmd_line.c_str());
+            std::string trimmed_cmd = _trim(cmd_line);
+            smash.executeCommand(trimmed_cmd.c_str());
         }
         catch(MySpecialCommandException& err){
             perror(err.what());

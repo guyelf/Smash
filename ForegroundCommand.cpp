@@ -27,8 +27,9 @@ ForegroundCommand::ForegroundCommand(const char* cmd_line, JobsList* jobs):Built
     if(args.size()==2 && jobs->getJobById(stoi(args[1])) == nullptr){ //meaning there's a job_id assigned and it's not found
         throw MyFgException(stoi(args[1]));
     }
+    if(args.size() == 2)
+        this->_job_id = stoi(args[1]);
 
-    this->_job_id = stoi(args[1]);
     this->_jobsList = jobs;
 }
 
@@ -47,14 +48,14 @@ void ForegroundCommand::execute() {
       cout<< jobToFg->getcommand()->cmd_string() << " : " << to_string(jobToFg->getpid()) << endl; //print jothe job like asked to
 
       int res = kill(jobToFg->getpid(),SIGCONT);
-      //doKill(jobToFg->getpid(),SIGCONT);
 
-        this->_jobsList->removeJobById(j_id); //removing by setting out = true;
 
-        auto smash = &SmallShell::getInstance();
-        smash->fg_job = jobToFg;
+      this->_jobsList->removeJobById(j_id); //removing by setting out = true;
 
-       doWaitPID(jobToFg->getpid(),WUNTRACED); //wait for that job to finish bc it's FG now.
+    auto smash = &SmallShell::getInstance();
+    smash->fg_job = jobToFg;
+
+   doWaitPID(jobToFg->getpid(),WUNTRACED); //wait for that job to finish bc it's FG now.
 
 }
 

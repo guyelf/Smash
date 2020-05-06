@@ -33,12 +33,12 @@ void ctrlCHandler(int sig_num) {
     cout << "smash: got ctrl-C" << endl;
     pid_t pid = smash.fg_job->getpid();
     if (pid) {
-        string res = "smash: process";
+        string res = "smash: process ";
         doKill(pid, SIGKILL);
         if (smash.isJobInList(pid)) {
             smash.killProcess(pid);
         }
-        res = res + to_string(pid) + "was killed";
+        res = res + to_string(pid) + " was killed";
         cout << res << endl;
     }
 }

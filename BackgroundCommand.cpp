@@ -11,16 +11,18 @@ BackgroundCommand::BackgroundCommand(const char *cmd_line, JobsList *jobs):Built
     if(args.size()>2)
         throw MyBgException("invalid arguments");
 
-    if (args.size() == 1 && jobs->size()==0)
-        throw MyBgException("jobs list is empty");
-
     try{
         if(args.size() == 2)
             int jobId = stoi(args[1]);
     }
     catch(exception& e){
-       throw MyBgException("invalid arguments");
+        throw MyBgException("invalid arguments");
     }
+
+
+    if (args.size() == 1 && jobs->size()==0)
+        throw MyBgException("jobs list is empty");
+
 
     if(args.size()==2 && jobs->getJobById(stoi(args[1])) == nullptr){ //meaning there's a job_id assigned and it's not found
         throw MyBgException(stoi(args[1]),"does not exist"); //overload for c'tor to throw with the job id - I'm so smart XD

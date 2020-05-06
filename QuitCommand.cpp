@@ -23,7 +23,8 @@ void QuitCommand::execute() {
         this->_jobsList->killAllJobs_no_print();
     }
 
-    doKill(smash.pid,SIGKILL); //kill smash
+    exit(0);
+  //  kill(smash.pid,SIGKILL); //kill smash
 }
 
 QuitCommand::~QuitCommand() {

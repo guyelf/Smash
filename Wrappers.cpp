@@ -3,7 +3,6 @@
 //
 
 #include "Wrappers.h"
-#include "MyExceptions.h"
 
 
 static bool isSmash(){
@@ -36,10 +35,10 @@ void doChngDir(const char* newDir){
 }
 
 int doKill(pid_t pid, int signal){
-    int val = killpg(pid,signal);
+  int val = killpg(pid,signal);
     if(val != 0)
         throw MySystemCallException("kill");
-    return val;
+  return val;
 }
 
 int doClose(int fd){
@@ -71,7 +70,6 @@ void doDup2(int fd, int received_fd){
     }
 }
 
-//Todo: why was it MyException beforehand?
 void doPipe(int *p_des){
     if(pipe(p_des) == -1){ //e.g fails
         throw MySystemCallException("pipe");
