@@ -36,7 +36,7 @@ JobEntry* JobsList::getJobByPID(pid_t pid){
     JobEntry *je= nullptr;
     for (list<JobEntry>::iterator current = this->jobs_list.begin();current != this->jobs_list.end();current++){
         if (current->pid == pid){
-            *je = *current;
+            return &(*current);
         }
     }
     return je;
@@ -101,8 +101,10 @@ JobEntry * JobsList::getLastJob(int *lastJobId) {
     JobEntry *lastjob = nullptr;
     for(list<JobEntry>::iterator current = this->jobs_list.begin(); current != this->jobs_list.end() ; current++){
         if (current->schedule_time > time){
-            *lastJobId = current->job_id;
-            *lastjob = *current;
+            if(lastJobId)
+                *lastJobId = current->job_id;
+            lastjob = &(*current);
+            time = current->schedule_time; //update time so we can find max
         }
     }
     return lastjob;
