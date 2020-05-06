@@ -40,8 +40,9 @@ void ForegroundCommand::execute() {
         j_id = this->_jobsList->getTopJobId();
 
      JobEntry *jobToFg = this->_jobsList->getJobById(j_id);
+     string tmp = _trim(jobToFg->getcommand()->cmd_string());
 
-     cout<< jobToFg->getcommand()->cmd_string() << " : " << to_string(jobToFg->getpid()) << endl; //print jothe job like asked to
+     cout<< tmp << " : " << to_string(jobToFg->getpid()) << endl; //print jothe job like asked to
 
      int res = kill(jobToFg->getpid(),SIGCONT);
      //doKill(jobToFg->getpid(),SIGCONT);
@@ -52,7 +53,7 @@ void ForegroundCommand::execute() {
      smash->fg_job = jobToFg;
 
      doWaitPID(jobToFg->getpid(),WUNTRACED); //wait for that job to finish bc it's FG now.
-
+    cout << "Hello World"<< endl;
 }
 
 ForegroundCommand::~ForegroundCommand() {

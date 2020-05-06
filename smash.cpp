@@ -23,7 +23,7 @@ int main(int argc, char* argv[]) {
     //TODO: setup sig alarm handler
 
     SmallShell& smash = SmallShell::getInstance();
-    ifstream in_fli("/home/student/CLionProjects/Smash/fg.in");
+    ifstream in_fli("/home/student/CLionProjects/Smash/quit_kill3.in");
     char* cmd_line = (char*)malloc(MAX_STRING_INPUT_SIZE*sizeof(char));
 
     //char buffer[MAX_STRING_INPUT_SIZE];"/home/student/CLionProjects/Smash/test_input1.txt"
@@ -37,7 +37,8 @@ int main(int argc, char* argv[]) {
 
             //getline(in_file, cmd_line);
             //std::getline(std::cin, cmd_line);
-            smash.executeCommand(cmd_line);
+            std::string tmp = _trim(cmd_line);
+            smash.executeCommand(tmp.c_str());
         }
         catch (MySystemCallException& my){
             perror(my.what());
